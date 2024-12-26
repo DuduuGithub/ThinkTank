@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import logger.SimpleLogger;
 import service.PdfTools;
 
+/*
+ * 用途：用于查看pdf文件
+ * 参数：request里面用get方法传入论文的id
+ */
 public class PdfViewerController {
     public static void main(String[] args) throws IOException {
         InputStream pdf = PdfTools.getPdfInputStream(1);
