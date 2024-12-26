@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>报告查看</title>
+    <link rel="stylesheet" href="../static/css/jquery-ui-1.10.3.custom.min.css">
+    <link rel="stylesheet" href="../static/css/entypo.css">
+    <link rel="stylesheet" href="../static/css/css.css">
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/css/neon-core.css">
+    <link rel="stylesheet" href="../static/css/neon-theme.css">
+    <link rel="stylesheet" href="../static/css/neon-forms.css">
+    <link rel="stylesheet" href="../static/css/black.css">
+    <link rel="stylesheet" href="../static/css/check.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    <style>
+        /* 模态框样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body class="page-body">
+    <div class="page-container horizontal-menu">
+        <header class="navbar navbar-fixed-top">
+            <!-- Navbar content here... -->
+        </header>
+
+        <div class="main-content">
+            <div class="container">
+                <div class="text-base">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button class="btn btn-primary" id="add-report">添加报告</button>
+                            <button class="btn btn-primary" id="openModalBtn">一键上传文件</button>
+
+                            <div id="myModal" class="modal">
+                                <div class="modal-content">
+                                    <span class="close">&times;</span>
+                                    <form id="uploadForm" action="app/loadPdf" method="post" enctype="multipart/form-data">
+                                        <input type="file" name="file" />
+                                        <input type="submit" value="一键上传报告" />
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div class="search-bar">
+                                <form action="/aireport/app/documentListView" method="get" id="searchForm">
+                                    <input type="text" id="title-search" name="title" placeholder="请输入标题..."/>
+                                    <input type="text" id="keywords-search" name="keywords" placeholder="请输入关键字..."/>
+                                    <input type="text" id="subject-search" name="subject" placeholder="请输入主题..."/>
+                                    <button type="submit" class="btn btn-default" id="search-btn">搜索</button>
+                                </form>
+                                
+                            </div>
+
+                            <table class="table table-bordered responsive" id="reportTable">
+                                <thead>
+                                    <tr>
+                                        <th>报告ID</th>
+                                        <th>报告标题</th>
+                                        <th>报告关键词</th>
+                                        <th>报告主题词</th>
+                                        <th>报告详情</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Thymeleaf模板语法，遍历documentList -->
+                                    <tr th:each="document : ${documentList}">
+                                        <td th:text="${document.documentId}"></td>
+                                        <td th:text="${document.title}"></td>
+                                        <td th:text="${document.keywords}"></td>
+                                        <td th:text="${document.subject}"></td>
+                                        <td><a th:href="@{app/pdf(id=${document.documentId})}" class="view-full-text">点击查看全文</a></td>
+                                        <td>
+                                            <!-- 删除表单 -->
+                                            <form action="deleteServlet" method="POST" style="display:inline;">
+                                                <input type="hidden" name="id" th:value="${document.documentId}" />
+                                                <input type="submit" class="btn btn-danger" value="删除" />
+                                            </form>
+
+                                            <!-- 修改表单 -->
+                                            <form method="POST" style="display:inline;">
+                                                <input type="hidden" name="id" th:value="${document.documentId}" />
+                                                <input type="submit" class="btn btn-primary edit-button" value="修改" data-id="${document.documentId}" />
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="pagination" id="paginationControls"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <footer class="main">
+                    Copyright &copy; 2021.Company name All rights reserved.
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("searchForm").onsubmit = function() {
+            // 检查每个输入字段，如果没有输入，设为空字符串
+            if (!document.getElementById("title-search").value) {
+                document.getElementById("title-search").value = '';
+            }
+            if (!document.getElementById("keywords-search").value) {
+                document.getElementById("keywords-search").value = '';
+            }
+            if (!document.getElementById("subject-search").value) {
+                document.getElementById("subject-search").value = '';
+            }
+        };
+
+        // 添加模态框相关的JavaScript代码
+        // 获取模态框元素
+        var modal = document.getElementById("myModal");
+
+        // 获取用于打开模态框的按钮
+        var btn = document.getElementById("openModalBtn");
+
+        // 获取关闭模态框的<span>元素
+        var span = document.getElementsByClassName("close")[0];
+
+        // 当用户点击按钮时，打开模态框
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        // 当用户点击<x>时，关闭模态框
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // 当用户点击模态框外部时，关闭模态框
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // 处理文件上传
+        document.getElementById('uploadForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // 阻止默认提交行为
+
+            const formData = new FormData(this);
+
+            fetch(this.action, {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => {
+                console.log('Response status:', response.status);
+                console.log('Response headers:', response.headers);
+                
+                return response.text().then(text => {
+                    console.log('Raw response:', text);
+                    try {
+                        return JSON.parse(text);
+                    } catch (e) {
+                        console.error('JSON解析错误:', e);
+                        throw new Error('服务器响应格式错误');
+                    }
+                });
+            })
+            .then(data => {
+                console.log('Parsed data:', data);
+                if (data.success) {
+                    alert(data.message);
+                    modal.style.display = "none";
+                    // 可以添加页面刷新
+                    window.location.reload();
+                } else {
+                    alert(data.message || '上传失败');
+                }
+            })
+            .catch((error) => {
+                console.error('详细错误信息:', error);
+                console.error('错误堆栈:', error.stack);
+                alert('上传失败: ' + error.message);
+            });
+        });
+    </script>
+</body>
+</html>
