@@ -2,7 +2,7 @@ package db.dao.proxy;
 
 import db.dao.impl.DocumentDaoImpl;
 import db.vo.Document;
-
+import logger.SimpleLogger;
 import java.util.List;
 
 public class DocumentDaoProxy {
@@ -21,6 +21,8 @@ public class DocumentDaoProxy {
         if (keywords == null) keywords = "";
         if (subject == null) subject = "";
 
+        // 记录搜索日志
+        SimpleLogger.log("用户" + userId + "搜索了标题包含" + title + "、关键词包含" + keywords + "、主题包含" + subject + "的文档");
         // 调用DocumentDaoImpl的查询方法
         return documentDaoImpl.searchDocuments(userId, title, keywords, subject);
     }

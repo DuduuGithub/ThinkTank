@@ -23,11 +23,18 @@ public class DocumentListViewController {
     }
 
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        //设置编码以读取汉字
+        request.setCharacterEncoding("UTF-8");
+
+
         // 记录请求到日志
         String method = request.getMethod();
         SimpleLogger.log("Received " + method + " request for document list view");
 
         int userId = 1; // 默认的 userId，实际应从 session 获取
+        // int userId = (int) request.getSession().getAttribute("userId");
+
         List<Document> documentList;
         Context context = new Context();
 
@@ -41,6 +48,23 @@ public class DocumentListViewController {
             String title = request.getParameter("title");
             String keywords = request.getParameter("keywords");
             String subject = request.getParameter("subject");
+            // 获取请求的字符编码
+            String encoding = request.getCharacterEncoding();
+            SimpleLogger.log("Request Encoding: " + encoding);
+
+            // 如果参数为null或者为空字符串，给它们设置一个默认值
+            if (title == null || title.trim().isEmpty()) {
+                title = ""; // 或者设置默认值，例如 "默认标题"
+            }
+            if (keywords == null || keywords.trim().isEmpty()) {
+                keywords = ""; // 或者设置默认值，例如 "默认关键字"
+            }
+            if (subject == null || subject.trim().isEmpty()) {
+                subject = ""; // 或者设置默认值，例如 "默认主题"
+            }
+
+            SimpleLogger.log(String.format("POST request: search title: %s ,keywords:%s,subject: %s,  for user %d", 
+            title,keywords,subject, userId));
 
             documentList = documentService.searchDocuments(userId, title, keywords, subject);
             
