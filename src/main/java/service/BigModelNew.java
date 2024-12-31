@@ -101,7 +101,7 @@ public class BigModelNew extends WebSocketListener {
 
         // 等待答案返回
         while (!wsCloseFlag) {
-            Thread.sleep(200);
+            Thread.sleep(10);
         }
 
         return totalAnswer; // 返回大模型的答案

@@ -19,3 +19,26 @@ CREATE TABLE document (
         ON DELETE SET NULL            
         ON UPDATE CASCADE             
 );
+
+-- 报告包表
+create table bag (
+    bag_id int auto_increment primary key,
+    bag_name varchar(100),
+    user_id int,
+    foreign key (user_id) references user(user_id)
+        on delete set null
+        on update cascade
+);
+
+-- 报告包内容表
+create table bag2document (
+    bag_id int,
+    document_id int,
+    primary key(bag_id,document_id),
+    foreign key (bag_id) references bag(bag_id)
+        on delete set null
+        on update cascade,
+    foreign key(document_id) references document(document_id)
+        on delete set null
+        on update cascade
+);
