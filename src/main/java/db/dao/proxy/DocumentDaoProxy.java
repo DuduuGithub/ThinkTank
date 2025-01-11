@@ -9,6 +9,7 @@ import db.dao.base.DocumentDao;
 import db.dao.impl.DocumentDaoImpl;
 import db.util.DBUtil;
 import db.vo.Document;
+import logger.SimpleLogger;
 
 /*
  * 代理类，使用时直接使用代理类即可
@@ -16,7 +17,7 @@ import db.vo.Document;
  * 当使用查询时，会返回对应的数据
  */
 public class DocumentDaoProxy implements DocumentDao {
-    private DocumentDao dao;
+    private DocumentDaoImpl dao;
     private Connection conn;
 
     /*
@@ -29,6 +30,19 @@ public class DocumentDaoProxy implements DocumentDao {
             e.printStackTrace();
         }
         dao = new DocumentDaoImpl();
+    }
+
+    // 代理搜索文档的逻辑
+    public List<Document> searchDocuments(int userId, String title, String keywords, String subject) {
+        // 过滤查询条件为空的情况
+        if (title == null) title = "";
+        if (keywords == null) keywords = "";
+        if (subject == null) subject = "";
+
+        // 记录搜索日志
+        SimpleLogger.log("用户" + userId + "搜索了标题包含" + title + "、关键词包含" + keywords + "、主题包含" + subject + "的文档");
+        // 调用DocumentDaoImpl的查询方法
+        return dao.searchDocuments(userId, title, keywords, subject);
     }
 
     /*
