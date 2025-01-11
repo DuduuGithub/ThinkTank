@@ -32,28 +32,28 @@ public class DaoFactory {
     /*
      * 获取BagDao的代理对象
      */
-    public BagDao getBagDao() {
+    public BagDaoProxy getBagDao() {
         return new BagDaoProxy();
     }
 
     /*
      * 获取Bag2documentDao的代理对象
      */
-    public Bag2documentDao getBag2documentDao() {
+    public Bag2documentDaoProxy getBag2documentDao() {
         return new Bag2documentDaoProxy();
     }
 
     /*
      * 获取DocumentDao的代理对象
      */
-    public DocumentDao getDocumentDao() {
+    public DocumentDaoProxy getDocumentDao() {
         return new DocumentDaoProxy();
     }
 
     /*
      * 获取UserDao的代理对象
      */
-    public UserDao getUserDao() {
+    public UserDaoProxy getUserDao() {
         return new UserDaoProxy();
     }
 } 

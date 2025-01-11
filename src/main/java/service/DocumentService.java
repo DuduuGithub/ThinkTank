@@ -13,7 +13,7 @@ public class DocumentService {
     private DocumentDaoProxy documentDaoProxy;
 
     public DocumentService() {
-        this.documentDaoProxy = DaoFactory.createDocumentDaoProxy();
+        this.documentDaoProxy = DaoFactory.getInstance().getDocumentDao();
     }
 
     public Document getDocumentById(Integer id) {
