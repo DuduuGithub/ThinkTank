@@ -36,9 +36,9 @@ create table bag2document (
     document_id int,
     primary key(bag_id,document_id),
     foreign key (bag_id) references bag(bag_id)
-        on delete set null
+        on delete cascade           -- 改为 cascade
         on update cascade,
     foreign key(document_id) references document(document_id)
-        on delete set null
+        on delete cascade           -- 改为 cascade
         on update cascade
 );
