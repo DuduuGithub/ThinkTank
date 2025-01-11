@@ -12,16 +12,24 @@ public interface Bag2documentDao {
      * 向报告包插入报告
      */
     public boolean insert(Bag2document bag2document);
+
     /*
      * 从报告包中删除报告
      */
     public boolean delete(Bag2document bag2document);
+
     /*
      * 更新报告包中的报告，这个估计用不上
      */
     public boolean update(Bag2document bag2document);
+
     /*
      * 查询报告包中的报告，返回一个List，内容是报告的id
      */
     public List<Integer> queryByBagId(int bagId);
+
+    /*
+     * 查询某个报告是否已经存在于报告包中
+     */
+    public boolean exists(Bag2document bag2document);
 }

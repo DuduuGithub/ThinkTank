@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 import service.ReportBagService;
 
 public class QueryBagsController {
-    public void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public static void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // 设置响应类型
         response.setContentType("application/json;charset=UTF-8");
         PrintWriter out = response.getWriter();

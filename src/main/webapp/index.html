@@ -114,16 +114,10 @@
 
                     <li class="sep"></li>
 
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <li>
+                        <a href="javascript:void(0)" onclick="showBags()">
                             我的报告包 <i class="entypo-star"></i>
                         </a>
-                        <ul class="dropdown-menu">
-                            <!-- 这里将通过 JavaScript 动态加载用户的报告包 -->
-                            <li class="bags-container">
-                                <!-- 报告包列表将在这里显示 -->
-                            </li>
-                        </ul>
                     </li>
 
                     <li>
@@ -221,7 +215,7 @@
                         bagsHtml += `
                             <div class="bag-item">
                                 <i class="entypo-folder"></i>
-                                ${bag.bagName}
+                                <a href="/aireport/app/bagDocumentListView?bagId=${bag.bagId}">${bag.bagName}</a>
                             </div>
                         `;
                     });
@@ -232,6 +226,96 @@
                 }
             });
         }
+    </script>
+
+    <!-- 在原有代码的基础上添加模态框 -->
+    <div id="bagsModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h4>我的报告包</h4>
+            <div id="bagsList">
+                <!-- 报告包列表将通过JavaScript动态加载 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 添加JavaScript代码 -->
+    <script>
+    var bagsModal = document.getElementById("bagsModal");
+    var bagsSpan = bagsModal.getElementsByClassName("close")[0];
+
+    function showBags() {
+        // 加载用户的报告包列表
+        fetch('/aireport/app/bags')
+            .then(response => response.json())
+            .then(bags => {
+                let html = '';
+                bags.forEach(bag => {
+                    html += `
+                        <div class="bag-item">
+                            <i class="entypo-folder"></i>
+                            <a href="/aireport/app/bagDocumentListView?bagId=${bag.bagId}">${bag.bagName}</a>
+                        </div>
+                    `;
+                });
+                document.getElementById('bagsList').innerHTML = html;
+                bagsModal.style.display = "block";
+            });
+    }
+
+    // 关闭模态框
+    bagsSpan.onclick = function() {
+        bagsModal.style.display = "none";
+    }
+
+    // 点击模态框外部关闭
+    window.onclick = function(event) {
+        if (event.target == bagsModal) {
+            bagsModal.style.display = "none";
+        }
+    }
+
+    // 添加样式
+    const style = document.createElement('style');
+    style.textContent = `
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .bag-item {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .bag-item i {
+            margin-right: 10px;
+        }
+    `;
+    document.head.appendChild(style);
     </script>
 
 </body>

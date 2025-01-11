@@ -116,6 +116,69 @@
             display: block;
         }
 
+        .toast-message {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 15px 25px;
+            border-radius: 4px;
+            color: white;
+            z-index: 1000;
+            display: none;
+            animation: fadeInOut 2.5s ease;
+        }
+
+        .toast-success {
+            background-color: #28a745;
+        }
+
+        .toast-error {
+            background-color: #dc3545;
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        /* 收藏模态框样式 */
+        .favorite-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .favorite-modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 5px;
+        }
+
+        .bag-item {
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .bag-item:hover {
+            background-color: #f5f5f5;
+        }
+
     </style>
 </head>
 
@@ -188,10 +251,8 @@
                                             <!-- 收藏按钮和文件夹列表容器 -->
                                             <div class="favorite-container" style="position: relative; display: inline-block;">
                                                 <!-- 收藏按钮 -->
-                                                <button class="btn btn-favorite" data-id="${document.documentId}" title="收藏">
-                                                    <i class="entypo-star"></i>
-                                                    <!-- 如果使用Font Awesome，使用以下代码替换上面一行 -->
-                                                    <!-- <i class="fas fa-star"></i> -->
+                                                <button class="btn btn-favorite" th:onclick="'showFavoriteModal(' + ${document.documentId} + ')'">
+                                                    <i class="entypo-star"></i> 收藏
                                                 </button>
                                                 
                                                 <!-- 文件夹列表框 -->
@@ -220,6 +281,17 @@
             </div>
         </div>
     </div>
+
+    <div id="favoriteModal" class="favorite-modal">
+        <div class="favorite-modal-content">
+            <h4>选择报告包</h4>
+            <div id="bagsList">
+                <!-- 报告包列表将通过 JavaScript 动态加载 -->
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast-message"></div>
 
     <script>
         document.getElementById("searchForm").onsubmit = function() {
@@ -304,74 +376,74 @@
             });
         });
         
-        // 收藏按钮功能
-        document.addEventListener('DOMContentLoaded', function() {
-            const favoriteButtons = document.querySelectorAll('.btn-favorite');
+        function showToast(message, isSuccess) {
+            const toast = $('#toast');
+            toast.text(message);
+            toast.removeClass('toast-success toast-error');
+            toast.addClass(isSuccess ? 'toast-success' : 'toast-error');
+            toast.css('display', 'block');
+            
+            setTimeout(function() {
+                toast.css('display', 'none');
+            }, 2500);
+        }
 
-            favoriteButtons.forEach(button => {
-                button.addEventListener('click', function(event) {
-                    event.preventDefault(); // 防止默认行为，如表单提交
-
-                    // 如果文件夹列表框已经显示，点击按钮时隐藏
-                    const dropdown = this.parentElement.querySelector('.folder-dropdown');
-                    const isVisible = dropdown.style.display === 'block';
-                    // 先隐藏所有文件夹列表框
-                    document.querySelectorAll('.folder-dropdown').forEach(dd => dd.style.display = 'none');
-                    if (!isVisible) {
-                        dropdown.style.display = 'block';
-                    }
-                });
-            });
-
-            // 点击页面其他地方时，隐藏所有文件夹列表框
-            document.addEventListener('click', function(event) {
-                if (!event.target.closest('.favorite-container')) {
-                    document.querySelectorAll('.folder-dropdown').forEach(dd => dd.style.display = 'none');
-                }
-            });
-
-            // 处理文件夹选择事件
-            const folderLinks = document.querySelectorAll('.add-to-folder');
-            folderLinks.forEach(link => {
-                link.addEventListener('click', function(event) {
-                    event.preventDefault(); // 防止默认行为
-
-                    const folderId = this.getAttribute('data-folder-id');
-                    const folderName = this.textContent.trim();
-                    const container = this.closest('.favorite-container');
-                    const documentId = container.querySelector('.btn-favorite').getAttribute('data-id');
-
-                    // 发送收藏请求到服务器
-                    fetch('/aireport/app/favorite', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ 
-                            documentId: documentId,
-                            folderId: folderId
-                        }),
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            alert(`已成功将报告添加到 "${folderName}" 文件夹！`);
-                            // 可选：更改按钮样式以反映已收藏状态
-                            container.querySelector('.btn-favorite').classList.add('favorited');
-                        } else {
-                            alert(data.message || '收藏失败');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('错误:', error);
-                        alert('收藏请求失败');
+        function showFavoriteModal(documentId) {
+            fetch('/aireport/app/bags')
+                .then(response => response.json())
+                .then(bags => {
+                    let html = '';
+                    bags.forEach(bag => {
+                        html += `
+                            <div class="bag-item" onclick="addToBag(${documentId}, ${bag.bagId})">
+                                <i class="entypo-folder"></i>
+                                ${bag.bagName}
+                                <input type="hidden" name="action" value="add" />
+                            </div>
+                        `;
                     });
-
-                    // 隐藏文件夹列表框
-                    container.querySelector('.folder-dropdown').style.display = 'none';
+                    document.getElementById('bagsList').innerHTML = html;
+                    document.getElementById('favoriteModal').style.display = "block";
                 });
+        }
+
+        function addToBag(documentId, bagId) {
+            // 添加console.log来调试
+            console.log('Sending request with:', {documentId, bagId});
+            
+            fetch('/aireport/app/bagOperation', {  // 确保这个URL是正确的
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `bagId=${bagId}&documentId=${documentId}&action=add`
+            })
+            .then(response => {
+                // 添加response状态检查
+                console.log('Response status:', response.status);
+                return response.json();
+            })
+            .then(data => {
+                console.log('Response data:', data);
+                if(data.success) {
+                    showToast(data.message, true);
+                } else {
+                    showToast(data.message, false);
+                }
+            })
+            .catch(error => {
+                console.error('Error details:', error);  // 更详细的错误日志
+                showToast('收藏失败，请重试', false);
             });
-        });
+        }
+
+        // 点击模态框外部关闭模态框
+        window.onclick = function(event) {
+            const modal = document.getElementById('favoriteModal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
     </script>
 </body>
 </html>

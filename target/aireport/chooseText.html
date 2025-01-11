@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Neon Admin Panel">
+  <meta name="author" content="">
+  <title>报告选择</title>
+
+  <!-- Include your CSS files here -->
+  <link rel="stylesheet" href="static/css/jquery-ui-1.10.3.custom.min.css">
+  <link rel="stylesheet" href="static/css/entypo.css">
+  <link rel="stylesheet" href="static/css/bootstrap.css">
+  <link rel="stylesheet" href="static/css/neon-core.css">
+  <link rel="stylesheet" href="static/css/neon-theme.css">
+  <link rel="stylesheet" href="static/css/neon-forms.css">
+  <link rel="stylesheet" href="static/css/black.css">
+  <link rel="stylesheet" href="static/css/check.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+  <!-- Include your JS files here -->
+  <script src="static/js/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+</head>
+
+<body class="page-body" data-url="http://neon.dev&quot;&gt;">
+
+  <div class="page-container horizontal-menu">
+
+    <header class="navbar navbar-fixed-top"><!-- set fixed position by adding class "navbar-fixed-top" -->
+
+      <div class="navbar-inner">
+
+        <!-- logo -->
+        <div class="navbar-brand">
+          <a href="index.html">
+            <img src="static/picture/logo@2x.png" width="88" alt="">
+          </a>
+        </div>
+        <!-- main menu -->
+        <ul class="navbar-nav">
+          <li>
+            <a href="check.html">
+              <i class="entypo-doc-text"></i>
+              <span>论文概览</span>
+            </a>
+          </li>
+
+          <li class="root-level has-sub">
+            <a href="index.html">
+              <i class="entypo-newspaper"></i>
+              <span>报告生成</span>
+            </a>
+          </li>
+
+        </ul>
+        <!-- notifications and other links -->
+        <ul class="nav navbar-right pull-right">
+          <ul class="user-info pull-left pull-none-xsm">
+
+            <!-- Profile Info -->
+            <li class="profile-info dropdown">
+              <!-- add class "pull-right" if you want to place this from right -->
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" _msttexthash="7861633" _msthash="125"><img
+                  src="static/picture/thumb-1@2x.png" alt="" class="img-circle" width="44" _istranslated="1">
+              </a>
+            </li>
+          </ul>
+
+          <li class="sep"></li>
+
+          <li>
+            <a href="extra-login.html">
+              退出登录 <i class="entypo-logout right"></i>
+            </a>
+          </li>
+
+          <!-- mobile only -->
+          <li class="visible-xs">
+
+            <!-- open/close menu icon (do not remove if you want to enable menu on mobile devices) -->
+            <div class="horizontal-mobile-menu visible-xs">
+              <a href="#" class="with-animation"><!-- add class "with-animation" to support animation -->
+                <i class="entypo-menu"></i>
+              </a>
+            </div>
+
+          </li>
+
+        </ul>
+
+      </div>
+
+    </header>
+
+    <div class="main-content">
+      <div class="container">
+        <div class="text-base">
+
+          <div class="row">
+            <div class="col-md-12">
+                <h2>选择报告</h2>
+                <div class="controls">
+                  <label class="select-all"><input type="checkbox" id="selectAll"> 全选</label>
+                  <label class="select-similar"><input type="checkbox" id="selectSimilar"> 相似主题全选</label>
+                </div>
+                <table class="table table-bordered responsive report-list" id="reportTable">
+                  <thead>
+                    <tr>
+                      <th>选择</th>
+                      <th>报告ID</th>
+                      <th>DOI号</th>
+                      <th>报告标题</th>
+                      <th>作者</th>
+                      <th>文章内容</th>
+                      <th>文章关键字</th>
+                      <th>文章主题</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- 表格数据 -->
+                  </tbody>
+                </table>
+                <button class="btn btn-primary" id="submitSelection">提交选择</button>
+              </div>
+          </div>
+
+        </div>
+        <!-- Footer -->
+        <footer class="main">
+          Copyright &copy; 2021.Company name All rights reserved.<a target="_blank" href=""></a>
+        </footer>
+      </div>
+    </div>
+  </div>
+  <script>
+    $(document).ready(function () {
+      // Fetch reports from the server or use existing data.
+      async function fetchData() {
+        try {
+          const response = await fetch('/api/search_reports', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams()
+          });
+  
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+  
+          // Parse response as JSON
+          const data = await response.json();
+          initializeTable(data.reports); // Initialize table with received reports
+        } catch (error) {
+          console.error('There has been a problem with your fetch operation:', error);
+        }
+      }
+  
+      // Initialize the table with report data and set up event listeners
+      function initializeTable(reports) {
+        let rowsHtml = '';
+        reports.forEach(report => {
+          rowsHtml += `
+            <tr data-theme="${report.theme}">
+              <td><input type="checkbox" class="report-checkbox" value="${report.id}"></td>
+              <td>${report.id}</td>
+              <td><a href="${report.doi}" target="_blank">${report.doi}</a></td>
+              <td>${report.title || ''}</td>
+              <td>${report.author || ''}</td>
+              <td><a href="Text.html?id=${report.id}" class="view-full-text">点击查看全文</a></td>
+              <td>${report.keywords || ''}</td>
+              <td>${report.theme || ''}</td>
+            </tr>`;
+        });
+        $('#reportTable tbody').html(rowsHtml);
+  
+        // Initialize DataTable plugin
+        $('#reportTable').DataTable({
+          "paging": false,
+          "info": false,
+          "searching": false
+        });
+  
+        setupCheckboxes();
+      }
+  
+      // Set up checkboxes for selecting all and similar theme reports
+      function setupCheckboxes() {
+        $('#selectAll').change(function () {
+          $('.report-checkbox').prop('checked', this.checked);
+        });
+  
+        $('#selectSimilar').change(function () {
+          const selectedTheme = $('.report-checkbox:checked').closest('tr').data('theme');
+          $('.report-checkbox').each(function () {
+            const isSameTheme = $(this).closest('tr').data('theme') === selectedTheme;
+            $(this).prop('checked', this.checked ? true : !isSameTheme);
+          });
+        });
+      }
+  
+      // Submit selected reports to backend and redirect to receive.html
+      $('#submitSelection').click(async function () {
+        const selectedIds = [];
+        $('.report-checkbox:checked').each(function () {
+          selectedIds.push($(this).val());
+        });
+  
+        const selectSimilar = $('#selectSimilar').is(':checked');
+        const selectAll = $('#selectAll').is(':checked');
+        const searchQuery = JSON.parse(sessionStorage.getItem('searchQuery'));
+  
+        const postData = {
+          ids: selectedIds,
+          similar: selectSimilar,
+          all:selectAll,
+          searchQuery: searchQuery
+        };
+  
+        try {
+          const response = await fetch('/api/submit_selection', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(postData)
+          });
+  
+          if (!response.ok) {
+            throw new Error('Error submitting selection');
+          }
+  
+          const responseData = await response.json();
+  
+          // Store response data in sessionStorage or any other way you prefer
+          sessionStorage.setItem('responseData', JSON.stringify(responseData));
+  
+          // Redirect to receive.html
+          window.location.href = 'receive.html';
+        } catch (error) {
+          console.error('There has been a problem with your submit operation:', error);
+        }
+      });
+  
+      // Fetch data on document ready
+      fetchData();
+    });
+  </script>
+
+</body>
+
+</html>

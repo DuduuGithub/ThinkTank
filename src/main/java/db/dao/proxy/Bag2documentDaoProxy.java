@@ -75,6 +75,14 @@ public class Bag2documentDaoProxy implements Bag2documentDao {
         return list;
     }
 
+    @Override
+    public boolean exists(Bag2document bag2document){
+        checkConnection();
+        flag = bag2documentDao.exists(bag2document);
+        DBUtil.closeConnection(conn);
+        return flag;
+    }
+
     /*
      * 检查连接是否为空，如果为空，则获取一个连接，所有方法都要检查
      */

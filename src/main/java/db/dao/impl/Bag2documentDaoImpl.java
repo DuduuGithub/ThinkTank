@@ -87,4 +87,25 @@ public class Bag2documentDaoImpl implements Bag2documentDao {
         }
         return list;
     }
+
+    @Override
+    public boolean exists(Bag2document bag2document){
+        flag = false;
+        sql = "select count(*) from bag2document where bag_id=? and document_id=?";
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, bag2document.getBagId());
+            pstmt.setInt(2, bag2document.getDocumentId());
+            rs = pstmt.executeQuery();
+            if(rs.next()){
+                flag = true;
+            }else{
+               flag = false; 
+            }
+            pstmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return flag;
+    }
 }
