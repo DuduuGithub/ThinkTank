@@ -51,6 +51,71 @@
             text-decoration: none;
             cursor: pointer;
         }
+
+        /* 收藏按钮样式 */
+        .btn-favorite {
+            background-color: #ffc107; /* 金色背景 */
+            border: none;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-left: 5px;
+            border-radius: 50%; /* 圆形按钮 */
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-favorite:hover {
+            background-color: #e0a800; /* 悬停时稍暗的金色 */
+        }
+
+        .btn-favorite i {
+            font-size: 16px; /* 星形图标大小 */
+        }
+
+        /* 文件夹列表框样式 */
+        .folder-dropdown {
+            display: none; /* 默认隐藏 */
+            position: absolute;
+            top: 120%; /* 位于按钮下方 */
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: white;
+            min-width: 150px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            border-radius: 4px;
+            z-index: 1001;
+        }
+
+        .folder-dropdown ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .folder-dropdown li {
+            padding: 8px 12px;
+        }
+
+        .folder-dropdown li a {
+            color: #333;
+            text-decoration: none;
+            display: block;
+            width: 100%;
+        }
+
+        .folder-dropdown li a:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* 显示文件夹列表框 */
+        .favorite-container:hover .folder-dropdown {
+            display: block;
+        }
+
     </style>
 </head>
 
@@ -119,6 +184,27 @@
                                                 <input type="hidden" name="id" th:value="${document.documentId}" />
                                                 <input type="submit" class="btn btn-primary edit-button" value="修改" data-id="${document.documentId}" />
                                             </form>
+
+                                            <!-- 收藏按钮和文件夹列表容器 -->
+                                            <div class="favorite-container" style="position: relative; display: inline-block;">
+                                                <!-- 收藏按钮 -->
+                                                <button class="btn btn-favorite" data-id="${document.documentId}" title="收藏">
+                                                    <i class="entypo-star"></i>
+                                                    <!-- 如果使用Font Awesome，使用以下代码替换上面一行 -->
+                                                    <!-- <i class="fas fa-star"></i> -->
+                                                </button>
+                                                
+                                                <!-- 文件夹列表框 -->
+                                                <div class="folder-dropdown">
+                                                    <ul>
+                                                        <!-- 遍历用户的收藏文件夹列表 -->
+                                                        <li th:each="folder : ${folderList}">
+                                                            <a href="#" class="add-to-folder" th:data-folder-id="${folder.id}" th:text="${folder.name}"></a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
                                         </td>
                                     </tr>
                                 </tbody>
@@ -215,6 +301,75 @@
                 console.error('详细错误信息:', error);
                 console.error('错误堆栈:', error.stack);
                 alert('上传失败: ' + error.message);
+            });
+        });
+        
+        // 收藏按钮功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const favoriteButtons = document.querySelectorAll('.btn-favorite');
+
+            favoriteButtons.forEach(button => {
+                button.addEventListener('click', function(event) {
+                    event.preventDefault(); // 防止默认行为，如表单提交
+
+                    // 如果文件夹列表框已经显示，点击按钮时隐藏
+                    const dropdown = this.parentElement.querySelector('.folder-dropdown');
+                    const isVisible = dropdown.style.display === 'block';
+                    // 先隐藏所有文件夹列表框
+                    document.querySelectorAll('.folder-dropdown').forEach(dd => dd.style.display = 'none');
+                    if (!isVisible) {
+                        dropdown.style.display = 'block';
+                    }
+                });
+            });
+
+            // 点击页面其他地方时，隐藏所有文件夹列表框
+            document.addEventListener('click', function(event) {
+                if (!event.target.closest('.favorite-container')) {
+                    document.querySelectorAll('.folder-dropdown').forEach(dd => dd.style.display = 'none');
+                }
+            });
+
+            // 处理文件夹选择事件
+            const folderLinks = document.querySelectorAll('.add-to-folder');
+            folderLinks.forEach(link => {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault(); // 防止默认行为
+
+                    const folderId = this.getAttribute('data-folder-id');
+                    const folderName = this.textContent.trim();
+                    const container = this.closest('.favorite-container');
+                    const documentId = container.querySelector('.btn-favorite').getAttribute('data-id');
+
+                    // 发送收藏请求到服务器
+                    fetch('/aireport/app/favorite', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ 
+                            documentId: documentId,
+                            folderId: folderId
+                        }),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert(`已成功将报告添加到 "${folderName}" 文件夹！`);
+                            // 可选：更改按钮样式以反映已收藏状态
+                            container.querySelector('.btn-favorite').classList.add('favorited');
+                        } else {
+                            alert(data.message || '收藏失败');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('错误:', error);
+                        alert('收藏请求失败');
+                    });
+
+                    // 隐藏文件夹列表框
+                    container.querySelector('.folder-dropdown').style.display = 'none';
+                });
             });
         });
     </script>

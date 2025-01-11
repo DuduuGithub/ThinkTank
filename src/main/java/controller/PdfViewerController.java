@@ -22,29 +22,25 @@ public class PdfViewerController {
         pdf.close();
     }
 
-
-
-
-
     public static void pdfViewer(HttpServletRequest request,HttpServletResponse response) throws IOException{
         // 获取请求的文件的id
-        String fileIdParam = request.getParameter("id");
-        SimpleLogger.log("请求id为" + fileIdParam + "的pdf文件");
-        if (fileIdParam == null || fileIdParam.isEmpty()) {
+        String documentIdParam = request.getParameter("id");
+        SimpleLogger.log("请求id为" + documentIdParam + "的pdf文件");
+        if (documentIdParam == null || documentIdParam.isEmpty()) {
             // 参数缺失，返回错误信息
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "请求中缺少fileId参数");
             return;
         }
-        int fileId = 0;
+        int documentId = 0;
         try{
-            fileId = Integer.parseInt(fileIdParam);
+            documentId = Integer.parseInt(documentIdParam);
         }catch(NumberFormatException e){
             // 参数格式错误，返回错误信息
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "fileId参数无效");
             return;
         }
 
-        InputStream pdfInputStream = PdfTools.getPdfInputStream(fileId);
+        InputStream pdfInputStream = PdfTools.getPdfInputStream(documentId);
         if (pdfInputStream != null) {
             response.setContentType("application/pdf");
             response.setHeader("Content-Disposition", "inline; filename=pdf_file.pdf");
