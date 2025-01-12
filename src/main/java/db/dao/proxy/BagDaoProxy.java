@@ -15,7 +15,7 @@ import db.vo.Bag;
  * 当使用查询时，会返回一个List<Bag>，表示查询到的报告包
  */
 public class BagDaoProxy implements BagDao {
-    private BagDao dao;
+    private BagDaoImpl dao;
     private Connection conn;
     private boolean flag;
 
@@ -75,12 +75,17 @@ public class BagDaoProxy implements BagDao {
      * 检查连接是否为空，如果为空，则获取一个连接，所有方法都要检查
      */
     private void checkConnection() {
-        if (conn == null) {
-            try {
-                conn = DBUtil.getConnection();
-            } catch (SQLException e) {
-                e.printStackTrace();
+        try {
+            if (conn.isClosed()) {
+                try {
+                    conn = DBUtil.getConnection();
+                    this.dao.setConnection(conn);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }
