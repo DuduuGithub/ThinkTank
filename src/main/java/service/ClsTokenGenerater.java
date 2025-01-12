@@ -23,7 +23,7 @@ public class ClsTokenGenerater {
         File tempFile = null;
 
         // 指定目录
-        File customDir = new File("webapp-db\\src\\main\\java\\com\\thinktank\\clsToken\\"); // 修改为你希望的目录
+        File customDir = new File("src\\main\\java\\clsToken\\tokens\\"); // 修改为你希望的目录
         if (!customDir.exists()) {
             customDir.mkdirs(); // 如果目录不存在，则创建
         }
@@ -36,10 +36,10 @@ public class ClsTokenGenerater {
             }
             
             // 输出文件位置在clsToken/tokens目录下
-            File outputFile = new File("webapp-db\\src\\main\\java\\com\\thinktank\\clsToken\\tokens\\", outputFileName);
+            File outputFile = new File("src\\main\\java\\clsToken\\tokens\\", outputFileName);
             
             ProcessBuilder processBuilder = new ProcessBuilder(
-                    "python", "webapp-db\\src\\main\\java\\com\\thinktank\\clsToken\\getClsToken.py",
+                    "python", "src\\main\\java\\clsToken\\getClsToken.py",
                     tempFile.getAbsolutePath(),
                     outputFile.getAbsolutePath());
             
