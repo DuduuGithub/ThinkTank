@@ -98,14 +98,16 @@ public class Bag2documentDaoImpl implements Bag2documentDao {
             pstmt.setInt(2, bag2document.getDocumentId());
             rs = pstmt.executeQuery();
             if(rs.next()){
-                flag = true;
-            }else{
-               flag = false; 
+                flag = rs.getInt(1)>0;
             }
             pstmt.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return flag;
+    }
+
+    public void setConnection(Connection conn) {
+        this.conn = conn;
     }
 }

@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="../static/css/black.css">
     <link rel="stylesheet" href="../static/css/check.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         /* 模态框样式 */
         .modal {
@@ -126,7 +127,6 @@
             color: white;
             z-index: 1000;
             display: none;
-            animation: fadeInOut 2.5s ease;
         }
 
         .toast-success {
@@ -163,20 +163,29 @@
             border: 1px solid #888;
             width: 80%;
             max-width: 500px;
-            border-radius: 5px;
         }
 
         .bag-item {
             padding: 10px;
-            margin: 5px 0;
+            margin-bottom: 10px;
+            background-color: #fff;
             border: 1px solid #ddd;
             border-radius: 4px;
+            border-bottom: 1px solid #eee;
+            transition: all 0.3s ease;
             cursor: pointer;
-            transition: background-color 0.3s;
         }
 
         .bag-item:hover {
-            background-color: #f5f5f5;
+            background-color: #f8f9fa;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .bag-item i {
+            margin-right: 10px;
+            color: #ffd700;
+            pointer-events: none;
         }
 
     </style>
@@ -284,9 +293,10 @@
 
     <div id="favoriteModal" class="favorite-modal">
         <div class="favorite-modal-content">
+            <span class="close">&times;</span>
             <h4>选择报告包</h4>
             <div id="bagsList">
-                <!-- 报告包列表将通过 JavaScript 动态加载 -->
+                <!-- 报告包列表将通过JavaScript动态加载 -->
             </div>
         </div>
     </div>
@@ -294,6 +304,58 @@
     <div id="toast" class="toast-message"></div>
 
     <script>
+        $(document).ready(function() {
+            window.showToast = function(message, isSuccess) {
+                const toast = $('#toast');
+                toast.text(message);
+                toast.removeClass('toast-success toast-error');
+                toast.addClass(isSuccess ? 'toast-success' : 'toast-error');
+                toast.css('display', 'block');
+                
+                setTimeout(function() {
+                    toast.css('display', 'none');
+                }, 2500);
+            }
+
+            window.addToBag = function(documentId, bagId) {
+                document.getElementById('favoriteModal').style.display = "none";
+                
+                fetch('/aireport/app/bagOperation', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `bagId=${bagId}&documentId=${documentId}&action=add`
+                })
+                .then(response => response.json())
+                .then(data => {
+                    showToast(data.message, data.success);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    showToast('收藏失败，请重试', false);
+                });
+            }
+
+            // 添加以下代码来处理收藏模态框的关闭按钮
+            const favoriteModal = document.getElementById('favoriteModal');
+            const favoriteModalClose = favoriteModal.querySelector('.close');
+            
+            favoriteModalClose.onclick = function() {
+                favoriteModal.style.display = "none";
+            }
+
+            // 修改window.onclick事件处理器，同时处理两个模态框
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+                if (event.target == favoriteModal) {
+                    favoriteModal.style.display = "none";
+                }
+            }
+        });
+
         document.getElementById("searchForm").onsubmit = function() {
             // 检查每个输入字段，如果没有输入，设为空字符串
             if (!document.getElementById("title-search").value) {
@@ -408,31 +470,23 @@
         }
 
         function addToBag(documentId, bagId) {
-            // 添加console.log来调试
-            console.log('Sending request with:', {documentId, bagId});
+            // 先关闭模态框
+            document.getElementById('favoriteModal').style.display = "none";
             
-            fetch('/aireport/app/bagOperation', {  // 确保这个URL是正确的
+            fetch('/aireport/app/bagOperation', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
                 body: `bagId=${bagId}&documentId=${documentId}&action=add`
             })
-            .then(response => {
-                // 添加response状态检查
-                console.log('Response status:', response.status);
-                return response.json();
-            })
+            .then(response => response.json())
             .then(data => {
-                console.log('Response data:', data);
-                if(data.success) {
-                    showToast(data.message, true);
-                } else {
-                    showToast(data.message, false);
-                }
+                // 直接使用后端返回的消息
+                showToast(data.message, data.success);
             })
             .catch(error => {
-                console.error('Error details:', error);  // 更详细的错误日志
+                console.error('Error:', error);
                 showToast('收藏失败，请重试', false);
             });
         }

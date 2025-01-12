@@ -15,7 +15,7 @@ import db.vo.Bag2document;
  * 当使用查询时，会返回一个List<Integer>，表示查询到的报告的id
  */
 public class Bag2documentDaoProxy implements Bag2documentDao {
-    private Bag2documentDao bag2documentDao;
+    private Bag2documentDaoImpl bag2documentDao;
     private Connection conn;
     private boolean flag;
 
@@ -84,15 +84,20 @@ public class Bag2documentDaoProxy implements Bag2documentDao {
     }
 
     /*
-     * 检查连接是否为空，如果为空，则获取一个连接，所有方法都要检查
+     * 检查连接是否为空，如果为空，则获取一个新连接并更新给实现类实例，所有方法都要检查
      */
     private void checkConnection() {
-        if (conn == null) {
-            try {
-                conn = DBUtil.getConnection();
-            } catch (SQLException e) {
-                e.printStackTrace();
+        try {
+            if (conn.isClosed()) {
+                try {
+                    conn = DBUtil.getConnection();
+                    this.bag2documentDao.setConnection(conn);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }
