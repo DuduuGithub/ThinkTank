@@ -14,8 +14,8 @@ print("input_file:" + args.input_file)
 print("output_file:" + args.output_file)
 
 # 加载BERT模型和tokenizer
-tokenizer = AutoTokenizer.from_pretrained("src/main/java/clsToken/bert-base-chinese")
-model = AutoModelForMaskedLM.from_pretrained("src/main/java/clsToken/bert-base-chinese", output_hidden_states=True)
+tokenizer = AutoTokenizer.from_pretrained("D:/java_hm_work/bert-base-chinese")
+model = AutoModelForMaskedLM.from_pretrained("D:/java_hm_work/bert-base-chinese", output_hidden_states=True)
 
 print("model loaded")
 
