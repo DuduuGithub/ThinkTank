@@ -5,21 +5,26 @@ import service.DocumentService;
 import view.ThymeleafViewResolver;
 import org.thymeleaf.context.Context;
 import logger.SimpleLogger; // 引入自定义的 SimpleLogger
+import service.VectorService;
+import service.ClsTokenGenerater;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.ArrayList;
 
 public class DocumentListViewController {
 
     private DocumentService documentService;
     private ThymeleafViewResolver viewResolver;
+    private VectorService vectorService;
 
     public DocumentListViewController(DocumentService documentService,ServletContext servletContext) {
         this.documentService = documentService;
 
         this.viewResolver = new ThymeleafViewResolver(servletContext);  // 使用你自己的 Thymeleaf 视图解析器
+        this.vectorService = new VectorService();
     }
 
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -36,58 +41,81 @@ public class DocumentListViewController {
         // int userId = (int) request.getSession().getAttribute("userId");
 
         List<Document> documentList;
+        List<Document> recommendedDocuments;
         Context context = new Context();
 
         if ("GET".equals(method)) {
-            // GET 请求：直接获取该用户的所有文档
-            documentList = documentService.searchDocuments(userId,"","","");
-            SimpleLogger.log(String.format("GET request: Found %d document(s) for user %d", 
-                documentList.size(), userId));
+            // GET请求：获取用户所有文档并基于平均向量推荐
+            documentList = documentService.searchDocuments(userId, "", "", "");
+            recommendedDocuments = getRecommendedDocuments(userId, documentList, null);
         } else {
-            // POST 请求：根据搜索条件筛选文档
-            String title = request.getParameter("title");
-            String keywords = request.getParameter("keywords");
-            String subject = request.getParameter("subject");
-            // 获取请求的字符编码
-            String encoding = request.getCharacterEncoding();
-            SimpleLogger.log("Request Encoding: " + encoding);
-
-            // 如果参数为null或者为空字符串，给它们设置一个默认值
-            if (title == null || title.trim().isEmpty()) {
-                title = ""; // 或者设置默认值，例如 "默认标题"
-            }
-            if (keywords == null || keywords.trim().isEmpty()) {
-                keywords = ""; // 或者设置默认值，例如 "默认关键字"
-            }
-            if (subject == null || subject.trim().isEmpty()) {
-                subject = ""; // 或者设置默认值，例如 "默认主题"
-            }
-
-            SimpleLogger.log(String.format("POST request: search title: %s ,keywords:%s,subject: %s,  for user %d", 
-            title,keywords,subject, userId));
+            // POST请求：根据搜索条件筛选文档并推荐
+            String title = request.getParameter("title") != null ? request.getParameter("title") : "";
+            String keywords = request.getParameter("keywords") != null ? request.getParameter("keywords") : "";
+            String subject = request.getParameter("subject") != null ? request.getParameter("subject") : "";
 
             documentList = documentService.searchDocuments(userId, title, keywords, subject);
             
-            // 记录搜索结果
-            if (documentList != null && !documentList.isEmpty()) {
-                SimpleLogger.log(String.format("POST request: Found %d document(s) for user %d with filters: title='%s', keywords='%s', subject='%s'",
-                        documentList.size(), userId, title, keywords, subject));
-            } else {
-                SimpleLogger.log(String.format("POST request: No documents found for user %d with filters: title='%s', keywords='%s', subject='%s'",
-                        userId, title, keywords, subject));
-            }
+            // 基于搜索文本进行推荐
+            String searchText = title + " " + keywords + " " + subject;
+            recommendedDocuments = getRecommendedDocuments(userId, null, searchText);
 
-            // 只在 POST 请求时设置过滤条件
             context.setVariable("titleFilter", title);
             context.setVariable("keywordsFilter", keywords);
             context.setVariable("subjectFilter", subject);
         }
 
-        // 共同的响应处理逻辑
         context.setVariable("documentList", documentList);
+        context.setVariable("recommendedDocuments", recommendedDocuments);
+        
         String renderedHtml = viewResolver.render("DocumentListView", context);
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html");
         response.getWriter().write(renderedHtml);
+    }
+
+    private List<Document> getRecommendedDocuments(int userId, List<Document> userDocuments, String searchText) throws Exception {
+        // 获取所有非用户的文档
+        List<Document> allDocuments = documentService.getAllDocumentsExceptUser(userId);
+        
+        // 如果没有文档可推荐，返回空列表
+        if (allDocuments.isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        double[] targetVector;
+        if (searchText != null && !searchText.trim().isEmpty()) {
+            // 基于搜索文本的推荐
+            targetVector = vectorService.vectorize(searchText);
+        } else {
+            // 基于用户文档平均向量的推荐
+            List<double[]> userDocumentVectors = new ArrayList<>();
+            for (Document doc : userDocuments) {
+                userDocumentVectors.add(vectorService.vectorize(doc.getTitle() + " " + doc.getKeywords() + " " + doc.getSubject()));
+            }
+            targetVector = vectorService.calculateAverageVector(userDocumentVectors);
+        }
+
+        // 如果无法获得目标向量，返回空列表
+        if (targetVector == null) {
+            return new ArrayList<>();
+        }
+
+        // 获取所有候选文档的向量
+        List<double[]> candidateVectors = new ArrayList<>();
+        for (Document doc : allDocuments) {
+            candidateVectors.add(vectorService.vectorize(doc.getTitle() + " " + doc.getKeywords() + " " + doc.getSubject()));
+        }
+
+        // 获取前7个最相似的文档
+        List<VectorService.SimilarityResult> topResults = vectorService.getTopNSimilarVectors(targetVector, candidateVectors, 7);
+        
+        // 转换结果为文档列表
+        List<Document> recommendedDocs = new ArrayList<>();
+        for (VectorService.SimilarityResult result : topResults) {
+            recommendedDocs.add(allDocuments.get(result.index));
+        }
+
+        return recommendedDocs;
     }
 }

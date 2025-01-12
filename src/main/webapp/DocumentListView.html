@@ -280,6 +280,40 @@
                                 </tbody>
                             </table>
                             <div class="pagination" id="paginationControls"></div>
+
+                            <div class="recommended-documents">
+                                <h3>推荐阅读</h3>
+                                <table class="table table-bordered responsive" id="recommendedTable">
+                                    <thead>
+                                        <tr>
+                                            <th>报告ID</th>
+                                            <th>报告标题</th>
+                                            <th>报告关键词</th>
+                                            <th>报告主题词</th>
+                                            <th>报告详情</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Thymeleaf模板语法，遍历recommendedDocuments -->
+                                        <tr th:each="document : ${recommendedDocuments}">
+                                            <td th:text="${document.documentId}"></td>
+                                            <td th:text="${document.title}"></td>
+                                            <td th:text="${document.keywords}"></td>
+                                            <td th:text="${document.subject}"></td>
+                                            <td><a th:href="@{app/pdf(id=${document.documentId})}" class="view-full-text">点击查看全文</a></td>
+                                            <td>
+                                                <!-- 收藏按钮和文件夹列表容器 -->
+                                                <div class="favorite-container" style="position: relative; display: inline-block;">
+                                                    <button class="btn btn-favorite" th:onclick="'showFavoriteModal(' + ${document.documentId} + ')'">
+                                                        <i class="entypo-star"></i> 收藏
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>

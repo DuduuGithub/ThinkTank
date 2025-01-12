@@ -18,7 +18,7 @@ tokenizer = AutoTokenizer.from_pretrained("D:/java_hm_work/bert-base-chinese")
 model = AutoModelForMaskedLM.from_pretrained("D:/java_hm_work/bert-base-chinese", output_hidden_states=True)
 
 print("model loaded")
-
+ 
 # 从文件读取输入文本
 # with open(args.input_file, 'r', encoding='utf-8') as f:
 #     text = f.read()  # 读取文件内容

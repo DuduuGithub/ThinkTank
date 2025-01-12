@@ -58,4 +58,55 @@ public class VectorService {
         }
         return vectors;
     }
+
+    // 计算多个向量的平均向量
+    public double[] calculateAverageVector(List<double[]> vectors) {
+        if (vectors == null || vectors.isEmpty()) {
+            return null;
+        }
+        
+        int dimension = vectors.get(0).length;
+        double[] avgVector = new double[dimension];
+        
+        for (double[] vector : vectors) {
+            for (int i = 0; i < dimension; i++) {
+                avgVector[i] += vector[i];
+            }
+        }
+        
+        for (int i = 0; i < dimension; i++) {
+            avgVector[i] /= vectors.size();
+        }
+        
+        return avgVector;
+    }
+
+    // 获取前N个最相似的向量及其对应的索引
+    public List<SimilarityResult> getTopNSimilarVectors(double[] targetVector, List<double[]> vectors, int n) {
+        List<SimilarityResult> results = new ArrayList<>();
+        
+        for (int i = 0; i < vectors.size(); i++) {
+            double similarity = cosineSimilarity(targetVector, vectors.get(i));
+            results.add(new SimilarityResult(i, vectors.get(i), similarity));
+        }
+        
+        // 按相似度降序排序
+        results.sort((a, b) -> Double.compare(b.similarity, a.similarity));
+        
+        // 返回前N个结果
+        return results.subList(0, Math.min(n, results.size()));
+    }
+
+    // 内部类用于存储相似度结果
+    public static class SimilarityResult {
+        public final int index;
+        public final double[] vector;
+        public final double similarity;
+
+        public SimilarityResult(int index, double[] vector, double similarity) {
+            this.index = index;
+            this.vector = vector;
+            this.similarity = similarity;
+        }
+    }
 }

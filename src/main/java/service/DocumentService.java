@@ -2,6 +2,7 @@ package service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import db.dao.impl.DocumentDaoImpl;
 import db.dao.proxy.Bag2documentDaoProxy;
@@ -41,5 +42,15 @@ public class DocumentService {
             }
         }
         return documents;
+    }
+
+    public List<Document> getAllDocumentsExceptUser(int userId) {
+        DocumentDaoProxy documentDao = new DocumentDaoProxy();
+        List<Document> allDocuments = documentDao.findAll();
+        
+        // 过滤掉属于该用户的文档
+        return allDocuments.stream()
+                .filter(doc -> doc.getUserId() != userId)
+                .collect(Collectors.toList());
     }
 }
