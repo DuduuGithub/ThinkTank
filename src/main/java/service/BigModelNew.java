@@ -85,6 +85,10 @@ public class BigModelNew extends WebSocketListener {
 
     // 用于外部调用的接口方法
     public static String askQuestion(String question) throws Exception {
+        // 重置状态
+        wsCloseFlag = false;
+        totalAnswer = "";
+
         // 构建鉴权url
         String authUrl = getAuthUrl(hostUrl, apiKey, apiSecret);
         OkHttpClient client = new OkHttpClient.Builder().build();
@@ -103,6 +107,11 @@ public class BigModelNew extends WebSocketListener {
         while (!wsCloseFlag) {
             Thread.sleep(10);
         }
+
+        // 确保连接完全关闭
+        webSocket.close(1000, "");
+        client.dispatcher().executorService().shutdown();
+        client.connectionPool().evictAll();
 
         return totalAnswer; // 返回大模型的答案
     }
@@ -225,6 +234,24 @@ public class BigModelNew extends WebSocketListener {
 
         public void setContent(String content) {
             this.content = content;
+        }
+    }
+
+    public static void main(String[] args) {
+        try {
+            // 测试第一个问题
+            System.out.println("提问第一个问题：");
+            String answer1 = askQuestion("你好，请介绍一下你自己");
+            System.out.println("\n最终答案：" + answer1);
+            
+            // 测试第二个问题
+            System.out.println("\n提问第二个问题：");
+            String answer2 = askQuestion("1+1等于多少？");
+            System.out.println("\n最终答案：" + answer2);
+            
+        } catch (Exception e) {
+            System.out.println("发生错误：");
+            e.printStackTrace();
         }
     }
 }
