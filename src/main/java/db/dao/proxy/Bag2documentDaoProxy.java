@@ -15,7 +15,7 @@ import db.vo.Bag2document;
  * 当使用查询时，会返回一个List<Integer>，表示查询到的报告的id
  */
 public class Bag2documentDaoProxy implements Bag2documentDao {
-    private Bag2documentDaoImpl bag2documentDao;
+    private Bag2documentDaoImpl dao;
     private Connection conn;
     private boolean flag;
 
@@ -28,7 +28,7 @@ public class Bag2documentDaoProxy implements Bag2documentDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        bag2documentDao = new Bag2documentDaoImpl(conn);
+        dao = new Bag2documentDaoImpl(conn);
     }
 
     /*
@@ -37,7 +37,7 @@ public class Bag2documentDaoProxy implements Bag2documentDao {
     @Override
     public boolean insert(Bag2document bag2document) {
         checkConnection();
-        flag = bag2documentDao.insert(bag2document);
+        flag = dao.insert(bag2document);
         DBUtil.closeConnection(conn);
         return flag;
     }
@@ -48,7 +48,7 @@ public class Bag2documentDaoProxy implements Bag2documentDao {
     @Override
     public boolean delete(Bag2document bag2document) {
         checkConnection();
-        flag = bag2documentDao.delete(bag2document);
+        flag = dao.delete(bag2document);
         DBUtil.closeConnection(conn);
         return flag;
     }
@@ -59,7 +59,7 @@ public class Bag2documentDaoProxy implements Bag2documentDao {
     @Override
     public boolean update(Bag2document bag2document) {
         checkConnection();
-        flag = bag2documentDao.update(bag2document);
+        flag = dao.update(bag2document);
         DBUtil.closeConnection(conn);
         return flag;
     }
@@ -70,7 +70,7 @@ public class Bag2documentDaoProxy implements Bag2documentDao {
     @Override
     public List<Integer> queryByBagId(int bagId) {
         checkConnection();
-        List<Integer> list = bag2documentDao.queryByBagId(bagId);
+        List<Integer> list = dao.queryByBagId(bagId);
         DBUtil.closeConnection(conn);
         return list;
     }
@@ -78,7 +78,7 @@ public class Bag2documentDaoProxy implements Bag2documentDao {
     @Override
     public boolean exists(Bag2document bag2document){
         checkConnection();
-        flag = bag2documentDao.exists(bag2document);
+        flag = dao.exists(bag2document);
         DBUtil.closeConnection(conn);
         return flag;
     }
@@ -91,7 +91,7 @@ public class Bag2documentDaoProxy implements Bag2documentDao {
             if (conn.isClosed()) {
                 try {
                     conn = DBUtil.getConnection();
-                    this.bag2documentDao.setConnection(conn);
+                    this.dao.setConnection(conn);
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }

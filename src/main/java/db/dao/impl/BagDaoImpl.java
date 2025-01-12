@@ -102,4 +102,8 @@ public class BagDaoImpl implements BagDao {
         }
         return bags;
     };
+
+    public void setConnection(Connection conn) {
+        this.conn = conn;
+    }
 }
