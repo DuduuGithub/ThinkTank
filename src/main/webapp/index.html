@@ -248,7 +248,13 @@
 
     function showBags() {
         // 加载用户的报告包列表
-        fetch('/aireport/app/bags')
+        fetch('/aireport/app/bagOperation', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: 'action=queryBags'
+        })
             .then(response => response.json())
             .then(bags => {
                 let html = '';

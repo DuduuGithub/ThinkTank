@@ -11,7 +11,9 @@ import logger.SimpleLogger;
 
 public class PdfMetaDataService {
     /*
-     * 将
+     * 将pdf文件的元数据和内容构造一个Document对象
+     * 参数：pdf的输入流，用户id
+     * 返回：Document对象
      */
     @SuppressWarnings("rawtypes")
     public static Document getDocument(InputStream pdfInputStream, int userId) throws Exception {
@@ -22,9 +24,6 @@ public class PdfMetaDataService {
         // 使用一个副本来获取元数据
         ByteArrayInputStream pdfInputStream1 = new ByteArrayInputStream(pdfBytes);
         Map metaDataMap = PdfMetaDataService.getPdfMetaData(pdfInputStream1);
-
-        // 检查元数据是否获取成功
-        SimpleLogger.log("获取到的元数据: " + metaDataMap);
 
         String title = (String) metaDataMap.get("title");
         String keywords = (String) metaDataMap.get("keywords");
@@ -45,20 +44,16 @@ public class PdfMetaDataService {
      */
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public static Map getPdfMetaData(InputStream pdfInputStream) throws Exception {
-        // 添加调试信息
-        System.out.println("开始读取PDF内容");
         
         String pdfContent = PdfTools.getPdfContent(pdfInputStream);
-        
-        // 检查PDF内容是否成功提取
-        System.out.println("PDF内容长度: " + (pdfContent != null ? pdfContent.length() : 0));
+        SimpleLogger.log("PDF内容: " + pdfContent);
         
         // 调用大模型获得结果
         String result = BigModelNew.askQuestion(pdfContent + "。"
                 + "请你给出以上文章的标题（title），关键词（文章自带的关键词,keywords），主题词（根据文章内容生成的主题词，subject），返回的形式为一个形如{\"title\":\"value1\", \"keywords\":\"value2\", \"subject\":\"value3\"}的json字符串，其中，value2和values3要求是不要用列表形式的，用中文逗号“，”分割");
 
         // 检查大模型返回结果
-        System.out.println("大模型返回结果: " + result);
+        SimpleLogger.log("大模型返回结果: " + result);
 
         // 截取result中的json字符串
         String jsonString = result = result.substring(result.indexOf('{'), result.lastIndexOf('}') + 1);

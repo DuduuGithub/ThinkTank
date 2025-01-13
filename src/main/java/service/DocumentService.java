@@ -32,7 +32,7 @@ public class DocumentService {
         // 先获取报告包中的所有文档ID
         Bag2documentDaoProxy bag2documentDao = new Bag2documentDaoProxy();
         List<Integer> documentIds = bag2documentDao.queryByBagId(bagId);
-        
+
         // 然后获取每个文档的详细信息
         DocumentDaoImpl documentDaoImpl = new DocumentDaoImpl();
         for (Integer documentId : documentIds) {
@@ -47,10 +47,27 @@ public class DocumentService {
     public List<Document> getAllDocumentsExceptUser(int userId) {
         DocumentDaoProxy documentDao = new DocumentDaoProxy();
         List<Document> allDocuments = documentDao.findAll();
-        
+
         // 过滤掉属于该用户的文档
         return allDocuments.stream()
                 .filter(doc -> doc.getUserId() != userId)
                 .collect(Collectors.toList());
+    }
+
+    /*
+     * 用途：删除文档
+     * 返回值：删除成功与否
+     * 参数：documentId,userId
+     */
+    public static String deleteDocument(int documentId, int userId) {
+        DocumentDaoProxy documentDaoProxy = DaoFactory.getInstance().getDocumentDao();
+        Document document = documentDaoProxy.findById(documentId);
+        if (document.getUserId() == userId) {
+            documentDaoProxy.delete(String.valueOf(documentId));
+            return "{\"success\": true, \"message\": \"删除成功\"}";
+        }
+        else{
+            return "{\"success\": false, \"message\": \"该报告不属于您，无法删除\"}";
+        }
     }
 }

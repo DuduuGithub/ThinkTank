@@ -12,7 +12,7 @@ CREATE TABLE document (
     title VARCHAR(200) NOT NULL,
     keywords VARCHAR(200),
     subject VARCHAR(100),
-    content TEXT,
+    content LONGTEXT,
     user_id INT,                      
     pdf_file LONGBLOB,
     FOREIGN KEY (user_id) REFERENCES user(user_id)
