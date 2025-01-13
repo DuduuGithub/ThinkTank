@@ -1,9 +1,5 @@
 package db.factory;
 
-import db.dao.base.BagDao;
-import db.dao.base.Bag2documentDao;
-import db.dao.base.DocumentDao;
-import db.dao.base.UserDao;
 import db.dao.proxy.BagDaoProxy;
 import db.dao.proxy.Bag2documentDaoProxy;
 import db.dao.proxy.DocumentDaoProxy;
