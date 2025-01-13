@@ -15,6 +15,7 @@ import controller.DeleteDocumentController;
 import controller.DocumentListViewController;
 import controller.LoginController;
 import controller.PdfViewerController;
+import controller.RegisterController;
 import service.DocumentService;
 import logger.SimpleLogger;
 
@@ -52,6 +53,10 @@ public class RequestDispatchServlet extends HttpServlet {
         path = path.substring(index);
 
         switch (path) {
+            case "/register"://新用户注册
+                RegisterController.register(request, response);
+                break;
+                
             case "/login"://用户身份验证
                 LoginController.processRequest(request, response);
                 break;
