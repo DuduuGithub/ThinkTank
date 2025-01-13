@@ -74,6 +74,12 @@
                         </button>
                     </div>
                     <div class="form-group">
+                        <button type="button" class="btn btn-primary btn-block btn-login" onclick="submitRegister()">
+                            <i class="entypo-user-add"></i>
+                            Register
+                        </button>
+                    </div>
+                    <div class="form-group">
                         <em>- or -</em>
                     </div>
                 </form>
@@ -91,6 +97,15 @@
     <script src="static/js/neon-login.js"></script>
     <script src="static/js/neon-custom.js"></script>
     <script src="static/js/neon-demo.js"></script>
+    <script>
+        function submitRegister() {
+            // 获取当前表单
+            var form = document.querySelector('form');
+            // 临时修改表单的action
+            form.action = "app/register";
+            form.submit();
+        }
+    </script>
 </body>
 
 </html>

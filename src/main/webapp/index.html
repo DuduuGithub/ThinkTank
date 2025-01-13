@@ -138,9 +138,9 @@
                         <!-- Profile Info -->
                         <li class="profile-info dropdown">
                             <!-- add class "pull-right" if you want to place this from right -->
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" _msttexthash="7861633"
-                                _msthash="125"><img src="static/picture/thumb-1@2x.png" alt="" class="img-circle"
-                                    width="44" _istranslated="1">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="static/picture/new-profile-picture.jpg" alt="" class="img-circle" 
+                                     style="width: 44px; height: 44px; object-fit: cover;">
                             </a>
                         </li>
                     </ul>
@@ -248,7 +248,13 @@
 
     function showBags() {
         // 加载用户的报告包列表
-        fetch('/aireport/app/bags')
+        fetch('/aireport/app/bagOperation', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: 'action=queryBags'
+        })
             .then(response => response.json())
             .then(bags => {
                 let html = '';

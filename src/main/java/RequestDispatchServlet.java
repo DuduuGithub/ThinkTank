@@ -11,10 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import controller.AddReportWithPdfController;
 import controller.BagDocumentListViewController;
 import controller.BagOperationController;
+import controller.DeleteDocumentController;
 import controller.DocumentListViewController;
 import controller.LoginController;
 import controller.PdfViewerController;
-import controller.QueryBagsController;
+import controller.RegisterController;
 import service.DocumentService;
 import logger.SimpleLogger;
 
@@ -52,12 +53,20 @@ public class RequestDispatchServlet extends HttpServlet {
         path = path.substring(index);
 
         switch (path) {
+            case "/register"://新用户注册
+                RegisterController.register(request, response);
+                break;
+                
             case "/login"://用户身份验证
                 LoginController.processRequest(request, response);
                 break;
 
             case "/loadPdf"://上传pdf文件
                 AddReportWithPdfController.processRequest(request,response);
+                break;
+
+            case "/deleteDocument"://删除报告
+                DeleteDocumentController.processRequest(request,response);
                 break;
 
             case "/documentListView"://用户查看自己的报告和检索
@@ -75,17 +84,14 @@ public class RequestDispatchServlet extends HttpServlet {
                 PdfViewerController.pdfViewer(request,response);
                 break;
 
-            case "/bags":  // 获得用户报告包列表
-                QueryBagsController.processRequest(request, response);
-                break;
-
             case "/bagDocumentListView":
                 DocumentService bagDocService = new DocumentService();
                 ServletContext bagServletContext = request.getServletContext();
                 BagDocumentListViewController bagDocController = new BagDocumentListViewController(bagDocService, bagServletContext);
                 bagDocController.processRequest(request, response);
                 break;
-            case "/bagOperation":
+
+            case "/bagOperation":// 用于获得用户的报告包列表、添加报告到报告包、删除报告包中的报告
                 BagOperationController.processRequest(request, response);
                 break;
 

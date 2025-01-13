@@ -205,13 +205,19 @@
                             <button class="btn btn-primary" id="add-report">添加报告</button>
                             <button class="btn btn-primary" id="openModalBtn">一键上传文件</button>
 
-                            <div id="myModal" class="modal">
-                                <div class="modal-content">
+                            <div id="myModal" class="favorite-modal">
+                                <div class="favorite-modal-content">
                                     <span class="close">&times;</span>
-                                    <form id="uploadForm" action="app/loadPdf" method="post" enctype="multipart/form-data">
-                                        <input type="file" name="file" />
-                                        <input type="submit" value="一键上传报告" />
-                                    </form>
+                                    <h4>上传报告文件</h4>
+                                    <div class="upload-container">
+                                        <form id="uploadForm" action="app/loadPdf" method="post" enctype="multipart/form-data" style="text-align: center;">
+                                            <div class="bag-item" style="margin: 30px 0;">
+                                                <input type="file" name="file" accept=".pdf" style="margin-bottom: 20px; display: block; margin-left: auto; margin-right: auto;" />
+                                                <br/>
+                                                <input type="submit" value="上传报告" class="btn btn-primary" />
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
 
@@ -245,11 +251,8 @@
                                         <td th:text="${document.subject}"></td>
                                         <td><a th:href="@{app/pdf(id=${document.documentId})}" class="view-full-text">点击查看全文</a></td>
                                         <td>
-                                            <!-- 删除表单 -->
-                                            <form action="deleteServlet" method="POST" style="display:inline;">
-                                                <input type="hidden" name="id" th:value="${document.documentId}" />
-                                                <input type="submit" class="btn btn-danger" value="删除" />
-                                            </form>
+                                            <!-- 删除按钮 -->
+                                            <button th:onclick="'deleteDocument(' + ${document.documentId} + ')'" class="btn btn-danger">删除</button>
 
                                             <!-- 修改表单 -->
                                             <form method="POST" style="display:inline;">
@@ -485,22 +488,31 @@
         }
 
         function showFavoriteModal(documentId) {
-            fetch('/aireport/app/bags')
-                .then(response => response.json())
-                .then(bags => {
-                    let html = '';
-                    bags.forEach(bag => {
-                        html += `
-                            <div class="bag-item" onclick="addToBag(${documentId}, ${bag.bagId})">
-                                <i class="entypo-folder"></i>
-                                ${bag.bagName}
-                                <input type="hidden" name="action" value="add" />
-                            </div>
-                        `;
-                    });
-                    document.getElementById('bagsList').innerHTML = html;
-                    document.getElementById('favoriteModal').style.display = "block";
+            fetch('/aireport/app/bagOperation', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'action=queryBags'
+            })
+            .then(response => response.json())
+            .then(bags => {
+                let html = '';
+                bags.forEach(bag => {
+                    html += `
+                        <div class="bag-item" onclick="addToBag(${documentId}, ${bag.bagId})">
+                            <i class="entypo-folder"></i>
+                            ${bag.bagName}
+                        </div>
+                    `;
                 });
+                document.getElementById('bagsList').innerHTML = html;
+                document.getElementById('favoriteModal').style.display = "block";
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showToast('获取报告包列表失败', false);
+            });
         }
 
         function addToBag(documentId, bagId) {
@@ -531,6 +543,28 @@
             if (event.target == modal) {
                 modal.style.display = "none";
             }
+        }
+
+        function deleteDocument(documentId) {
+            fetch('/aireport/app/deleteDocument', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `documentId=${documentId}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                showToast(data.message, data.success);
+                if (data.success) {
+                    // 如果删除成功，刷新页面
+                    window.location.reload();
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showToast('删除失败，请重试', false);
+            });
         }
     </script>
 </body>
