@@ -55,6 +55,7 @@
             align-items: center;
             border-bottom: 1px solid #eee;
             transition: all 0.3s ease;
+            cursor: pointer;
         }
 
         .bag-item:hover {
@@ -100,6 +101,27 @@
             border: 1px solid #888;
             width: 80%;
             max-width: 500px;
+            max-height: 35vh;
+            overflow-y: auto;
+        }
+
+        /* 以下4个模态框的滚动条样式 */
+        .modal-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .modal-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 3px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb:hover {
+            background: #555;
         }
 
         .close {
@@ -309,12 +331,12 @@
                 let html = '';
                 bags.forEach(bag => {
                     html += `
-                        <div class="bag-item">
-                            <span onclick="navigateToBag(${bag.bagId})" style="cursor: pointer;">
+                        <div class="bag-item" onclick="navigateToBag(${bag.bagId})">
+                            <span>
                                 <i class="entypo-folder"></i>
                                 ${bag.bagName}
                             </span>
-                            <button class="btn btn-link delete-btn" onclick="deleteBag(${bag.bagId})">
+                            <button class="btn btn-link delete-btn" onclick="event.stopPropagation(); deleteBag(${bag.bagId})">
                                 <i class="entypo-trash" style="color: #ff4444;"></i>
                             </button>
                         </div>
