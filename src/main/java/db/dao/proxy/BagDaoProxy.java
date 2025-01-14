@@ -54,9 +54,9 @@ public class BagDaoProxy implements BagDao {
     /*
      * 用途：用户删除报告包
      */
-    public boolean delete(Bag bag) {
+    public boolean delete(int bagId) {
         checkConnection();
-        flag = dao.delete(bag);
+        flag = dao.delete(bagId);
         DBUtil.closeConnection(conn);
         return flag;
     };

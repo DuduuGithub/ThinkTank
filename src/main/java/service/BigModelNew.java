@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
+
+import logger.SimpleLogger;
 import okhttp3.*;
 
 import javax.crypto.Mac;
@@ -152,6 +154,8 @@ public class BigModelNew extends WebSocketListener {
 
             // 关闭 WebSocket
             wsCloseFlag = true;
+
+            SimpleLogger.log("已经关闭了连接\n\n\n\n\n\n\n\n\n");
         }
     }
 

@@ -60,12 +60,12 @@ public class BagDaoImpl implements BagDao {
     /*
      * 用途：用户删除报告包
      */
-    public boolean delete(Bag bag) {
+    public boolean delete(int bagId) {
         flag = false;
         sql = "delete from bag where bag_id=?";
         try {
             pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, bag.getBagId());
+            pstmt.setInt(1, bagId);
             flag = pstmt.executeUpdate() > 0;
             pstmt.close();
         } catch (Exception e) {
