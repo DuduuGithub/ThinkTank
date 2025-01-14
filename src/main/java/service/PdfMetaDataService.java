@@ -56,7 +56,9 @@ public class PdfMetaDataService {
         SimpleLogger.log("大模型返回结果: " + result);
 
         // 截取result中的json字符串
-        String jsonString = result = result.substring(result.indexOf('{'), result.lastIndexOf('}') + 1);
+        String jsonString = result.substring(result.indexOf('{'), result.lastIndexOf('}') + 1);
+
+        SimpleLogger.log("json字符串: " + jsonString);
 
         // 创建Gson对象，用于把json字符串转换为Map
         Gson gson = new Gson();

@@ -1,17 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Neon Admin Panel">
     <meta name="author" content="">
-
     <title>模型首页</title>
 
-
+    <!-- 引入公共 CSS -->
     <link rel="stylesheet" href="static/css/jquery-ui-1.10.3.custom.min.css">
     <link rel="stylesheet" href="static/css/entypo.css">
     <link rel="stylesheet" href="static/css/css.css">
@@ -21,235 +18,28 @@
     <link rel="stylesheet" href="static/css/neon-forms.css">
     <link rel="stylesheet" href="static/css/black.css">
     <link rel="stylesheet" href="static/css/new.css">
-
-    <script src="static/js/jquery-1.11.0.min.js"></script>
-
-    <!--[if lt IE 9]><script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-	<![endif]-->
+    
+    <!-- 引入导航栏相关的 CSS -->
+    <link rel="stylesheet" href="static/css/navbar.css">
 
     <style>
-        .entypo-star {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            background: transparent;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 20px;
-            color: #ffd700;
-        }
-
-        .bag-item {
-            padding: 10px;
-            margin-bottom: 10px;
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #eee;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .bag-item:hover {
-            background-color: #f8f9fa;
-            transform: translateY(-2px);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .bag-item i {
-            margin-right: 10px;
-            color: #ffd700;
-        }
-
-        /* 下面2个删除按钮样式 */
-        .delete-btn {
-            padding: 0;
-            margin: 0;
-            border: none;
-            background: none;
-            cursor: pointer;
-        }
-
-        .delete-btn:hover i {
-            color: #ff0000;
-        }
-
-        /* 模态框样式 */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.4);
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 500px;
-            max-height: 35vh;
-            overflow-y: auto;
-        }
-
-        /* 以下4个模态框的滚动条样式 */
-        .modal-content::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .modal-content::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 3px;
-        }
-
-        .modal-content::-webkit-scrollbar-thumb {
-            background: #888;
-            border-radius: 3px;
-        }
-
-        .modal-content::-webkit-scrollbar-thumb:hover {
-            background: #555;
-        }
-
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        /* 以下4个是创建报告包的表单样式 */
-        .create-bag-form {
-            background-color: #f8f9fa;
-            padding: 15px;
-            border-radius: 4px;
-            width: 100%;
-        }
-
-        .input-group {
-            display: flex;
-            gap: 10px;
-            width: 100%;
-        }
-
-        .input-group .form-control {
-            flex: none !important;
-            flex-basis: 350px !important;
-            height: 36px;
-            min-width: 0;
-        }
-
-        .input-group .btn {
-            height: 36px;
-            padding: 0 15px;
-            white-space: nowrap;
-            flex-shrink: 0;
-        }
+        /* 其他页面特有的样式 */
+        
+        /* ... 其他样式 ... */
     </style>
-
 </head>
-
 <body class="page-body" data-url="http://neon.dev">
-
     <div class="page-container horizontal-menu">
 
+        <!-- 导航栏占位符 -->
+        <div id="navbar"></div>
 
-        <header class="navbar navbar-fixed-top"><!-- set fixed position by adding class "navbar-fixed-top" -->
-
-            <div class="navbar-inner">
-
-                <!-- logo -->
-                <div class="navbar-brand">
-                    <a href="index.html">
-                        <img src="static/picture/logo@2x.png" width="88" alt="">
-                    </a>
-                </div>
-                <!-- main menu -->
-                <ul class="navbar-nav">
-                    <li>
-                        <a href="app/documentListView">
-                            <i class="entypo-doc-text"></i>
-                            <span>论文概览</span>
-                        </a>
-                    </li>
-
-                    <li class="root-level has-sub">
-                        <a href="receive.html">
-                            <i class="entypo-newspaper"></i>
-                            <span>报告生成</span>
-                        </a>
-                    </li>
-                    </li>
-                </ul>
-                <!-- notifications and other links -->
-                <ul class="nav navbar-right pull-right">
-                    <ul class="user-info pull-left pull-none-xsm">
-
-                        <!-- Profile Info -->
-                        <li class="profile-info dropdown">
-                            <!-- add class "pull-right" if you want to place this from right -->
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="static/picture/new-profile-picture.jpg" alt="" class="img-circle" 
-                                     style="width: 44px; height: 44px; object-fit: cover;">
-                            </a>
-                        </li>
-                    </ul>
-
-                    <li class="sep"></li>
-
-                    <li>
-                        <a href="javascript:void(0)" onclick="showBags()">
-                            我的报告包 <i class="entypo-star"></i>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="extra-login.html">
-                            退出登录 <i class="entypo-logout right"></i>
-                        </a>
-                    </li>
-
-
-                    <!-- mobile only -->
-                    <li class="visible-xs">
-
-                        <!-- open/close menu icon (do not remove if you want to enable menu on mobile devices) -->
-                        <div class="horizontal-mobile-menu visible-xs">
-                            <a href="#" class="with-animation"><!-- add class "with-animation" to support animation -->
-                                <i class="entypo-menu"></i>
-                            </a>
-                        </div>
-
-                    </li>
-
-                </ul>
-
-            </div>
-
-        </header>
         <div class="main-content">
-
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-
                         <div class="dialog-box">
                             <input class="input" type="text" placeholder="请输入一个主题，例如"芯片出口管制"">
-
                             <div class="toggle-search">
                                 <label class="switch">
                                     <input type="checkbox" checked>
@@ -260,174 +50,36 @@
                             <div class="begin">
                                 <button class="search-button">开始</button>
                             </div>
-
                         </div>
-
                     </div>
                 </div>
-
                 <!-- Footer -->
                 <footer class="main">
-
-
-                    Copyright &copy; 2021.Company name All rights reserved.<a target="_blank" href=""></a>
-
+                    Copyright &copy; 2021.Company name All rights reserved.
                 </footer>
             </div>
         </div>
     </div>
 
+    <!-- 引入公共 JavaScript -->
+    <script src="static/js/jquery-1.11.0.min.js"></script>
+    <!--[if lt IE 9]><script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- 引入导航栏相关的 JavaScript -->
+    <script src="static/js/navbar.js"></script>
 
     <script>
         document.getElementsByClassName('search-button')[0].addEventListener('click', function () {
-
             // 获取输入框的值
             var searchQuery = document.getElementsByClassName('input')[0].value;
-
             sessionStorage.setItem('searchQuery', JSON.stringify(searchQuery));
             location.href = 'chooseText.html';
         });
     </script>
-
-    <!-- 在原有代码的基础上添加模态框 -->
-    <div id="bagsModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h4>我的报告包</h4>
-            <div id="bagsList">
-                <!-- 报告包列表将通过JavaScript动态加载 -->
-            </div>
-            
-            <!-- 添加创建报告包的表单 -->
-            <div class="create-bag-form" style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #eee;">
-                <div class="input-group">
-                    <input type="text" id="newBagName" class="form-control" placeholder="输入报告包名称">
-                    <span class="input-group-btn">
-                        <button class="btn btn-primary" onclick="createNewBag()">
-                            <i class="entypo-plus"></i> 新建
-                        </button>
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 添加JavaScript代码 -->
-    <script>
-    var bagsModal = document.getElementById("bagsModal");
-    var bagsSpan = bagsModal.getElementsByClassName("close")[0];
-
-    function showBags() {
-        // 加载用户的报告包列表
-        fetch('/aireport/app/bagOperation', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: 'action=queryBags'
-        })
-            .then(response => response.json())
-            .then(bags => {
-                let html = '';
-                bags.forEach(bag => {
-                    html += `
-                        <div class="bag-item" onclick="navigateToBag(${bag.bagId})">
-                            <span>
-                                <i class="entypo-folder"></i>
-                                ${bag.bagName}
-                            </span>
-                            <button class="btn btn-link delete-btn" onclick="event.stopPropagation(); deleteBag(${bag.bagId})">
-                                <i class="entypo-trash" style="color: #ff4444;"></i>
-                            </button>
-                        </div>
-                    `;
-                });
-                document.getElementById('bagsList').innerHTML = html;
-                bagsModal.style.display = "block";
-            });
-    }
-
-    // 新增的导航函数
-    function navigateToBag(bagId) {
-        window.location.href = `/aireport/app/bagDocumentListView?bagId=${bagId}`;
-    }
-
-
-    // 关闭模态框
-    bagsSpan.onclick = function() {
-        bagsModal.style.display = "none";
-    }
-
-    // 点击模态框外部关闭
-    window.onclick = function(event) {
-        if (event.target == bagsModal) {
-            bagsModal.style.display = "none";
-        }
-    }
-
-    function createNewBag() {
-        var bagName = document.getElementById('newBagName').value;
-        
-        if (!bagName.trim()) {
-            alert('请输入报告包名称');
-            return;
-        }
-
-        fetch('/aireport/app/bagOperation', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: 'action=createBag&bagName=' + encodeURIComponent(bagName)
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                // 清空输入框
-                document.getElementById('newBagName').value = '';
-                // 重新加载报告包列表
-                showBags();
-            } else {
-                alert('创建失败：' + data.message);
-            }
-        })
-        .catch(error => {
-            alert('创建出错：' + error);
-        });
-    }
-
-    // 添加回车键提交功能
-    document.getElementById('newBagName').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-            createNewBag();
-        }
-    });
-
-    // 添加删除报告包的函数
-    function deleteBag(bagId) {
-        if (confirm('确定要删除这个报告包吗？')) {
-            fetch('/aireport/app/bagOperation', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: `action=deleteBag&bagId=${bagId}`
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    showBags(); // 刷新列表
-                } else {
-                    alert('删除失败：' + data.message);
-                }
-            })
-            .catch(error => {
-                alert('删除出错：' + error);
-            });
-        }
-    }
-    </script>
-
 </body>
-
 </html>
