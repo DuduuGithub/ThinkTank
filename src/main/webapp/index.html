@@ -95,6 +95,34 @@
             font-weight: bold;
             cursor: pointer;
         }
+
+        /* 以下4个是创建报告包的表单样式 */
+        .create-bag-form {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            width: 100%;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .input-group .form-control {
+            flex: none !important;
+            flex-basis: 350px !important;
+            height: 36px;
+            min-width: 0;
+        }
+
+        .input-group .btn {
+            height: 36px;
+            padding: 0 15px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
     </style>
 
 </head>
@@ -202,11 +230,6 @@
                     </div>
                 </div>
 
-
-
-
-
-
                 <!-- Footer -->
                 <footer class="main">
 
@@ -237,6 +260,18 @@
             <h4>我的报告包</h4>
             <div id="bagsList">
                 <!-- 报告包列表将通过JavaScript动态加载 -->
+            </div>
+            
+            <!-- 添加创建报告包的表单 -->
+            <div class="create-bag-form" style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #eee;">
+                <div class="input-group">
+                    <input type="text" id="newBagName" class="form-control" placeholder="输入报告包名称">
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" onclick="createNewBag()">
+                            <i class="entypo-plus"></i> 新建
+                        </button>
+                    </span>
+                </div>
             </div>
         </div>
     </div>
@@ -288,6 +323,44 @@
             bagsModal.style.display = "none";
         }
     }
+
+    function createNewBag() {
+        var bagName = document.getElementById('newBagName').value;
+        
+        if (!bagName.trim()) {
+            alert('请输入报告包名称');
+            return;
+        }
+
+        fetch('/aireport/app/bagOperation', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: 'action=createBag&bagName=' + encodeURIComponent(bagName)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // 清空输入框
+                document.getElementById('newBagName').value = '';
+                // 重新加载报告包列表
+                showBags();
+            } else {
+                alert('创建失败：' + data.message);
+            }
+        })
+        .catch(error => {
+            alert('创建出错：' + error);
+        });
+    }
+
+    // 添加回车键提交功能
+    document.getElementById('newBagName').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            createNewBag();
+        }
+    });
     </script>
 
 </body>

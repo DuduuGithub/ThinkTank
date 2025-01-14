@@ -5,8 +5,7 @@ public class Bag {
     private String bagName;
     private int userId;
 
-    public Bag(int bagId,String bagName,int userId){
-        this.bagId = bagId;
+    public Bag(String bagName,int userId){
         this.bagName = bagName;
         this.userId = userId;
     }

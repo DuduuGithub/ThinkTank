@@ -15,31 +15,36 @@ public class BagOperationController {
         request.setCharacterEncoding("UTF-8");
         
         String action = request.getParameter("action");
-
         String resultString;
 
-        if(action.equals("queryBags")){
-            // 从session获取用户ID
-            HttpSession session = request.getSession();
-            Integer userId = (Integer) session.getAttribute("userId");
-            
-            if (userId == null) {
-                
-            }
-            resultString = BagOperationService.queryBags(userId);
-        }else{
-            int bagId = Integer.parseInt(request.getParameter("bagId"));
-            int documentId = Integer.parseInt(request.getParameter("documentId"));
-            
-            if(action.equals("delete")) {
-                resultString = BagOperationService.removeFromBag(bagId, documentId);
-            } else if(action.equals("add")) {
+        switch(action){
+            case "queryBags":
+                HttpSession session = request.getSession();
+                Integer userId = (Integer) session.getAttribute("userId");
+                resultString = BagOperationService.queryBags(userId);
+                break;
+
+            case "add":
+                int bagId = Integer.parseInt(request.getParameter("bagId"));
+                int documentId = Integer.parseInt(request.getParameter("documentId"));
                 resultString = BagOperationService.addToBag(bagId, documentId);
-            } else {
+                break;
+            case "delete":
+                bagId = Integer.parseInt(request.getParameter("bagId"));
+                documentId = Integer.parseInt(request.getParameter("documentId"));
+                resultString = BagOperationService.removeFromBag(bagId, documentId);
+                break;
+            case "createBag":
+                session = request.getSession();
+                userId = (Integer) session.getAttribute("userId");
+                String bagName = request.getParameter("bagName");
+                resultString = BagOperationService.createBag(bagName, userId);
+                break;
+            default:
                 resultString = "{\"success\": false, \"message\": \"未知操作\"}";
-            }
+                break;
         }
-        
+
         // 写入响应
         response.setContentType("application/json;charset=UTF-8");
         PrintWriter out = response.getWriter();
