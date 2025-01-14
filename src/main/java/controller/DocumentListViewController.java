@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class DocumentListViewController {
 
@@ -45,20 +47,19 @@ public class DocumentListViewController {
         Context context = new Context();
 
         if ("GET".equals(method)) {
-            // GET请求：获取用户所有文档并基于平均向量推荐
+            // GET请求：获取用户所有文档并基于这些文档推荐
             documentList = documentService.searchDocuments(userId, "", "", "");
             recommendedDocuments = getRecommendedDocuments(userId, documentList, null);
         } else {
-            // POST请求：根据搜索条件筛选文档并推荐
+            // POST请求：根据搜索条件筛选文档
             String title = request.getParameter("title") != null ? request.getParameter("title") : "";
             String keywords = request.getParameter("keywords") != null ? request.getParameter("keywords") : "";
             String subject = request.getParameter("subject") != null ? request.getParameter("subject") : "";
 
             documentList = documentService.searchDocuments(userId, title, keywords, subject);
             
-            // 基于搜索文本进行推荐
-            String searchText = title + " " + keywords + " " + subject;
-            recommendedDocuments = getRecommendedDocuments(userId, null, searchText);
+            // 基于搜索结果进行推荐，而不是搜索文本
+            recommendedDocuments = getRecommendedDocuments(userId, documentList, null);
 
             context.setVariable("titleFilter", title);
             context.setVariable("keywordsFilter", keywords);
@@ -79,43 +80,30 @@ public class DocumentListViewController {
         List<Document> allDocuments = documentService.getAllDocumentsExceptUser(userId);
         
         // 如果没有文档可推荐，返回空列表
-        if (allDocuments.isEmpty()) {
+        if (allDocuments.isEmpty() || userDocuments.isEmpty()) {
             return new ArrayList<>();
         }
 
-        double[] targetVector;
-        if (searchText != null && !searchText.trim().isEmpty()) {
-            // 基于搜索文本的推荐
-            targetVector = vectorService.vectorize(searchText);
-        } else {
-            // 基于用户文档平均向量的推荐
-            List<double[]> userDocumentVectors = new ArrayList<>();
-            for (Document doc : userDocuments) {
-                userDocumentVectors.add(vectorService.vectorize(doc.getTitle() + " " + doc.getKeywords() + " " + doc.getSubject()));
-            }
-            targetVector = vectorService.calculateAverageVector(userDocumentVectors);
-        }
-
-        // 如果无法获得目标向量，返回空列表
-        if (targetVector == null) {
-            return new ArrayList<>();
-        }
-
-        // 获取所有候选文档的向量
-        List<double[]> candidateVectors = new ArrayList<>();
-        for (Document doc : allDocuments) {
-            candidateVectors.add(vectorService.vectorize(doc.getTitle() + " " + doc.getKeywords() + " " + doc.getSubject()));
-        }
-
-        // 获取前7个最相似的文档
-        List<VectorService.SimilarityResult> topResults = vectorService.getTopNSimilarVectors(targetVector, candidateVectors, 7);
+        // 获取向量文件目录路径
+        String vectorDir = "src/main/java/clsToken/tokens/";
         
-        // 转换结果为文档列表
-        List<Document> recommendedDocs = new ArrayList<>();
-        for (VectorService.SimilarityResult result : topResults) {
-            recommendedDocs.add(allDocuments.get(result.index));
-        }
+        // 获取用户文档的向量文件名列表
+        List<String> vectorFileNames = userDocuments.stream()
+            .map(doc -> doc.getDocumentId() + ".txt")
+            .collect(Collectors.toList());
 
-        return recommendedDocs;
+        // 使用VectorService找到最相似的文章
+        List<String> similarDocIds = vectorService.findMostSimilarArticles(
+            vectorFileNames,
+            vectorDir,
+            7  // 获取前7个最相似的文章
+        );
+
+        // 将文件名转换回文档ID并获取对应的Document对象
+        return similarDocIds.stream()
+            .map(fileName -> Integer.parseInt(fileName.replace(".txt", "")))
+            .map(documentService::getDocumentById)
+            .filter(Objects::nonNull)
+            .collect(Collectors.toList());
     }
 }

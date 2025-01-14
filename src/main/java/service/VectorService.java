@@ -2,16 +2,10 @@ package service;
 
 import java.io.*;
 import java.util.*;
-import java.util.stream.Collectors;
+// import java.util.stream.Collectors;
 
 public class VectorService {
-
-    // 向量化函数，假设已经实现
-    public double[] vectorize(String input) {
-        // 这里是向量化函数
-        // 返回一个double数组表示向量
-        return new double[]{1.0, 2.0, 3.0}; // 示例的向量
-    }
+    private static final String VECTOR_DIR = "D:/java_hm_work/tokens/";
 
     // 计算两个向量之间的余弦相似度
     private double cosineSimilarity(double[] vecA, double[] vecB) {
@@ -26,40 +20,71 @@ public class VectorService {
         return dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
     }
 
-    // 按照余弦相似度对向量数组进行排序
-    public List<double[]> sortVectorsByCosineSimilarity(double[] vector, List<double[]> vectors) {
-        return vectors.stream()
-                .sorted(Comparator.comparingDouble(v -> -cosineSimilarity(vector, v)))
-                .collect(Collectors.toList());
-    }
-
-    // 将字符串向量化并保存到文本文件，filePath是文件路径
-    public void saveVectorToFile(String input, String filePath) throws IOException {
-        double[] vector = vectorize(input);
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-            writer.write(Arrays.toString(vector));
-            writer.newLine();
+    // 从文件中读取向量
+    private double[] readVectorFromFile(String fileName) throws IOException {
+        File vectorFile = new File(VECTOR_DIR, fileName);
+        try (BufferedReader reader = new BufferedReader(new FileReader(vectorFile))) {
+            String vectorStr = reader.readLine();
+            String[] values = vectorStr.replaceAll("[\\[\\]]", "").split(",\\s*");
+            return Arrays.stream(values)
+                    .mapToDouble(Double::parseDouble)
+                    .toArray();
         }
     }
 
-    // 从文本文件中读取向量
-    public List<double[]> readVectorsFromFile(String filePath) throws IOException {
-        List<double[]> vectors = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                line = line.replaceAll("[\\[\\]]", ""); // 去掉方括号
-                String[] values = line.split(",\\s*");
-                double[] vector = Arrays.stream(values)
-                        .mapToDouble(Double::parseDouble)
-                        .toArray();
-                vectors.add(vector);
+    // 找到与给定文件列表最相似的前几个文章
+    public List<String> findMostSimilarArticles(List<String> fileNames, String directoryPath, int topN) throws IOException {
+        Map<String, double[]> vectors = new HashMap<>();
+        double[] sumVector = new double[0];
+        int count = 0;
+
+        // 读取输入文件的向量
+        for (String fileName : fileNames) {
+            double[] vector = readVectorFromFile(fileName);
+            if (sumVector.length == 0) {
+                sumVector = vector.clone();
+            } else {
+                for (int i = 0; i < vector.length; i++) {
+                    sumVector[i] += vector[i];
+                }
+            }
+            count++;
+        }
+
+        // 计算平均向量
+        final int finalCount = count;
+        double[] averageVector = Arrays.stream(sumVector).map(v -> v / finalCount).toArray();
+
+        // 读取所有文件的向量
+        File directory = new File(VECTOR_DIR);
+        File[] files = directory.listFiles((dir, name) -> name.endsWith(".txt"));
+        if (files != null) {
+            for (File file : files) {
+                if (!fileNames.contains(file.getName())) {
+                    double[] vector = readVectorFromFile(file.getName());
+                    vectors.put(file.getName(), vector);
+                }
             }
         }
-        return vectors;
+
+        // 计算相似度并排序
+        List<Map.Entry<String, Double>> similarities = new ArrayList<>();
+        for (Map.Entry<String, double[]> entry : vectors.entrySet()) {
+            double similarity = cosineSimilarity(averageVector, entry.getValue());
+            similarities.add(new AbstractMap.SimpleEntry<>(entry.getKey(), similarity));
+        }
+
+        similarities.sort((e1, e2) -> e2.getValue().compareTo(e1.getValue()));
+
+        // 返回最相似的报告ID列表
+        List<String> mostSimilarArticles = new ArrayList<>();
+        for (int i = 0; i < Math.min(topN, similarities.size()); i++) {
+            mostSimilarArticles.add(similarities.get(i).getKey());
+        }
+
+        return mostSimilarArticles;
     }
 
-    // 计算多个向量的平均向量
     public double[] calculateAverageVector(List<double[]> vectors) {
         if (vectors == null || vectors.isEmpty()) {
             return null;
@@ -67,6 +92,7 @@ public class VectorService {
         
         int dimension = vectors.get(0).length;
         double[] avgVector = new double[dimension];
+        final int vectorCount = vectors.size();
         
         for (double[] vector : vectors) {
             for (int i = 0; i < dimension; i++) {
@@ -75,38 +101,9 @@ public class VectorService {
         }
         
         for (int i = 0; i < dimension; i++) {
-            avgVector[i] /= vectors.size();
+            avgVector[i] /= vectorCount;
         }
         
         return avgVector;
-    }
-
-    // 获取前N个最相似的向量及其对应的索引
-    public List<SimilarityResult> getTopNSimilarVectors(double[] targetVector, List<double[]> vectors, int n) {
-        List<SimilarityResult> results = new ArrayList<>();
-        
-        for (int i = 0; i < vectors.size(); i++) {
-            double similarity = cosineSimilarity(targetVector, vectors.get(i));
-            results.add(new SimilarityResult(i, vectors.get(i), similarity));
-        }
-        
-        // 按相似度降序排序
-        results.sort((a, b) -> Double.compare(b.similarity, a.similarity));
-        
-        // 返回前N个结果
-        return results.subList(0, Math.min(n, results.size()));
-    }
-
-    // 内部类用于存储相似度结果
-    public static class SimilarityResult {
-        public final int index;
-        public final double[] vector;
-        public final double similarity;
-
-        public SimilarityResult(int index, double[] vector, double similarity) {
-            this.index = index;
-            this.vector = vector;
-            this.similarity = similarity;
-        }
     }
 }

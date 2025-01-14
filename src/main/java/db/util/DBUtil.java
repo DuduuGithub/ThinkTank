@@ -12,7 +12,7 @@ public class DBUtil {
     // 数据库连接
     private static final String URL = "jdbc:mysql://localhost:3306/java_db?useSSL=false&serverTimezone=UTC";
     private static final String USERNAME = "root";
-    private static final String PASSWORD = "0483";
+    private static final String PASSWORD = "123456";
 
     static {
         try {

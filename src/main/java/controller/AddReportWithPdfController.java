@@ -1,15 +1,16 @@
 package controller;
 
 import java.io.InputStream;
-
+import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-
 import db.dao.proxy.DocumentDaoProxy;
 import db.factory.DaoFactory;
 import db.vo.Document;
 import service.PdfMetaDataService;
+import service.ClsTokenGenerater;
+import logger.SimpleLogger;
 
 /*
  * 用途：用户通过表单传入一个pdf文件，通过调用大模型获得这个pdf的各个字段，并把这个报告存入数据库
@@ -27,31 +28,72 @@ public class AddReportWithPdfController {
         String fileName = filePart.getSubmittedFileName();
 
         // 获取文件输入流
-        InputStream pdfInputStream = filePart.getInputStream();
-
-        // 返回响应
-        // 构造JSON响应
-        String jsonResponse = String.format(
-                "{\"success\": true, \"message\": \"文件上传成功\", \"fileName\": \"%s\"}",
-                fileName);
-        response.getWriter().println(jsonResponse);
+        InputStream pdfInputStream = null;
 
         // 获取用户id
         int userId = (int) request.getSession().getAttribute("userId");
 
-        // 调用大模型以获取元数据并构造一个Document对象
-        Document document = PdfMetaDataService.getDocument(pdfInputStream, userId);
+        try {
+            pdfInputStream = filePart.getInputStream();
+            
+            // 使用 try-with-resources 确保资源正确关闭
+            try (InputStream finalInputStream = pdfInputStream) {
+                // 调用大模型以获取元数据并构造一个Document对象
+                Document document = PdfMetaDataService.getDocument(finalInputStream, userId);
+                
+                // 在处理完一个请求后，强制进行垃圾回收
+                System.gc();
+                
+                // 插入文档到数据库
+                DocumentDaoProxy documentDaoProxy = DaoFactory.getInstance().getDocumentDao();
+                int document_id=documentDaoProxy.insert(document);
 
-        // DocumentDaoImpl documentDaoImpl = new DocumentDaoImpl();
-        // documentDaoImpl.insert(document);
+                
+                // 确保获取到了documentId
+                if (document_id == 0) {
+                    throw new RuntimeException("Failed to get document ID after insertion");
+                }
 
-        DocumentDaoProxy documentDaoProxy = DaoFactory.getInstance().getDocumentDao();
-        documentDaoProxy.insert(document);
+                // 生成向量化文件
+                String inputText = document.getContent();
+                String vectorFileName = document_id + ".txt";
+                
+                SimpleLogger.log("Generating vector for document ID: " + document_id);
+                
+                // 创建ClsTokenGenerater实例并生成向量
+                ClsTokenGenerater tokenGenerater = new ClsTokenGenerater(inputText, vectorFileName);
+                tokenGenerater.generateClsToken();
 
-        // } else {
-        // // 未选择文件的情况
-        // response.getWriter().println(
-        // "{\"success\": false, \"message\": \"请选择要上传的文件\"}");
-        // }
+                // 返回成功响应
+                String jsonResponse = String.format(
+                        "{\"success\": true, \"message\": \"文件上传成功，并已生成向量化文件\", \"fileName\": \"%s\"}",
+                        fileName);
+                response.getWriter().println(jsonResponse);
+            }
+
+        } catch (Exception e) {
+            SimpleLogger.log("Error processing PDF: " + e.getMessage());
+            String jsonResponse = String.format(
+                    "{\"success\": false, \"message\": \"处理文件时出错: %s\"}",
+                    e.getMessage());
+            response.getWriter().println(jsonResponse);
+            e.printStackTrace();
+        } finally {
+            // 确保关闭输入流
+            if (pdfInputStream != null) {
+                try {
+                    pdfInputStream.close();
+                } catch (IOException e) {
+                    SimpleLogger.log("Error closing input stream: " + e.getMessage());
+                }
+            }
+            
+            // 强制关闭之前的连接
+            try {
+                BigModelNew.closeAllConnections();  // 需要在 BigModelNew 类中添加这个方法
+            } catch (Exception e) {
+                SimpleLogger.log("Error closing AI model connections: " + e.getMessage());
+            }
+        }
     }
 }

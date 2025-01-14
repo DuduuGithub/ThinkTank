@@ -49,10 +49,11 @@ public class DocumentDaoProxy implements DocumentDao {
      * 用途：插入新文档
      */
     @Override
-    public void insert(Document document) {
+    public int insert(Document document) {
         checkConnection();
-        dao.insert(document);
+        int rt=dao.insert(document);
         DBUtil.closeConnection(conn);
+        return rt;
     }
 
     /*
