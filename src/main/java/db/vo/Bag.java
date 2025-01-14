@@ -9,6 +9,11 @@ public class Bag {
         this.bagName = bagName;
         this.userId = userId;
     }
+    
+    public Bag(int userId){
+        this.userId = userId;
+    }
+
     public Bag(){
         
     }

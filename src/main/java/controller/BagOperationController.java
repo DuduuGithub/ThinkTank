@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import logger.SimpleLogger;
 import service.BagOperationService;
 
 public class BagOperationController {
@@ -29,17 +30,26 @@ public class BagOperationController {
                 int documentId = Integer.parseInt(request.getParameter("documentId"));
                 resultString = BagOperationService.addToBag(bagId, documentId);
                 break;
+
             case "delete":
                 bagId = Integer.parseInt(request.getParameter("bagId"));
                 documentId = Integer.parseInt(request.getParameter("documentId"));
                 resultString = BagOperationService.removeFromBag(bagId, documentId);
                 break;
+
             case "createBag":
                 session = request.getSession();
                 userId = (Integer) session.getAttribute("userId");
                 String bagName = request.getParameter("bagName");
                 resultString = BagOperationService.createBag(bagName, userId);
                 break;
+
+            case "deleteBag":
+                bagId = Integer.parseInt(request.getParameter("bagId"));
+                SimpleLogger.log("deleteBag: " + bagId);
+                resultString = BagOperationService.deleteBag(bagId);
+                break;
+
             default:
                 resultString = "{\"success\": false, \"message\": \"未知操作\"}";
                 break;

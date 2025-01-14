@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.google.gson.Gson;
 
+import db.dao.impl.BagDaoImpl;
 import db.dao.proxy.Bag2documentDaoProxy;
 import db.dao.proxy.BagDaoProxy;
 import db.factory.DaoFactory;
@@ -57,6 +58,16 @@ public class BagOperationService {
             return "{\"success\": true, \"message\": \"新建成功\"}";
         }else{
             return "{\"success\": false, \"message\": \"新建失败\"}";
+        }
+    }
+
+    public static String deleteBag(int bagId) {
+        BagDaoProxy bagDaoProxy = DaoFactory.getInstance().getBagDao();
+        boolean success = bagDaoProxy.delete(bagId);
+        if(success){
+            return "{\"success\": true, \"message\": \"删除成功\"}";
+        }else{
+            return "{\"success\": false, \"message\": \"删除失败\"}";
         }
     }
 }

@@ -50,9 +50,11 @@
             background-color: #fff;
             border: 1px solid #ddd;
             border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             border-bottom: 1px solid #eee;
             transition: all 0.3s ease;
-            cursor: pointer; /* 确保鼠标指针为手型 */
         }
 
         .bag-item:hover {
@@ -64,7 +66,19 @@
         .bag-item i {
             margin-right: 10px;
             color: #ffd700;
-            pointer-events: none;
+        }
+
+        /* 下面2个删除按钮样式 */
+        .delete-btn {
+            padding: 0;
+            margin: 0;
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+
+        .delete-btn:hover i {
+            color: #ff0000;
         }
 
         /* 模态框样式 */
@@ -295,9 +309,14 @@
                 let html = '';
                 bags.forEach(bag => {
                     html += `
-                        <div class="bag-item" onclick="navigateToBag(${bag.bagId})" style="cursor: pointer;">
-                            <i class="entypo-folder"></i>
-                            ${bag.bagName}
+                        <div class="bag-item">
+                            <span onclick="navigateToBag(${bag.bagId})" style="cursor: pointer;">
+                                <i class="entypo-folder"></i>
+                                ${bag.bagName}
+                            </span>
+                            <button class="btn btn-link delete-btn" onclick="deleteBag(${bag.bagId})">
+                                <i class="entypo-trash" style="color: #ff4444;"></i>
+                            </button>
                         </div>
                     `;
                 });
@@ -361,6 +380,30 @@
             createNewBag();
         }
     });
+
+    // 添加删除报告包的函数
+    function deleteBag(bagId) {
+        if (confirm('确定要删除这个报告包吗？')) {
+            fetch('/aireport/app/bagOperation', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `action=deleteBag&bagId=${bagId}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showBags(); // 刷新列表
+                } else {
+                    alert('删除失败：' + data.message);
+                }
+            })
+            .catch(error => {
+                alert('删除出错：' + error);
+            });
+        }
+    }
     </script>
 
 </body>

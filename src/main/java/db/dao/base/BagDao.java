@@ -21,7 +21,7 @@ public interface BagDao {
     /*
      * 用途：用户删除报告包
      */
-    public boolean delete(Bag bag);
+    public boolean delete(int bagId);
 
     /*
      * 用途：根据userId查询用户的报告包
