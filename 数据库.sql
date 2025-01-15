@@ -11,7 +11,7 @@ CREATE TABLE document (
     document_id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(200) NOT NULL,
     keywords VARCHAR(200),
-    subject VARCHAR(100),
+    subject LONGTEXT,
     content LONGTEXT,
     user_id INT,                      
     pdf_file LONGBLOB,
