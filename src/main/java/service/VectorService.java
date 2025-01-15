@@ -2,7 +2,8 @@ package service;
 
 import java.io.*;
 import java.util.*;
-// import java.util.stream.Collectors;
+import java.util.stream.Collectors;
+import logger.SimpleLogger;
 
 public class VectorService {
     private static final String VECTOR_DIR = "D:/java_hm_work/tokens/";
@@ -21,8 +22,10 @@ public class VectorService {
     }
 
     // 从文件中读取向量
-    private double[] readVectorFromFile(String fileName) throws IOException {
-        File vectorFile = new File(VECTOR_DIR, fileName);
+    private double[] readVectorFromFile(int documentId) throws IOException {
+        File vectorFile = new File(VECTOR_DIR, documentId + ".txt");
+        SimpleLogger.log("Reading vector from file: " + vectorFile.getAbsolutePath());
+        
         try (BufferedReader reader = new BufferedReader(new FileReader(vectorFile))) {
             String vectorStr = reader.readLine();
             String[] values = vectorStr.replaceAll("[\\[\\]]", "").split(",\\s*");
@@ -32,57 +35,49 @@ public class VectorService {
         }
     }
 
-    // 找到与给定文件列表最相似的前几个文章
-    public List<String> findMostSimilarArticles(List<String> fileNames, String directoryPath, int topN) throws IOException {
-        Map<String, double[]> vectors = new HashMap<>();
-        double[] sumVector = new double[0];
-        int count = 0;
-
-        // 读取输入文件的向量
-        for (String fileName : fileNames) {
-            double[] vector = readVectorFromFile(fileName);
-            if (sumVector.length == 0) {
-                sumVector = vector.clone();
-            } else {
-                for (int i = 0; i < vector.length; i++) {
-                    sumVector[i] += vector[i];
-                }
+    // 找到与给定文档最相似的前几个文章
+    public List<Integer> findMostSimilarArticles(List<Integer> sourceDocIds, List<Integer> candidateDocIds, int topN) throws IOException {
+        SimpleLogger.log("Finding similar articles for source docs: " + sourceDocIds);
+        
+        // 读取源文档的向量并计算平均向量
+        List<double[]> sourceVectors = new ArrayList<>();
+        for (Integer docId : sourceDocIds) {
+            try {
+                double[] vector = readVectorFromFile(docId);
+                sourceVectors.add(vector);
+            } catch (IOException e) {
+                SimpleLogger.log("Error reading vector for document " + docId + ": " + e.getMessage());
             }
-            count++;
+        }
+        
+        if (sourceVectors.isEmpty()) {
+            SimpleLogger.log("No source vectors found");
+            return new ArrayList<>();
         }
 
         // 计算平均向量
-        final int finalCount = count;
-        double[] averageVector = Arrays.stream(sumVector).map(v -> v / finalCount).toArray();
-
-        // 读取所有文件的向量
-        File directory = new File(VECTOR_DIR);
-        File[] files = directory.listFiles((dir, name) -> name.endsWith(".txt"));
-        if (files != null) {
-            for (File file : files) {
-                if (!fileNames.contains(file.getName())) {
-                    double[] vector = readVectorFromFile(file.getName());
-                    vectors.put(file.getName(), vector);
+        double[] averageVector = calculateAverageVector(sourceVectors);
+        
+        // 计算候选文档的相似度
+        Map<Integer, Double> similarities = new HashMap<>();
+        for (Integer docId : candidateDocIds) {
+            if (!sourceDocIds.contains(docId)) {  // 排除源文档
+                try {
+                    double[] vector = readVectorFromFile(docId);
+                    double similarity = cosineSimilarity(averageVector, vector);
+                    similarities.put(docId, similarity);
+                } catch (IOException e) {
+                    SimpleLogger.log("Error reading vector for candidate " + docId + ": " + e.getMessage());
                 }
             }
         }
 
-        // 计算相似度并排序
-        List<Map.Entry<String, Double>> similarities = new ArrayList<>();
-        for (Map.Entry<String, double[]> entry : vectors.entrySet()) {
-            double similarity = cosineSimilarity(averageVector, entry.getValue());
-            similarities.add(new AbstractMap.SimpleEntry<>(entry.getKey(), similarity));
-        }
-
-        similarities.sort((e1, e2) -> e2.getValue().compareTo(e1.getValue()));
-
-        // 返回最相似的报告ID列表
-        List<String> mostSimilarArticles = new ArrayList<>();
-        for (int i = 0; i < Math.min(topN, similarities.size()); i++) {
-            mostSimilarArticles.add(similarities.get(i).getKey());
-        }
-
-        return mostSimilarArticles;
+        // 排序并返回前topN个文档ID
+        return similarities.entrySet().stream()
+                .sorted(Map.Entry.<Integer, Double>comparingByValue().reversed())
+                .limit(topN)
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
     }
 
     public double[] calculateAverageVector(List<double[]> vectors) {
@@ -92,7 +87,6 @@ public class VectorService {
         
         int dimension = vectors.get(0).length;
         double[] avgVector = new double[dimension];
-        final int vectorCount = vectors.size();
         
         for (double[] vector : vectors) {
             for (int i = 0; i < dimension; i++) {
@@ -101,7 +95,7 @@ public class VectorService {
         }
         
         for (int i = 0; i < dimension; i++) {
-            avgVector[i] /= vectorCount;
+            avgVector[i] /= vectors.size();
         }
         
         return avgVector;

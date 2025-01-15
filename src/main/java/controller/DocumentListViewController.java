@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.stream.Collectors;
-
+import logger.SimpleLogger;
 public class DocumentListViewController {
 
     private DocumentService documentService;
@@ -39,8 +39,13 @@ public class DocumentListViewController {
         String method = request.getMethod();
         SimpleLogger.log("Received " + method + " request for document list view");
 
-        int userId = 1; // 默认的 userId，实际应从 session 获取
-        // int userId = (int) request.getSession().getAttribute("userId");
+        // 从session获取当前登录用户的ID
+        Integer userId = (Integer) request.getSession().getAttribute("userId");
+        if (userId == null) {
+            SimpleLogger.log("No user logged in - redirecting to login page");
+            response.sendRedirect("/login");
+            return;
+        }
 
         List<Document> documentList;
         List<Document> recommendedDocuments;
@@ -76,32 +81,37 @@ public class DocumentListViewController {
     }
 
     private List<Document> getRecommendedDocuments(int userId, List<Document> userDocuments, String searchText) throws Exception {
-        // 获取所有非用户的文档
+        // 获取所有非用户的文档ID
         List<Document> allDocuments = documentService.getAllDocumentsExceptUser(userId);
+        List<Integer> candidateDocIds = allDocuments.stream()
+            .map(Document::getDocumentId)
+            .collect(Collectors.toList());
         
         // 如果没有文档可推荐，返回空列表
-        if (allDocuments.isEmpty() || userDocuments.isEmpty()) {
+        if (candidateDocIds.isEmpty() || userDocuments.isEmpty()) {
+            SimpleLogger.log("No documents available for recommendation");
             return new ArrayList<>();
         }
 
-        // 获取向量文件目录路径
-        String vectorDir = "src/main/java/clsToken/tokens/";
-        
-        // 获取用户文档的向量文件名列表
-        List<String> vectorFileNames = userDocuments.stream()
-            .map(doc -> doc.getDocumentId() + ".txt")
+        // 获取源文档ID列表
+        List<Integer> sourceDocIds = userDocuments.stream()
+            .map(Document::getDocumentId)
             .collect(Collectors.toList());
 
+        SimpleLogger.log("Source document IDs: " + sourceDocIds);
+        SimpleLogger.log("Candidate document IDs: " + candidateDocIds);
+
         // 使用VectorService找到最相似的文章
-        List<String> similarDocIds = vectorService.findMostSimilarArticles(
-            vectorFileNames,
-            vectorDir,
+        List<Integer> similarDocIds = vectorService.findMostSimilarArticles(
+            sourceDocIds,
+            candidateDocIds,
             7  // 获取前7个最相似的文章
         );
 
-        // 将文件名转换回文档ID并获取对应的Document对象
+        SimpleLogger.log("Similar document IDs: " + similarDocIds);
+
+        // 获取相似文档的完整信息
         return similarDocIds.stream()
-            .map(fileName -> Integer.parseInt(fileName.replace(".txt", "")))
             .map(documentService::getDocumentById)
             .filter(Objects::nonNull)
             .collect(Collectors.toList());
