@@ -18,45 +18,27 @@ import logger.SimpleLogger;
  */
 public class AddReportWithPdfController {
     public static void processRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        // 设置响应类型为 JSON 格式
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
-        Part filePart = request.getPart("file");
-
-        // 获取原始文件名
-        String fileName = filePart.getSubmittedFileName();
-
-        // 获取文件输入流
-        InputStream pdfInputStream = null;
-
-        // 获取用户id并添加检查
-        Integer userId = (Integer) request.getSession().getAttribute("userId");
-        if (userId == null) {
-            String jsonResponse = "{\"success\": false, \"message\": \"用户未登录，请先登录\"}";
-            response.getWriter().println(jsonResponse);
-            return;
-        }
-
         try {
-            pdfInputStream = filePart.getInputStream();
-            
-            // 使用 try-with-resources 确保资源正确关闭
-            try (InputStream finalInputStream = pdfInputStream) {
+            Part filePart = request.getPart("file");
+            String fileName = filePart.getSubmittedFileName();
+            int userId = (int) request.getSession().getAttribute("userId");
+
+            try (InputStream pdfInputStream = filePart.getInputStream()) {
                 // 调用大模型以获取元数据并构造一个Document对象
-                Document document = PdfMetaDataService.getDocument(finalInputStream, userId);
+                Document document = PdfMetaDataService.getDocument(pdfInputStream, userId);
                 
                 // 在处理完一个请求后，强制进行垃圾回收
                 System.gc();
                 
                 // 插入文档到数据库
                 DocumentDaoProxy documentDaoProxy = DaoFactory.getInstance().getDocumentDao();
-                int document_id=documentDaoProxy.insert(document);
+                int document_id = documentDaoProxy.insert(document);
 
-                
-                // 确保获取到了documentId
                 if (document_id == 0) {
-                    throw new RuntimeException("Failed to get document ID after insertion");
+                    throw new RuntimeException("文档插入数据库失败");
                 }
 
                 // 生成向量化文件
@@ -70,28 +52,19 @@ public class AddReportWithPdfController {
                 tokenGenerater.generateClsToken();
 
                 // 返回成功响应
-                String jsonResponse = String.format(
-                        "{\"success\": true, \"message\": \"文件上传成功，并已生成向量化文件\", \"fileName\": \"%s\"}",
-                        fileName);
-                response.getWriter().println(jsonResponse);
-            }
+                response.getWriter().write(String.format(
+                    "{\"success\": true, \"message\": \"文件上传成功，并已生成向量化文件\", \"fileName\": \"%s\"}",
+                    fileName));
 
+            }
         } catch (Exception e) {
             SimpleLogger.log("Error processing PDF: " + e.getMessage());
-            String jsonResponse = String.format(
-                    "{\"success\": false, \"message\": \"处理文件时出错: %s\"}",
-                    e.getMessage());
-            response.getWriter().println(jsonResponse);
+            // 确保错误消息是有效的JSON字符串
+            String errorMessage = e.getMessage().replace("\"", "'").replace("\n", " ");
+            response.getWriter().write(String.format(
+                "{\"success\": false, \"message\": \"添加失败: %s\"}",
+                errorMessage));
             e.printStackTrace();
-        } finally {
-            // 确保关闭输入流
-            if (pdfInputStream != null) {
-                try {
-                    pdfInputStream.close();
-                } catch (IOException e) {
-                    SimpleLogger.log("Error closing input stream: " + e.getMessage());
-                }
-            }
         }
     }
 }

@@ -222,13 +222,14 @@
                             </div>
 
                             <div class="search-bar">
-                                <form action="/aireport/app/documentListView" method="post" id="searchForm">
-                                    <input type="text" id="title-search" name="title" placeholder="请输入标题..."/>
-                                    <input type="text" id="keywords-search" name="keywords" placeholder="请输入关键字..."/>
-                                    <input type="text" id="subject-search" name="subject" placeholder="请输入主题..."/>
-                                    <button type="submit" class="btn btn-default" id="search-btn">搜索</button>
+                                <form id="searchForm" method="post" action="/aireport/app/documentListView">
+                                    <div class="form-group">
+                                        <input type="text" id="title-search" name="title" class="form-control" placeholder="标题" th:value="${titleFilter}">
+                                        <input type="text" id="keywords-search" name="keywords" class="form-control" placeholder="关键词" th:value="${keywordsFilter}">
+                                        <input type="text" id="subject-search" name="subject" class="form-control" placeholder="主题" th:value="${subjectFilter}">
+                                        <button type="submit" class="btn btn-primary">搜索</button>
+                                    </div>
                                 </form>
-                                
                             </div>
 
                             <table class="table table-bordered responsive" id="reportTable">
@@ -285,37 +286,32 @@
                             <div class="pagination" id="paginationControls"></div>
 
                             <div class="recommended-documents">
-                                <h3>推荐阅读</h3>
-                                <table class="table table-bordered responsive" id="recommendedTable">
-                                    <thead>
-                                        <tr>
-                                            <th>报告ID</th>
-                                            <th>报告标题</th>
-                                            <th>报告关键词</th>
-                                            <th>报告主题词</th>
-                                            <th>报告详情</th>
-                                            <th>操作</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <!-- Thymeleaf模板语法，遍历recommendedDocuments -->
-                                        <tr th:each="document : ${recommendedDocuments}">
-                                            <td th:text="${document.documentId}"></td>
-                                            <td th:text="${document.title}"></td>
-                                            <td th:text="${document.keywords}"></td>
-                                            <td th:text="${document.subject}"></td>
-                                            <td><a th:href="@{app/pdf(id=${document.documentId})}" class="view-full-text">点击查看全文</a></td>
-                                            <td>
-                                                <!-- 收藏按钮和文件夹列表容器 -->
-                                                <div class="favorite-container" style="position: relative; display: inline-block;">
-                                                    <button class="btn btn-favorite" th:onclick="'showFavoriteModal(' + ${document.documentId} + ')'">
-                                                        <i class="entypo-star"></i> 收藏
+                                <h3>推荐报告</h3>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>标题</th>
+                                                <th>关键词</th>
+                                                <th>主题</th>
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="doc : ${recommendedDocuments}">
+                                                <td th:text="${doc.title}"></td>
+                                                <td th:text="${doc.keywords}"></td>
+                                                <td th:text="${doc.subject}"></td>
+                                                <td>
+                                                    <button class="btn btn-success btn-sm" 
+                                                            th:onclick="'addToLibrary(' + ${doc.documentId} + ')'">
+                                                        加入库
                                                     </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -391,6 +387,29 @@
                     favoriteModal.style.display = "none";
                 }
             }
+
+            // 搜索表单处理
+            const searchForm = document.getElementById("searchForm");
+            if (searchForm) {
+                searchForm.onsubmit = function() {
+                    // 检查每个输入字段，如果没有输入，设为空字符串
+                    const titleSearch = document.getElementById("title-search");
+                    const keywordsSearch = document.getElementById("keywords-search");
+                    const subjectSearch = document.getElementById("subject-search");
+
+                    if (titleSearch && !titleSearch.value) {
+                        titleSearch.value = '';
+                    }
+                    if (keywordsSearch && !keywordsSearch.value) {
+                        keywordsSearch.value = '';
+                    }
+                    if (subjectSearch && !subjectSearch.value) {
+                        subjectSearch.value = '';
+                    }
+                    return true;
+                };
+            }
+
         });
 
         document.getElementById("searchForm").onsubmit = function() {
@@ -435,7 +454,7 @@
 
         // 处理文件上传
         document.getElementById('uploadForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // 阻止默认提交行为
+            event.preventDefault();
 
             const formData = new FormData(this);
 
@@ -443,38 +462,32 @@
                 method: 'POST',
                 body: formData,
             })
-            .then(response => {
-                console.log('Response status:', response.status);
-                console.log('Response headers:', response.headers);
+            .then(response => response.text())
+            .then(text => {
+                let data;
+                try {
+                    data = JSON.parse(text);
+                } catch (e) {
+                    console.error('JSON解析错误:', e);
+                    console.log('原始响应:', text);
+                    showToast('服务器响应格式错误', false);
+                    return;
+                }
                 
-                return response.text().then(text => {
-                    console.log('Raw response:', text);
-                    try {
-                        return JSON.parse(text);
-                    } catch (e) {
-                        console.error('JSON解析错误:', e);
-                        throw new Error('服务器响应格式错误');
-                    }
-                });
-            })
-            .then(data => {
-                console.log('Parsed data:', data);
                 if (data.success) {
-                    alert(data.message);
+                    showToast(data.message, true);
                     modal.style.display = "none";
-                    // 可以添加页面刷新
-                    window.location.reload();
+                    setTimeout(() => window.location.reload(), 1500);
                 } else {
-                    alert(data.message || '上传失败');
+                    showToast(data.message || '上传失败', false);
                 }
             })
             .catch((error) => {
-                console.error('详细错误信息:', error);
-                console.error('错误堆栈:', error.stack);
-                alert('上传失败: ' + error.message);
+                console.error('上传错误:', error);
+                showToast('上传失败: ' + error.message, false);
             });
         });
-        
+
         function showToast(message, isSuccess) {
             const toast = $('#toast');
             toast.text(message);
@@ -566,6 +579,33 @@
                 showToast('删除失败，请重试', false);
             });
         }
+
+        function addToLibrary(documentId) {
+            fetch('/aireport/app/documentListView', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `action=addToLibrary&documentId=${documentId}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showToast('成功加入库', true);
+                    // 可以选择是否刷新页面
+                    setTimeout(() => window.location.reload(), 1500);
+                } else {
+                    showToast(data.message || '加入失败', false);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showToast('操作失败，请重试', false);
+            });
+        }
     </script>
+
+    <!-- 确保引入了Bootstrap的JS文件 -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

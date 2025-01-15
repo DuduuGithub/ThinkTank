@@ -2,6 +2,7 @@ package service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import db.dao.impl.DocumentDaoImpl;
@@ -9,6 +10,8 @@ import db.dao.proxy.Bag2documentDaoProxy;
 import db.dao.proxy.DocumentDaoProxy;
 import db.factory.DaoFactory;
 import db.vo.Document;
+import db.vo.Bag2document;
+import logger.SimpleLogger;
 
 public class DocumentService {
     private DocumentDaoProxy documentDaoProxy;
@@ -44,13 +47,21 @@ public class DocumentService {
         return documents;
     }
 
-    public List<Document> getAllDocumentsExceptUser(int userId) {
+    public List<Document> getAllDocumentsExceptUser(int userId, List<Document> sourceDocuments) {
         DocumentDaoProxy documentDao = new DocumentDaoProxy();
         List<Document> allDocuments = documentDao.findAll();
 
-        // 过滤掉属于该用户的文档
+        // 获取源文档的标题列表
+        Set<String> sourceTitles = sourceDocuments.stream()
+                .map(Document::getTitle)
+                .collect(Collectors.toSet());
+
+        SimpleLogger.log("Source document titles: " + sourceTitles);
+
+        // 过滤掉属于该用户的文档和标题重复的文档
         return allDocuments.stream()
-                .filter(doc -> doc.getUserId() != userId)
+                .filter(doc -> doc.getUserId() != userId)  // 排除用户自己的文档
+                .filter(doc -> !sourceTitles.contains(doc.getTitle()))  // 排除标题重复的文档
                 .collect(Collectors.toList());
     }
 
@@ -68,6 +79,22 @@ public class DocumentService {
         }
         else{
             return "{\"success\": false, \"message\": \"该报告不属于您，无法删除\"}";
+        }
+    }
+
+    public int insertDocument(Document document) {
+        DocumentDaoProxy documentDao = DaoFactory.getInstance().getDocumentDao();
+        return documentDao.insert(document);
+    }
+
+    public boolean addDocumentToBag(int bagId, int documentId) {
+        try {
+            Bag2documentDaoProxy bag2documentDao = new Bag2documentDaoProxy();
+            Bag2document newBag2document = new Bag2document(bagId, documentId);
+            return bag2documentDao.insert(newBag2document);
+        } catch (Exception e) {
+            SimpleLogger.log("Error adding document to bag: " + e.getMessage());
+            return false;
         }
     }
 }

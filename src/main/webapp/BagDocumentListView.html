@@ -94,6 +94,35 @@
                     </div>
                 </div>
 
+                <div class="recommended-documents">
+                    <h3>推荐报告</h3>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>标题</th>
+                                    <th>关键词</th>
+                                    <th>主题</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="doc : ${recommendedDocuments}">
+                                    <td th:text="${doc.title}"></td>
+                                    <td th:text="${doc.keywords}"></td>
+                                    <td th:text="${doc.subject}"></td>
+                                    <td>
+                                        <button class="btn btn-success btn-sm" 
+                                                th:onclick="'addToLibrary(' + ${doc.documentId} + ')'">
+                                            加入库
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
                 <footer class="main">
                     Copyright &copy; 2021.Company name All rights reserved.
                 </footer>
@@ -107,16 +136,22 @@
     <script>
     $(document).ready(function() {
         function showToast(message, isSuccess) {
-            const toast = $('#toast');
-            toast.text(message);
-            toast.removeClass('toast-success toast-error');
-            toast.addClass(isSuccess ? 'toast-success' : 'toast-error');
-            toast.css('display', 'block');
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = `toast-message ${isSuccess ? 'toast-success' : 'toast-error'}`;
+            toast.style.display = 'block';
             
-            // 2.5秒后自动消失
-            setTimeout(function() {
-                toast.css('display', 'none');
-            }, 2500);
+            if (isSuccess) {
+                // 如果成功，1秒后刷新页面
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
+            } else {
+                // 如果失败，3秒后隐藏提示
+                setTimeout(() => {
+                    toast.style.display = 'none';
+                }, 3000);
+            }
         }
 
         $('form').on('submit', function(e) {
@@ -143,6 +178,34 @@
             });
         });
     });
+
+    function addToLibrary(documentId) {
+        const bagId = document.querySelector('input[name="bagId"]').value;
+        fetch('/aireport/app/bagDocumentListView', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `action=addToLibrary&documentId=${documentId}&bagId=${bagId}`
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            showToast(data.success ? '成功加入库并添加到报告包' : (data.message || '加入失败'), data.success);
+            if (data.success) {
+                // 直接刷新页面，不使用 setTimeout
+                window.location.href = window.location.href;
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            showToast('操作失败，请重试', false);
+        });
+    }
     </script>
 </body>
 </html> 
