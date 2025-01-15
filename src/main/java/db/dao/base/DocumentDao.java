@@ -20,7 +20,7 @@ public interface DocumentDao {
      * 更新一篇论文的数据
      * @param paper 论文对象
      */
-    void update(Document document);
+    boolean update(Document document);
 
     /**
      * 根据论文ID删除一篇论文

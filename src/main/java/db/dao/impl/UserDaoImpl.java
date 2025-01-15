@@ -16,18 +16,22 @@ import java.util.List;
  public class UserDaoImpl implements UserDao {
 
     @Override
-    public void insert(User user) {
-        String sql = "INSERT INTO user (user_id, password) VALUES (?, ?)";
+    public int insert(User user) {
+        String sql = "INSERT INTO user (password) VALUES (?)";
         Connection conn = null;
+        int userId = -1;
         try {
             // 获取数据库连接
             conn = DBUtil.getConnection();
             // 准备SQL预编译语句
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, user.getUserId());
-            pstmt.setString(2, user.getPassword());
+            PreparedStatement pstmt = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            pstmt.setString(1, user.getPassword());
             // 执行更新
             pstmt.executeUpdate();
+            ResultSet rs = pstmt.getGeneratedKeys();
+            if (rs.next()) {
+                userId = rs.getInt(1);
+            }
         } catch (SQLException e) {
             // 出现异常则打印堆栈并抛出RuntimeException
             e.printStackTrace();
@@ -36,6 +40,7 @@ import java.util.List;
             // 确保连接最终被关闭
             DBUtil.closeConnection(conn);
         }
+        return userId;
     }
 
     @Override

@@ -32,7 +32,7 @@
         <div class="login-header login-caret">
             <div class="login-content">
                 <a href="login.html" class="logo">
-                    <img src="static/picture/logo@2x.png" width="120" alt="">
+                    <img src="static/picture/new-logo-blue.png" width="120" alt="">
                 </a>
                 <p class="description">Dear user, log in to access the admin area!</p>
                 <div class="login-progressbar-indicator">
@@ -50,7 +50,8 @@
                     <h3>Invalid login</h3>
                     <p>Enter <strong>demo</strong>/<strong>demo</strong> as login and password.</p>
                 </div>
-                <form method="post" role="form" action="app/login">
+                <form method="post" role="form" action="app/userOperation" onsubmit="return validateLoginForm()">
+                    <input type="hidden" name="action" value="login">
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-addon">
@@ -73,19 +74,52 @@
                             Login In
                         </button>
                     </div>
-                    <div class="form-group">
-                        <button type="button" class="btn btn-primary btn-block btn-login" onclick="submitRegister()">
-                            <i class="entypo-user-add"></i>
-                            Register
-                        </button>
-                    </div>
-                    <div class="form-group">
-                        <em>- or -</em>
-                    </div>
                 </form>
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary btn-block btn-login" onclick="submitRegister()">
+                        <i class="entypo-user-add"></i>
+                        Register
+                    </button>
+                </div>
+                <div class="form-group">
+                    <em>- or -</em>
+                </div>
             </div>
         </div>
     </div>
+
+    <!-- 添加注册模态框 -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h3>用户注册</h3>
+            <form id="registerForm" method="post" role="form">
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="entypo-key"></i>
+                        </div>
+                        <input type="password" class="form-control" name="password" id="registerPassword" placeholder="请输入密码" autocomplete="off">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="entypo-key"></i>
+                        </div>
+                        <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="请确认密码" autocomplete="off">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary btn-block btn-login" onclick="submitRegisterForm()">
+                        <i class="entypo-user-add"></i>
+                        确认注册
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- Bottom Scripts -->
     <script src="static/js/main-gsap.js"></script>
     <script src="static/js/jquery-ui-1.10.3.minimal.min.js"></script>
@@ -97,13 +131,134 @@
     <script src="static/js/neon-login.js"></script>
     <script src="static/js/neon-custom.js"></script>
     <script src="static/js/neon-demo.js"></script>
+    <style>
+        /* 模态框基本样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 4px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* 补充模态框按钮样式 */
+        .modal .btn-login {
+            margin-top: 15px;
+        }
+        
+        /* 错误提示样式 */
+        .error-message {
+            color: #ff0000;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+    </style>
     <script>
         function submitRegister() {
-            // 获取当前表单
-            var form = document.querySelector('form');
-            // 临时修改表单的action
-            form.action = "app/register";
-            form.submit();
+            document.getElementById('registerModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('registerModal').style.display = 'none';
+            // 清空表单
+            document.getElementById('registerForm').reset();
+        }
+
+        function submitRegisterForm() {
+            var password = document.getElementById('registerPassword').value.trim();
+            var confirmPassword = document.getElementById('confirmPassword').value.trim();
+
+            if (!password) {
+                alert('密码不能为空！');
+                return;
+            }
+
+            if (!confirmPassword) {
+                alert('确认密码不能为空！');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                alert('两次输入的密码不一致！');
+                return;
+            }
+
+            // 发送注册请求
+            fetch('app/userOperation', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'action=register&password=' + encodeURIComponent(password)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('注册成功！您的用户ID是：' + data.userId);
+                    closeModal();
+                } else {
+                    alert('注册失败：' + data.message);
+                }
+            })
+            .catch(error => {
+                alert('注册失败，请稍后重试');
+                console.error('Error:', error);
+            });
+        }
+
+        // 点击模态框外部关闭模态框
+        window.onclick = function(event) {
+            var modal = document.getElementById('registerModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // 修改登录表单验证函数
+        function validateLoginForm() {
+            var userId = document.getElementById('username').value.trim();
+            var password = document.getElementById('password').value.trim();
+
+            if (!userId) {
+                alert('用户ID不能为空！');
+                return false;
+            }
+
+            if (!password) {
+                alert('密码不能为空！');
+                return false;
+            }
+
+            return true;
         }
     </script>
 </body>

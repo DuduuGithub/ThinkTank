@@ -34,10 +34,11 @@ public class UserDaoProxy implements UserDao {
      * 用途：插入新用户数据
      */
     @Override
-    public void insert(User user) {
+    public int insert(User user) {
         checkConnection();
-        dao.insert(user);
+        int userId = dao.insert(user);
         DBUtil.closeConnection(conn);
+        return userId;
     }
 
     /*

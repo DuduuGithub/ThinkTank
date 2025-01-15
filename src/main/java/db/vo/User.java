@@ -16,6 +16,10 @@ public class User {
         this.password = password;
     }
 
+    public User(String password) {
+        this.password = password;
+    }
+
     // Getter和Setter方法，用于读取和修改用户ID和密码
 
     public Integer getUserId() {

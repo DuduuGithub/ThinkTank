@@ -1,9 +1,11 @@
 package service;
 
 import db.dao.impl.UserDaoImpl;
+import db.dao.proxy.UserDaoProxy;
+import db.factory.DaoFactory;
 import db.vo.User;
 
-public class UserVerifyService {
+public class UserOperationService {
 
     /*
      * 用途：用于用户登录时对用户的验证
@@ -29,6 +31,15 @@ public class UserVerifyService {
             else{
                 return false;
             }
+        }
+    }
+    public static String register(String password){
+        UserDaoProxy userDapProxy = DaoFactory.getInstance().getUserDao();
+        int userId = userDapProxy.insert(new User(password));
+        if(userId == -1){
+            return "{\"success\":false,\"message\":\"注册失败\"}";
+        }else{
+            return "{\"success\":true,\"message\":\"注册成功\",\"userId\":\"" + userId + "\"}";
         }
     }
 }

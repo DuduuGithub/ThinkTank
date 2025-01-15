@@ -94,9 +94,10 @@ import java.util.List;
     }
 
     @Override
-    public void update(Document document) {
+    public boolean update(Document document) {
         String sql = "UPDATE document SET title = ?, keywords = ?, subject = ?, content = ?, user_id = ? WHERE document_id = ?";
         Connection conn = null;
+        boolean flag = false;
         try {
             conn = DBUtil.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -106,13 +107,14 @@ import java.util.List;
             pstmt.setString(4, document.getContent());
             pstmt.setInt(5, document.getUserId());
             pstmt.setInt(6, document.getDocumentId());
-            pstmt.executeUpdate();
+            flag = pstmt.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException("更新论文数据失败", e);
         } finally {
             DBUtil.closeConnection(conn);
         }
+        return flag;
     }
 
     @Override

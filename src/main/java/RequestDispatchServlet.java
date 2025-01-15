@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import controller.AddReportWithPdfController;
 import controller.BagDocumentListViewController;
@@ -14,9 +15,9 @@ import controller.BagOperationController;
 import controller.DeleteDocumentController;
 import controller.DocumentListViewController;
 import controller.GetDocumentsController;
-import controller.LoginController;
 import controller.PdfViewerController;
-import controller.RegisterController;
+import controller.UpdateDocumentController;
+import controller.UserOperationController;
 import service.DocumentService;
 import logger.SimpleLogger;
 
@@ -46,6 +47,16 @@ public class RequestDispatchServlet extends HttpServlet {
 
     private void dispatch(HttpServletRequest request, HttpServletResponse response)
             throws Exception {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            // 检查是否已登录
+            Integer userId = (Integer) session.getAttribute("userId");
+            if (userId != null) {
+                // 续期30分钟
+                session.setMaxInactiveInterval(30 * 60);// 用户登录后每次操作之后都把session续期为30分钟
+            }
+        }
+        
         // 获取请求路径
         String path = request.getRequestURI();
 
@@ -54,20 +65,20 @@ public class RequestDispatchServlet extends HttpServlet {
         path = path.substring(index);
 
         switch (path) {
-            case "/register"://新用户注册
-                RegisterController.register(request, response);
-                break;
-                
-            case "/login"://用户身份验证
-                LoginController.processRequest(request, response);
+            case "/userOperation"://用户操作，包括注册和登录
+                UserOperationController.processRequest(request, response);
                 break;
 
-            case "/loadPdf"://上传pdf文件
+            case "/loadPdf"://上传pdf文件报告
                 AddReportWithPdfController.processRequest(request,response);
                 break;
 
             case "/deleteDocument"://删除报告
                 DeleteDocumentController.processRequest(request,response);
+                break;
+
+            case "/updateDocument":
+                UpdateDocumentController.processRequest(request,response);
                 break;
 
             case "/documentListView"://用户查看自己的报告和检索

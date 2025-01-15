@@ -60,10 +60,11 @@ public class DocumentDaoProxy implements DocumentDao {
      * 用途：更新文档数据
      */
     @Override
-    public void update(Document document) {
+    public boolean update(Document document) {
         checkConnection();
-        dao.update(document);
+        boolean flag = dao.update(document);
         DBUtil.closeConnection(conn);
+        return flag;
     }
 
     /*
