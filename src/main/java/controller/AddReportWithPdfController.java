@@ -87,13 +87,6 @@ public class AddReportWithPdfController {
                     SimpleLogger.log("Error closing input stream: " + e.getMessage());
                 }
             }
-            
-            // 强制关闭之前的连接
-            try {
-                BigModelNew.closeAllConnections();  // 需要在 BigModelNew 类中添加这个方法
-            } catch (Exception e) {
-                SimpleLogger.log("Error closing AI model connections: " + e.getMessage());
-            }
         }
     }
 }
