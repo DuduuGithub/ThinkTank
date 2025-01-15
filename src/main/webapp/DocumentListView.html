@@ -15,10 +15,14 @@
     <link rel="stylesheet" href="../static/css/black.css">
     <link rel="stylesheet" href="../static/css/check.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    
+    <!-- 引入导航栏相关的 CSS -->
+    <link rel="stylesheet" href="../static/css/navbar.css">
+    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         /* 模态框样式 */
-        .modal {
+        .custom-modal {
             display: none;
             position: fixed;
             z-index: 1000;
@@ -29,16 +33,18 @@
             background-color: rgba(0,0,0,0.4);
         }
 
-        .modal-content {
+        .custom-modal-content {
             background-color: #fefefe;
             margin: 15% auto;
             padding: 20px;
             border: 1px solid #888;
             width: 80%;
             max-width: 500px;
+            max-height: 35vh;
+            overflow-y: auto;
         }
 
-        .close {
+        .custom-close {
             color: #aaa;
             float: right;
             font-size: 28px;
@@ -46,8 +52,8 @@
             cursor: pointer;
         }
 
-        .close:hover,
-        .close:focus {
+        .custom-close:hover,
+        .custom-close:focus {
             color: black;
             text-decoration: none;
             cursor: pointer;
@@ -58,13 +64,13 @@
             background-color: #ffc107; /* 金色背景 */
             border: none;
             color: white;
-            padding: 10px;
+            padding: 6px 12px; /* 调整padding使其与删除按钮一致 */
             text-align: center;
             text-decoration: none;
             display: inline-block;
-            font-size: 16px;
+            font-size: 14px; /* 调整字体大小 */
             margin-left: 5px;
-            border-radius: 50%; /* 圆形按钮 */
+            border-radius: 4px; /* 改为方形边角 */
             cursor: pointer;
             transition: background-color 0.3s;
         }
@@ -74,7 +80,7 @@
         }
 
         .btn-favorite i {
-            font-size: 16px; /* 星形图标大小 */
+            font-size: 14px; /* 调整图标大小 */
         }
 
         /* 文件夹列表框样式 */
@@ -117,7 +123,7 @@
             display: block;
         }
 
-        .toast-message {
+        .custom-toast-message {
             position: fixed;
             top: 20px;
             left: 50%;
@@ -129,11 +135,11 @@
             display: none;
         }
 
-        .toast-success {
+        .custom-toast-success {
             background-color: #28a745;
         }
 
-        .toast-error {
+        .custom-toast-error {
             background-color: #dc3545;
         }
 
@@ -145,7 +151,7 @@
         }
 
         /* 收藏模态框样式 */
-        .favorite-modal {
+        .custom-favorite-modal {
             display: none;
             position: fixed;
             z-index: 1000;
@@ -156,16 +162,37 @@
             background-color: rgba(0,0,0,0.4);
         }
 
-        .favorite-modal-content {
+        .custom-favorite-modal-content {
             background-color: #fefefe;
             margin: 15% auto;
             padding: 20px;
             border: 1px solid #888;
             width: 80%;
             max-width: 500px;
+            max-height: 35vh;
+            overflow-y: auto;
         }
 
-        .bag-item {
+        /* 自定义滚动条样式 - WebKit浏览器 */
+        .custom-favorite-modal-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-favorite-modal-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+
+        .custom-favorite-modal-content::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 3px;
+        }
+
+        .custom-favorite-modal-content::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        .favorite-bag-item {
             padding: 10px;
             margin-bottom: 10px;
             background-color: #fff;
@@ -176,13 +203,13 @@
             cursor: pointer;
         }
 
-        .bag-item:hover {
+        .favorite-bag-item:hover {
             background-color: #f8f9fa;
             transform: translateY(-2px);
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        .bag-item i {
+        .favorite-bag-item i {
             margin-right: 10px;
             color: #ffd700;
             pointer-events: none;
@@ -193,9 +220,8 @@
 
 <body class="page-body">
     <div class="page-container horizontal-menu">
-        <header class="navbar navbar-fixed-top">
-            <!-- Navbar content here... -->
-        </header>
+        <!-- 导航栏占位符 -->
+        <div id="navbar"></div>
 
         <div class="main-content">
             <div class="container">
@@ -205,13 +231,13 @@
                             <button class="btn btn-primary" id="add-report">添加报告</button>
                             <button class="btn btn-primary" id="openModalBtn">一键上传文件</button>
 
-                            <div id="myModal" class="favorite-modal">
-                                <div class="favorite-modal-content">
-                                    <span class="close">&times;</span>
+                            <div id="myModal" class="custom-favorite-modal">
+                                <div class="custom-favorite-modal-content">
+                                    <span class="custom-close">&times;</span>
                                     <h4>上传报告文件</h4>
                                     <div class="upload-container">
                                         <form id="uploadForm" action="app/loadPdf" method="post" enctype="multipart/form-data" style="text-align: center;">
-                                            <div class="bag-item" style="margin: 30px 0;">
+                                            <div class="favorite-bag-item" style="margin: 30px 0;">
                                                 <input type="file" name="file" accept=".pdf" style="margin-bottom: 20px; display: block; margin-left: auto; margin-right: auto;" />
                                                 <br/>
                                                 <input type="submit" value="上传报告" class="btn btn-primary" />
@@ -254,12 +280,6 @@
                                         <td>
                                             <!-- 删除按钮 -->
                                             <button th:onclick="'deleteDocument(' + ${document.documentId} + ')'" class="btn btn-danger">删除</button>
-
-                                            <!-- 修改表单 -->
-                                            <form method="POST" style="display:inline;">
-                                                <input type="hidden" name="id" th:value="${document.documentId}" />
-                                                <input type="submit" class="btn btn-primary edit-button" value="修改" data-id="${document.documentId}" />
-                                            </form>
 
                                             <!-- 收藏按钮和文件夹列表容器 -->
                                             <div class="favorite-container" style="position: relative; display: inline-block;">
@@ -324,25 +344,28 @@
         </div>
     </div>
 
-    <div id="favoriteModal" class="favorite-modal">
-        <div class="favorite-modal-content">
-            <span class="close">&times;</span>
+    <div id="favoriteModal" class="custom-favorite-modal">
+        <div class="custom-favorite-modal-content">
+            <span class="custom-close">&times;</span>
             <h4>选择报告包</h4>
-            <div id="bagsList">
+            <div id="favoriteBagsList">
                 <!-- 报告包列表将通过JavaScript动态加载 -->
             </div>
         </div>
     </div>
 
-    <div id="toast" class="toast-message"></div>
+    <div id="toast" class="custom-toast-message"></div>
+
+    <!-- 引入导航栏相关的 JavaScript -->
+    <script src="../static/js/navbar.js"></script>
 
     <script>
         $(document).ready(function() {
             window.showToast = function(message, isSuccess) {
                 const toast = $('#toast');
                 toast.text(message);
-                toast.removeClass('toast-success toast-error');
-                toast.addClass(isSuccess ? 'toast-success' : 'toast-error');
+                toast.removeClass('custom-toast-success custom-toast-error');
+                toast.addClass(isSuccess ? 'custom-toast-success' : 'custom-toast-error');
                 toast.css('display', 'block');
                 
                 setTimeout(function() {
@@ -372,20 +395,10 @@
 
             // 添加以下代码来处理收藏模态框的关闭按钮
             const favoriteModal = document.getElementById('favoriteModal');
-            const favoriteModalClose = favoriteModal.querySelector('.close');
+            const favoriteModalClose = favoriteModal.querySelector('.custom-close');
             
             favoriteModalClose.onclick = function() {
                 favoriteModal.style.display = "none";
-            }
-
-            // 修改window.onclick事件处理器，同时处理两个模态框
-            window.onclick = function(event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                }
-                if (event.target == favoriteModal) {
-                    favoriteModal.style.display = "none";
-                }
             }
 
             // 搜索表单处理
@@ -412,18 +425,17 @@
 
         });
 
-        document.getElementById("searchForm").onsubmit = function() {
-            // 检查每个输入字段，如果没有输入，设为空字符串
-            if (!document.getElementById("title-search").value) {
-                document.getElementById("title-search").value = '';
+        // 删除重复的window.onclick事件处理器，合并处理多个模态框
+        window.onclick = function(event) {
+            const modal = document.getElementById("myModal");
+            const favoriteModal = document.getElementById("favoriteModal");
+            if (event.target == modal) {
+                modal.style.display = "none";
             }
-            if (!document.getElementById("keywords-search").value) {
-                document.getElementById("keywords-search").value = '';
+            if (event.target == favoriteModal) {
+                favoriteModal.style.display = "none";
             }
-            if (!document.getElementById("subject-search").value) {
-                document.getElementById("subject-search").value = '';
-            }
-        };
+        }
 
         // 添加模态框相关的JavaScript代码
         // 获取模态框元素
@@ -433,7 +445,7 @@
         var btn = document.getElementById("openModalBtn");
 
         // 获取关闭模态框的<span>元素
-        var span = document.getElementsByClassName("close")[0];
+        var span = modal.querySelector('.custom-close');
 
         // 当用户点击按钮时，打开模态框
         btn.onclick = function() {
@@ -443,13 +455,6 @@
         // 当用户点击<x>时，关闭模态框
         span.onclick = function() {
             modal.style.display = "none";
-        }
-
-        // 当用户点击模态框外部时，关闭模态框
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
         }
 
         // 处理文件上传
@@ -491,8 +496,8 @@
         function showToast(message, isSuccess) {
             const toast = $('#toast');
             toast.text(message);
-            toast.removeClass('toast-success toast-error');
-            toast.addClass(isSuccess ? 'toast-success' : 'toast-error');
+            toast.removeClass('custom-toast-success custom-toast-error');
+            toast.addClass(isSuccess ? 'custom-toast-success' : 'custom-toast-error');
             toast.css('display', 'block');
             
             setTimeout(function() {
@@ -513,13 +518,13 @@
                 let html = '';
                 bags.forEach(bag => {
                     html += `
-                        <div class="bag-item" onclick="addToBag(${documentId}, ${bag.bagId})">
+                        <div class="favorite-bag-item" onclick="addToBag(${documentId}, ${bag.bagId})">
                             <i class="entypo-folder"></i>
                             ${bag.bagName}
                         </div>
                     `;
                 });
-                document.getElementById('bagsList').innerHTML = html;
+                document.getElementById('favoriteBagsList').innerHTML = html;
                 document.getElementById('favoriteModal').style.display = "block";
             })
             .catch(error => {
@@ -548,14 +553,6 @@
                 console.error('Error:', error);
                 showToast('收藏失败，请重试', false);
             });
-        }
-
-        // 点击模态框外部关闭模态框
-        window.onclick = function(event) {
-            const modal = document.getElementById('favoriteModal');
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
         }
 
         function deleteDocument(documentId) {

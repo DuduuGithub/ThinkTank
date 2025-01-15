@@ -15,6 +15,10 @@
     <link rel="stylesheet" href="../static/css/black.css">
     <link rel="stylesheet" href="../static/css/check.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    
+    <!-- 引入导航栏相关的 CSS -->
+    <link rel="stylesheet" href="../static/css/navbar.css">
+
     <style>
     .toast-message {
         position: fixed;
@@ -85,9 +89,8 @@
 
 <body class="page-body">
     <div class="page-container horizontal-menu">
-        <header class="navbar navbar-fixed-top">
-            <!-- Navbar content here... -->
-        </header>
+        <!-- 导航栏占位符 -->
+        <div id="navbar"></div>
 
         <div class="main-content">
             <div class="container">
@@ -175,6 +178,10 @@
     <div id="toast" class="toast-message"></div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- 引入导航栏相关的 JavaScript -->
+    <script src="../static/js/navbar.js"></script>
+
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         function showToast(message, isSuccess) {
