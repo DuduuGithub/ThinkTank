@@ -27,9 +27,12 @@ public class BigModelNew extends WebSocketListener {
 
     public static final Gson gson = new Gson();
 
-    private static Boolean wsCloseFlag=false; // WebSocket关闭标志
-    private static String totalAnswer = ""; // 大模型的答案汇总
+    private static boolean wsCloseFlag = false;
+    private static String totalAnswer = "";
+    private static StringBuilder currentResponse = new StringBuilder();
     private static OkHttpClient client;
+    private static long lastMessageTime;  // 新增：最后一条消息的时间
+    private static final long TIMEOUT_MS = 30000;  // 新增：超时时间，10秒
 
     // 线程来发送音频与参数
     class MyThread extends Thread {
@@ -89,13 +92,27 @@ public class BigModelNew extends WebSocketListener {
 
     // 用于外部调用的接口方法
     public static String askQuestion(String question) throws Exception {
-        // 重置状态
+        // 重置所有状态
         wsCloseFlag = false;
         totalAnswer = "";
+        currentResponse.setLength(0);
+        lastMessageTime = System.currentTimeMillis();  // 重置时间
+        
+        if (client != null) {
+            // 清理旧的连接
+            client.dispatcher().executorService().shutdown();
+            client.connectionPool().evictAll();
+        }
+        
+        // 创建新的 client
+        client = new OkHttpClient.Builder()
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .build();
 
         // 构建鉴权url
         String authUrl = getAuthUrl(hostUrl, apiKey, apiSecret);
-        OkHttpClient client = new OkHttpClient.Builder().build();
         String url = authUrl.replace("http://", "ws://").replace("https://", "wss://");
         Request request = new Request.Builder().url(url).build();
 
@@ -107,73 +124,73 @@ public class BigModelNew extends WebSocketListener {
         MyThread myThread = new BigModelNew().new MyThread(webSocket, question);
         myThread.start();
 
-        // 设置超时时间为30秒
-        long startTime = System.currentTimeMillis();
-        long timeout = 30000; // 30 seconds
-
-        // 等待答案返回，增加超时检查
+        // 等待答案返回
         while (!wsCloseFlag) {
-            if (System.currentTimeMillis() - startTime > timeout) {
-                webSocket.close(1000, "Timeout");
-            }
             Thread.sleep(10);
         }
 
-        // 确保连接完全关闭
-        webSocket.close(1000, "");
-        client.dispatcher().executorService().shutdown();
-        client.connectionPool().evictAll();
-
-        return totalAnswer; // 返回大模型的答案
+        // 获取结果并清理
+        String result = totalAnswer;
+        totalAnswer = "";
+        
+        SimpleLogger.log("BigModelNew大模型回答: " + result);
+        return result;
     }
 
     @Override
     public void onOpen(WebSocket webSocket, Response response) {
         super.onOpen(webSocket, response);
         wsCloseFlag = false;
+        currentResponse.setLength(0);
+        lastMessageTime = System.currentTimeMillis();  // 初始化时间
     }
 
     @Override
-    public void onMessage(WebSocket webSocket, String text) {
-        // 解析返回的 JSON
+    public void onMessage(WebSocket webSocket, String text) {        
         JsonParse myJsonParse = gson.fromJson(text, JsonParse.class);
+        
         if (myJsonParse.header.code != 0) {
-            System.out.println("发生错误，错误码为：" + myJsonParse.header.code);
-            System.out.println("本次请求的sid为：" + myJsonParse.header.sid);
-            webSocket.close(1000, "");
+            SimpleLogger.log("发生错误，错误码：" + myJsonParse.header.code + 
+                           "，消息：" + myJsonParse.header.sid);
+            wsCloseFlag = true;
+            webSocket.close(1000, "Error: " + myJsonParse.header.code);
+            return;
         }
+
         List<Text> textList = myJsonParse.payload.choices.text;
         for (Text temp : textList) {
-            System.out.print(temp.content);
-            totalAnswer += temp.content;
+            currentResponse.append(temp.content);
         }
-        if (myJsonParse.header.status == 2) {
-            // 只处理本次返回的答案，不涉及历史记录
-            System.out.println();
-            System.out.println("*************************************************************************************");
 
-            // 关闭 WebSocket
+        // 检查是否超时
+        if (System.currentTimeMillis() - lastMessageTime > TIMEOUT_MS) {
+            SimpleLogger.log("响应超时，使用当前累积的响应");
+            totalAnswer = currentResponse.toString();
+            currentResponse.setLength(0);
             wsCloseFlag = true;
+            webSocket.close(1000, "Timeout");
+            return;
+        }
 
-            SimpleLogger.log("已经关闭了连接\n\n\n\n\n\n\n\n\n");
+        if (myJsonParse.header.status == 2) {
+            totalAnswer = currentResponse.toString();
+            currentResponse.setLength(0);
+            wsCloseFlag = true;
+            SimpleLogger.log("连接已关闭");
         }
     }
 
     @Override
     public void onFailure(WebSocket webSocket, Throwable t, Response response) {
-        super.onFailure(webSocket, t, response);
-        try {
-            if (null != response) {
-                int code = response.code();
-                System.out.println("onFailure code:" + code);
-                System.out.println("onFailure body:" + response.body().string());
-                if (101 != code) {
-                    System.out.println("connection failed");
-                    System.exit(0);
-                }
+        wsCloseFlag = true;
+        currentResponse.setLength(0);
+        SimpleLogger.log("WebSocket连接失败: " + t.getMessage());
+        if (response != null) {
+            try {
+                SimpleLogger.log("失败响应: " + response.body().string());
+            } catch (IOException e) {
+                SimpleLogger.log("读取失败响应出错: " + e.getMessage());
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
