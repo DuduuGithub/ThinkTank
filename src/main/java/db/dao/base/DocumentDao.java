@@ -14,7 +14,7 @@ public interface DocumentDao {
      * 插入一篇新论文
      * @param paper 论文对象
      */
-    void insert(Document document);
+    int insert(Document document);
 
     /**
      * 更新一篇论文的数据

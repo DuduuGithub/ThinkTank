@@ -15,6 +15,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class BigModelNew extends WebSocketListener {
     // 各版本的hostUrl及其对应的domain参数，具体可以参考接口文档 https://www.xfyun.cn/doc/spark/Web.html
@@ -28,6 +29,7 @@ public class BigModelNew extends WebSocketListener {
 
     private static Boolean wsCloseFlag=false; // WebSocket关闭标志
     private static String totalAnswer = ""; // 大模型的答案汇总
+    private static OkHttpClient client;
 
     // 线程来发送音频与参数
     class MyThread extends Thread {
@@ -251,6 +253,14 @@ public class BigModelNew extends WebSocketListener {
         }
     }
 
+    public static void closeAllConnections() {
+        if (client != null) {
+            client.dispatcher().executorService().shutdown();
+            client.connectionPool().evictAll();
+            client = null;
+        }
+    }
+
     public static void main(String[] args) {
         try {
             // 测试第一个问题
@@ -262,6 +272,26 @@ public class BigModelNew extends WebSocketListener {
             System.out.println("\n提问第二个问题：");
             String answer2 = askQuestion("1+1等于多少？");
             System.out.println("\n最终答案：" + answer2);
+
+            // 测试第二个问题
+            System.out.println("\n提问第二个问题：");
+            String answer3 = askQuestion("1+2等于多少？");
+            System.out.println("\n最终答案：" + answer3);
+
+            // 测试第二个问题
+            System.out.println("\n提问第二个问题：");
+            String answer4= askQuestion("1+3等于多少？");
+            System.out.println("\n最终答案：" + answer4);
+
+            // 测试第二个问题
+            System.out.println("\n提问第二个问题：");
+            String answer5 = askQuestion("1+4等于多少？");
+            System.out.println("\n最终答案：" + answer5);
+
+            // 测试第二个问题
+            System.out.println("\n提问第二个问题：");
+            String answer6 = askQuestion("1+5等于多少？");
+            System.out.println("\n最终答案：" + answer6);
             
         } catch (Exception e) {
             System.out.println("发生错误：");

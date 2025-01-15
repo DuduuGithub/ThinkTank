@@ -1,53 +1,73 @@
-import argparse
-from transformers import AutoTokenizer, AutoModelForMaskedLM
+from transformers import BertTokenizer, BertModel
 import torch
-import os
+import sys
+import numpy as np
 
+def get_cls_token_for_long_text(text, max_length=512, stride=256):
+    # 初始化tokenizer和模型
+    tokenizer = BertTokenizer.from_pretrained('bert-base-chinese')
+    model = BertModel.from_pretrained('bert-base-chinese')
+    
+    # 将文本分成多个片段
+    tokens = tokenizer.tokenize(text)
+    all_cls_tokens = []
+    
+    # 使用滑动窗口处理长文本
+    for i in range(0, len(tokens), stride):
+        # 获取当前片段
+        chunk_tokens = tokens[i:i + max_length]
+        if len(chunk_tokens) < 50:  # 忽略太短的片段
+            continue
+            
+        # 转换回文本
+        chunk_text = tokenizer.convert_tokens_to_string(chunk_tokens)
+        
+        # 处理当前片段
+        inputs = tokenizer(chunk_text, 
+                          return_tensors="pt",
+                          max_length=max_length,
+                          truncation=True,
+                          padding=True)
+        
+        # 获取模型输出
+        with torch.no_grad():  # 不计算梯度，节省内存
+            outputs = model(**inputs)
+            cls_token = outputs.last_hidden_state[0][0].numpy()
+            all_cls_tokens.append(cls_token)
+    
+    # 如果没有获取到任何向量，处理整个文本的前max_length个token
+    if not all_cls_tokens:
+        inputs = tokenizer(text, 
+                          return_tensors="pt",
+                          max_length=max_length,
+                          truncation=True,
+                          padding=True)
+        with torch.no_grad():
+            outputs = model(**inputs)
+            cls_token = outputs.last_hidden_state[0][0].numpy()
+            return cls_token
+    
+    # 计算所有CLS token的平均值
+    return np.mean(all_cls_tokens, axis=0)
 
-# 解析命令行参数
-parser = argparse.ArgumentParser(description='Get CLS token from text.')
-parser.add_argument('input_file', type=str, help='The input file containing the text to process.')
-parser.add_argument('output_file', type=str, help='The output file to save the CLS vector.')
-args = parser.parse_args()
+def main():
+    if len(sys.argv) != 3:
+        print("Usage: python getClsToken.py input_file output_file")
+        sys.exit(1)
 
-print("input_file:" + args.input_file)
-print("output_file:" + args.output_file)
+    input_file = sys.argv[1]
+    output_file = sys.argv[2]
 
-# 加载BERT模型和tokenizer
-tokenizer = AutoTokenizer.from_pretrained("D:/java_hm_work/bert-base-chinese")
-model = AutoModelForMaskedLM.from_pretrained("D:/java_hm_work/bert-base-chinese", output_hidden_states=True)
+    # 读取输入文件
+    with open(input_file, 'r', encoding='utf-8') as f:
+        text = f.read()
 
-print("model loaded")
- 
-# 从文件读取输入文本
-# with open(args.input_file, 'r', encoding='utf-8') as f:
-#     text = f.read()  # 读取文件内容
-with open(args.input_file, 'r', encoding='utf-8') as f:
-    text = f.read()  # 读取文件内容
+    # 获取CLS token
+    cls_token = get_cls_token_for_long_text(text)
 
-print("read")
-# 分块处理长文本
-max_length = 510
-tokens = tokenizer.tokenize(text)  # 将文本分词
-chunks = [tokens[i:i+max_length] for i in range(0, len(tokens), max_length)]
+    # 保存结果
+    with open(output_file, 'w', encoding='utf-8') as f:
+        f.write(str(cls_token.tolist()))
 
-# 分别处理每个块
-cls_vectors = []
-for chunk in chunks:
-    chunk_text = tokenizer.convert_tokens_to_string(chunk)  # 将tokens还原为字符串
-    inputs = tokenizer(chunk_text, return_tensors="pt", max_length=max_length, padding="max_length", truncation=False)
-    with torch.no_grad():
-        outputs = model(**inputs)
-    # 获取[CLS]向量
-    cls_vector = outputs.hidden_states[-1][:, 0, :]  # 最后一层的[CLS]
-    cls_vectors.append(cls_vector)
-
-# 求平均
-avg_cls_vector = torch.mean(torch.stack(cls_vectors), dim=0)
-
-
-# 保存平均[CLS]向量到文件
-with open(args.output_file, "w") as f:
-    f.write(str(avg_cls_vector.tolist()))  # 将张量转换为列表后写入文件
-
-print(f"CLS token saved to {args.output_file}")
+if __name__ == "__main__":
+    main()

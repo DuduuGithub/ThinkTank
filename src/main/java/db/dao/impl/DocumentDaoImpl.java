@@ -66,13 +66,13 @@ import java.util.List;
     }
 
     @Override
-    public void insert(Document document) {
+    public int insert(Document document) {
         String sql = "INSERT INTO document (title, keywords, subject, content, user_id, pdf_File) " +
                      "VALUES (?, ?, ?, ?, ?, ?)";
         Connection conn = null;
         try {
             conn = DBUtil.getConnection();
-            PreparedStatement pstmt = conn.prepareStatement(sql);
+            PreparedStatement pstmt = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             pstmt.setString(1, document.getTitle());
             pstmt.setString(2, document.getKeywords());
             pstmt.setString(3, document.getSubject());
@@ -80,6 +80,11 @@ import java.util.List;
             pstmt.setInt(5, document.getUserId());
             pstmt.setBinaryStream(6, document.getPdfFile());
             pstmt.executeUpdate();
+            ResultSet rs = pstmt.getGeneratedKeys();
+            if(rs.next()){
+                return rs.getInt(1);
+            }
+            return -1;
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException("插入论文数据失败", e);

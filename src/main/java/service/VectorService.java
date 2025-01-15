@@ -3,15 +3,10 @@ package service;
 import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
+import logger.SimpleLogger;
 
 public class VectorService {
-
-    // 向量化函数，假设已经实现
-    public double[] vectorize(String input) {
-        // 这里是向量化函数
-        // 返回一个double数组表示向量
-        return new double[]{1.0, 2.0, 3.0}; // 示例的向量
-    }
+    private static final String VECTOR_DIR = "D:/java_hm_work/tokens/";
 
     // 计算两个向量之间的余弦相似度
     private double cosineSimilarity(double[] vecA, double[] vecB) {
@@ -26,40 +21,65 @@ public class VectorService {
         return dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
     }
 
-    // 按照余弦相似度对向量数组进行排序
-    public List<double[]> sortVectorsByCosineSimilarity(double[] vector, List<double[]> vectors) {
-        return vectors.stream()
-                .sorted(Comparator.comparingDouble(v -> -cosineSimilarity(vector, v)))
+    // 从文件中读取向量
+    private double[] readVectorFromFile(int documentId) throws IOException {
+        File vectorFile = new File(VECTOR_DIR, documentId + ".txt");
+        SimpleLogger.log("Reading vector from file: " + vectorFile.getAbsolutePath());
+        
+        try (BufferedReader reader = new BufferedReader(new FileReader(vectorFile))) {
+            String vectorStr = reader.readLine();
+            String[] values = vectorStr.replaceAll("[\\[\\]]", "").split(",\\s*");
+            return Arrays.stream(values)
+                    .mapToDouble(Double::parseDouble)
+                    .toArray();
+        }
+    }
+
+    // 找到与给定文档最相似的前几个文章
+    public List<Integer> findMostSimilarArticles(List<Integer> sourceDocIds, List<Integer> candidateDocIds, int topN) throws IOException {
+        SimpleLogger.log("Finding similar articles for source docs: " + sourceDocIds);
+        
+        // 读取源文档的向量并计算平均向量
+        List<double[]> sourceVectors = new ArrayList<>();
+        for (Integer docId : sourceDocIds) {
+            try {
+                double[] vector = readVectorFromFile(docId);
+                sourceVectors.add(vector);
+            } catch (IOException e) {
+                SimpleLogger.log("Error reading vector for document " + docId + ": " + e.getMessage());
+            }
+        }
+        
+        if (sourceVectors.isEmpty()) {
+            SimpleLogger.log("No source vectors found");
+            return new ArrayList<>();
+        }
+
+        // 计算平均向量
+        double[] averageVector = calculateAverageVector(sourceVectors);
+        
+        // 计算候选文档的相似度
+        Map<Integer, Double> similarities = new HashMap<>();
+        for (Integer docId : candidateDocIds) {
+            if (!sourceDocIds.contains(docId)) {  // 排除源文档
+                try {
+                    double[] vector = readVectorFromFile(docId);
+                    double similarity = cosineSimilarity(averageVector, vector);
+                    similarities.put(docId, similarity);
+                } catch (IOException e) {
+                    SimpleLogger.log("Error reading vector for candidate " + docId + ": " + e.getMessage());
+                }
+            }
+        }
+
+        // 排序并返回前topN个文档ID
+        return similarities.entrySet().stream()
+                .sorted(Map.Entry.<Integer, Double>comparingByValue().reversed())
+                .limit(topN)
+                .map(Map.Entry::getKey)
                 .collect(Collectors.toList());
     }
 
-    // 将字符串向量化并保存到文本文件，filePath是文件路径
-    public void saveVectorToFile(String input, String filePath) throws IOException {
-        double[] vector = vectorize(input);
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-            writer.write(Arrays.toString(vector));
-            writer.newLine();
-        }
-    }
-
-    // 从文本文件中读取向量
-    public List<double[]> readVectorsFromFile(String filePath) throws IOException {
-        List<double[]> vectors = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                line = line.replaceAll("[\\[\\]]", ""); // 去掉方括号
-                String[] values = line.split(",\\s*");
-                double[] vector = Arrays.stream(values)
-                        .mapToDouble(Double::parseDouble)
-                        .toArray();
-                vectors.add(vector);
-            }
-        }
-        return vectors;
-    }
-
-    // 计算多个向量的平均向量
     public double[] calculateAverageVector(List<double[]> vectors) {
         if (vectors == null || vectors.isEmpty()) {
             return null;
@@ -79,34 +99,5 @@ public class VectorService {
         }
         
         return avgVector;
-    }
-
-    // 获取前N个最相似的向量及其对应的索引
-    public List<SimilarityResult> getTopNSimilarVectors(double[] targetVector, List<double[]> vectors, int n) {
-        List<SimilarityResult> results = new ArrayList<>();
-        
-        for (int i = 0; i < vectors.size(); i++) {
-            double similarity = cosineSimilarity(targetVector, vectors.get(i));
-            results.add(new SimilarityResult(i, vectors.get(i), similarity));
-        }
-        
-        // 按相似度降序排序
-        results.sort((a, b) -> Double.compare(b.similarity, a.similarity));
-        
-        // 返回前N个结果
-        return results.subList(0, Math.min(n, results.size()));
-    }
-
-    // 内部类用于存储相似度结果
-    public static class SimilarityResult {
-        public final int index;
-        public final double[] vector;
-        public final double similarity;
-
-        public SimilarityResult(int index, double[] vector, double similarity) {
-            this.index = index;
-            this.vector = vector;
-            this.similarity = similarity;
-        }
     }
 }
