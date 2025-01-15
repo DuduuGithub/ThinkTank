@@ -13,7 +13,7 @@ public interface UserDao {
      * 插入新用户数据
      * @param user 用户对象
      */
-    void insert(User user);
+    int insert(User user);
 
     /**
      * 更新用户数据（如更新密码）

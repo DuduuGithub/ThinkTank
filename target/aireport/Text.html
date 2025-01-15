@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Neon Admin Panel">
+    <meta name="author" content="">
+
+    <title>查看报告全文</title>
+
+
+    <link rel="stylesheet" href="static/css/jquery-ui-1.10.3.custom.min.css">
+    <link rel="stylesheet" href="static/css/entypo.css">
+    <link rel="stylesheet" href="static/css/css.css">
+    <link rel="stylesheet" href="static/css/bootstrap.css">
+    <link rel="stylesheet" href="static/css/neon-core.css">
+    <link rel="stylesheet" href="static/css/neon-theme.css">
+    <link rel="stylesheet" href="static/css/neon-forms.css">
+    <link rel="stylesheet" href="static/css/black.css">
+
+    <script src="static/js/jquery-1.11.0.min.js"></script>
+
+    <!--[if lt IE 9]><script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
+    <style>
+        .container {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        iframe {
+            width: 80%;
+            height: 600px;
+            border: none;
+        }
+    </style>
+</head>
+
+<body class="page-body" data-url="http://neon.dev">
+
+    <div class="page-container horizontal-menu">
+
+
+        <header class="navbar navbar-fixed-top"><!-- set fixed position by adding class "navbar-fixed-top" -->
+
+            <div class="navbar-inner">
+
+                <!-- logo -->
+                <div class="navbar-brand">
+                    <a href="index.html">
+                        <img src="static/picture/logo@2x.png" width="88" alt="">
+                    </a>
+                </div>
+                <!-- main menu -->
+                <ul class="navbar-nav">
+                    <li>
+                        <a href="check.html">
+                            <i class="entypo-doc-text"></i>
+                            <span>论文概览</span>
+                        </a>
+                    </li>
+
+                    <li class="root-level has-sub">
+                        <a href="index.html">
+                            <i class="entypo-newspaper"></i>
+                            <span>报告生成</span>
+                        </a>
+                    </li>
+
+                    </li>
+                </ul>
+                <!-- notifications and other links -->
+                <ul class="nav navbar-right pull-right">
+                    <ul class="user-info pull-left pull-none-xsm">
+
+                        <!-- Profile Info -->
+                        <li class="profile-info dropdown">
+                            <!-- add class "pull-right" if you want to place this from right -->
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" _msttexthash="7861633"
+                                _msthash="125"><img src="static/picture/thumb-1@2x.png" alt="" class="img-circle"
+                                    width="44" _istranslated="1">
+                            </a>
+                        </li>
+                    </ul>
+
+                    <li class="sep"></li>
+
+                    <li>
+                        <a href="extra-login.html">
+                            退出登录 <i class="entypo-logout right"></i>
+                        </a>
+                    </li>
+
+
+                    <!-- mobile only -->
+                    <li class="visible-xs">
+
+                        <!-- open/close menu icon (do not remove if you want to enable menu on mobile devices) -->
+                        <div class="horizontal-mobile-menu visible-xs">
+                            <a href="#" class="with-animation"><!-- add class "with-animation" to support animation -->
+                                <i class="entypo-menu"></i>
+                            </a>
+                        </div>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </header>
+
+        <div class="main-content">
+            <div class="container">
+                <div class="text-base">
+
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div class="container">
+                                <h1>PDF Viewer</h1>
+                                <!-- 使用 iframe 来嵌入 PDF -->
+                                <iframe width="100%" height="600px"></iframe>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <!-- Footer -->
+                <footer class="main">
+
+
+                    Copyright &copy; 2021.Company name All rights reserved.<a target="_blank" href=""></a>
+
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            // 获取 URL 中的参数
+            function getUrlParam(name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null) return unescape(r[2]);
+                return null;
+            }
+
+            // 获取 URL 中的 reportID 参数
+            var id = getUrlParam('id');
+
+            // 设置 iframe 的 src 属性
+            $('iframe').attr('src', 'http://localhost:8080/Text?id=' + id);
+
+
+        });
+
+
+    </script>
+
+</body>
+
+</html>

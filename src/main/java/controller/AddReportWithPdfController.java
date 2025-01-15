@@ -30,8 +30,13 @@ public class AddReportWithPdfController {
         // 获取文件输入流
         InputStream pdfInputStream = null;
 
-        // 获取用户id
-        int userId = (int) request.getSession().getAttribute("userId");
+        // 获取用户id并添加检查
+        Integer userId = (Integer) request.getSession().getAttribute("userId");
+        if (userId == null) {
+            String jsonResponse = "{\"success\": false, \"message\": \"用户未登录，请先登录\"}";
+            response.getWriter().println(jsonResponse);
+            return;
+        }
 
         try {
             pdfInputStream = filePart.getInputStream();

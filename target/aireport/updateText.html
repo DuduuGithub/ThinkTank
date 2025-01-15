@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Neon Admin Panel">
+    <meta name="author" content="">
+
+    <title>添加报告</title>
+
+
+    <link rel="stylesheet" href="static/css/jquery-ui-1.10.3.custom.min.css">
+    <link rel="stylesheet" href="static/css/entypo.css">
+    <link rel="stylesheet" href="static/css/css.css">
+    <link rel="stylesheet" href="static/css/bootstrap.css">
+    <link rel="stylesheet" href="static/css/neon-core.css">
+    <link rel="stylesheet" href="static/css/neon-theme.css">
+    <link rel="stylesheet" href="static/css/neon-forms.css">
+    <link rel="stylesheet" href="static/css/black.css">
+    <link rel="stylesheet" href="static/css/check.css">
+
+    <script src="static/js/jquery-1.11.0.min.js"></script>
+
+    <!--[if lt IE 9]><script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
+
+</head>
+
+<body class="page-body" data-url="http://neon.dev">
+
+    <div class="page-container horizontal-menu">
+
+
+        <header class="navbar navbar-fixed-top"><!-- set fixed position by adding class "navbar-fixed-top" -->
+
+            <div class="navbar-inner">
+
+                <!-- logo -->
+                <div class="navbar-brand">
+                    <a href="index.html">
+                        <img src="static/picture/logo@2x.png" width="88" alt="">
+                    </a>
+                </div>
+                <!-- main menu -->
+                <ul class="navbar-nav">
+                    <li>
+                        <a href="check.html">
+                            <i class="entypo-doc-text"></i>
+                            <span>论文概览</span>
+                        </a>
+
+                    </li>
+
+                    <li class="root-level has-sub">
+                        <a href="index.html">
+                            <i class="entypo-newspaper"></i>
+                            <span>报告生成</span>
+                        </a>
+                    </li>
+
+                    </li>
+                </ul>
+                <!-- notifications and other links -->
+                <ul class="nav navbar-right pull-right">
+                    <ul class="user-info pull-left pull-none-xsm">
+
+                        <!-- Profile Info -->
+                        <li class="profile-info dropdown">
+                            <!-- add class "pull-right" if you want to place this from right -->
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" _msttexthash="7861633"
+                                _msthash="125"><img src="static/picture/thumb-1@2x.png" alt="" class="img-circle"
+                                    width="44" _istranslated="1">
+                            </a>
+                        </li>
+                    </ul>
+
+                    <li class="sep"></li>
+
+                    <li>
+                        <a href="extra-login.html">
+                            退出登录 <i class="entypo-logout right"></i>
+                        </a>
+                    </li>
+
+
+                    <!-- mobile only -->
+                    <li class="visible-xs">
+
+                        <!-- open/close menu icon (do not remove if you want to enable menu on mobile devices) -->
+                        <div class="horizontal-mobile-menu visible-xs">
+                            <a href="#" class="with-animation"><!-- add class "with-animation" to support animation -->
+                                <i class="entypo-menu"></i>
+                            </a>
+                        </div>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </header>
+
+        <div class="main-content">
+            <div class="container">
+                <div class="text-base">
+
+                    <div class="row">
+                        <div class="col-md-12">
+
+
+                            <h2>修改报告</h2>
+
+                            <!-- 模态框触发按钮 -->
+                            <button class="btn btn-primary" id="openModalBtn">文件内容</button>
+
+                            <!-- 模态框结构 -->
+                            <div id="myModal" class="modal">
+                                <!-- 模态框内容 -->
+                                <div class="modal-content">
+                                    <span class="close">&times;</span>
+                                    <form id="uploadForm" action="upload" method="post" enctype="multipart/form-data">
+                                        <input type="file" name="file" />
+                                        <input type="submit" value="一键上传报告" />
+                                    </form>
+                                </div>
+                            </div>
+
+                            <form id="addReportForm" action="" method="post">
+                                <div class="form-group">
+                                    <label for="reportID">报告ID</label>
+                                    <input type="hidden" class="form-control" id="reportID" placeholder="输入报告ID"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="reportTitle">报告标题</label>
+                                    <input type="text" class="form-control" id="reportTitle" placeholder="输入报告标题"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="reportDOI">DOI号</label>
+                                    <input type="text" class="form-control" id="reportDOI" placeholder="输入DOI号"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="reportAuthor">作者</label>
+                                    <input type="text" class="form-control" id="reportAuthor" placeholder="输入作者姓名"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="reportKeywords">文章关键字</label>
+                                    <input type="text" class="form-control" id="reportKeywords"
+                                        placeholder="输入文章关键字，用逗号分隔">
+                                </div>
+                                <div class="form-group">
+                                    <label for="reportTheme">文章主题</label>
+                                    <input type="text" class="form-control" id="reportTheme" placeholder="输入文章主题">
+                                </div>
+                                <button type="submit" id="submitButton" class="btn btn-primary">提交报告</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+            <!-- Footer -->
+            <footer class="main">
+
+
+                Copyright &copy; 2021.Company name All rights reserved.<a target="_blank" href=""></a>
+
+            </footer>
+        </div>
+    </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', async function () {
+            const urlparams = new URLSearchParams(window.location.search);
+            const reportId = urlparams.get('id');
+            console.log(reportId);
+
+            if (reportId) {
+                await fetchReportDetails(reportId);
+            }
+
+            const form = document.getElementById('addReportForm');
+            form.addEventListener('submit', handleSubmit);
+
+            function handleSubmit(event) {
+                event.preventDefault();
+                const submitButton = document.getElementById('submitButton');
+                submitButton.disabled = true;
+                submitButton.innerText = '提交中...';
+
+                const formData = new FormData(form);
+                for (let pair of formData.entries()) {
+                    console.log(pair[0] + ', ' + pair[1]);
+                };
+
+                updateReport(formData)
+                    .then(() => {
+                        alert('报告更新成功');
+                        window.location.href = 'check.html';
+                    })
+                    .catch((error) => {
+                        alert('报告更新失败');
+                        console.error(error);
+                    })
+                    .finally(() => {
+                        submitButton.disabled = false;
+                        submitButton.innerText = '提交报告';
+                    });
+            };
+        });
+
+        async function fetchReportDetails(reportId) {
+            try {
+                const response = await fetch(`api/report/selectById`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        id: reportId
+                    }),
+                });
+
+                if (!response.ok) {
+                    throw new Error('获取报告详情失败');
+                }
+
+                const report = await response.json();
+                console.log(report.reports[0]);
+
+                populateForm(report.reports[0]);
+            } catch (error) {
+                console.error(error);
+                alert('获取报告详情失败');
+            }
+        }
+
+        function populateForm(report) {
+            console.log(report);
+            document.getElementById('reportID').value = report.id;
+            document.getElementById('reportTitle').value = report.title;
+            document.getElementById('reportDOI').value = report.doi;
+            document.getElementById('reportAuthor').value = report.author;
+            document.getElementById('reportKeywords').value = report.keywords;
+            document.getElementById('reportTheme').value = report.theme;
+        }
+
+        async function updateReport(formData) {
+            try {
+                const response = await fetch(`api/report/update`, {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                if (!response.ok) {
+                    throw new Error('更新报告失败');
+                }
+            } catch (error) {
+                console.error(error);
+                throw error;
+            }
+        }
+
+        // 获取模态框元素
+        var modal = document.getElementById("myModal");
+
+        // 获取用于打开模态框的按钮
+        var btn = document.getElementById("openModalBtn");
+
+        // 获取关闭模态框的<span>元素
+        var span = document.getElementsByClassName("close")[0];
+
+        // 当用户点击按钮时，打开模态框
+        btn.onclick = function () {
+            modal.style.display = "block";
+        }
+
+        // 当用户点击<x>时，关闭模态框
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        // 当用户点击模态框外部时，关闭模态框
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // 阻止表单默认提交行为，并使用 fetch API 发送请求
+        document.getElementById('uploadForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // 阻止默认提交行为
+
+            const formData = new FormData(this); // 创建FormData对象并填充表单数据
+
+            fetch(this.action, { // 使用fetch API进行文件上传
+                method: 'POST',
+                body: formData,
+            })
+                .then(response => response.json()) // 假设后端返回JSON格式的数据
+                .then(data => {
+                    console.log('Success:', data);
+                    alert('文件上传成功');
+                    modal.style.display = "none"; // 成功后关闭模态框
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    alert('文件上传失败');
+                });
+        });
+    </script>
+
+
+
+</body>
+
+</html>

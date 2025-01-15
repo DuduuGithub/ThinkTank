@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>报告包内容</title>
+    <link rel="stylesheet" href="../static/css/jquery-ui-1.10.3.custom.min.css">
+    <link rel="stylesheet" href="../static/css/entypo.css">
+    <link rel="stylesheet" href="../static/css/css.css">
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/css/neon-core.css">
+    <link rel="stylesheet" href="../static/css/neon-theme.css">
+    <link rel="stylesheet" href="../static/css/neon-forms.css">
+    <link rel="stylesheet" href="../static/css/black.css">
+    <link rel="stylesheet" href="../static/css/check.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    <style>
+    .toast-message {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 15px 25px;
+        border-radius: 4px;
+        color: white;
+        z-index: 1000;
+        display: none;
+        animation: fadeInOut 2.5s ease;
+    }
+
+    .toast-success {
+        background-color: #28a745;
+    }
+
+    .toast-error {
+        background-color: #dc3545;
+    }
+
+    @keyframes fadeInOut {
+        0% { opacity: 0; }
+        10% { opacity: 1; }
+        90% { opacity: 1; }
+        100% { opacity: 0; }
+    }
+    </style>
+</head>
+
+<body class="page-body">
+    <div class="page-container horizontal-menu">
+        <header class="navbar navbar-fixed-top">
+            <!-- Navbar content here... -->
+        </header>
+
+        <div class="main-content">
+            <div class="container">
+                <div class="text-base">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3 th:text="${bagName}">报告包名称</h3>
+
+                            <table class="table table-bordered responsive" id="reportTable">
+                                <thead>
+                                    <tr>
+                                        <th>报告ID</th>
+                                        <th>报告标题</th>
+                                        <th>报告关键词</th>
+                                        <th>报告主题词</th>
+                                        <th>报告详情</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Thymeleaf模板语法，遍历documentList -->
+                                    <tr th:each="document : ${documentList}">
+                                        <td th:text="${document.documentId}"></td>
+                                        <td th:text="${document.title}"></td>
+                                        <td th:text="${document.keywords}"></td>
+                                        <td th:text="${document.subject}"></td>
+                                        <td><a th:href="@{app/pdf(id=${document.documentId})}" class="view-full-text">点击查看全文</a></td>
+                                        <td>
+                                            <!-- 从报告包中移除报告 -->
+                                            <form action="app/bagOperation" method="POST" style="display:inline;">
+                                                <input type="hidden" name="bagId" th:value="${bagId}" />
+                                                <input type="hidden" name="documentId" th:value="${document.documentId}" />
+                                                <input type="hidden" name="action" value="delete" />
+                                                <input type="submit" class="btn btn-danger" value="移除" />
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <footer class="main">
+                    Copyright &copy; 2021.Company name All rights reserved.
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast-message"></div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        function showToast(message, isSuccess) {
+            const toast = $('#toast');
+            toast.text(message);
+            toast.removeClass('toast-success toast-error');
+            toast.addClass(isSuccess ? 'toast-success' : 'toast-error');
+            toast.css('display', 'block');
+            
+            // 2.5秒后自动消失
+            setTimeout(function() {
+                toast.css('display', 'none');
+            }, 2500);
+        }
+
+        $('form').on('submit', function(e) {
+            e.preventDefault();
+            
+            $.ajax({
+                url: $(this).attr('action'),
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function(response) {
+                    if(response.success) {
+                        showToast(response.message, true);
+                        // 使用较短的延迟（500毫秒）让用户能看到提示消息
+                        setTimeout(function() {
+                            window.location.reload();
+                        }, 500);
+                    } else {
+                        showToast(response.message, false);
+                    }
+                },
+                error: function() {
+                    showToast('操作失败，请重试', false);
+                }
+            });
+        });
+    });
+    </script>
+</body>
+</html> 
