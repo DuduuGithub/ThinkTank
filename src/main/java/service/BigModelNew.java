@@ -106,8 +106,18 @@ public class BigModelNew extends WebSocketListener {
         myThread.start();
 
         // 等待答案返回
+        // 设置超时时间为30秒
+        long startTime = System.currentTimeMillis();
+        long timeout = 30000; // 30 seconds
+        
+        // 等待答案返回，增加超时检查
         while (!wsCloseFlag) {
-            Thread.sleep(10);
+        if (System.currentTimeMillis() - startTime > timeout) {
+            SimpleLogger.log("超时关闭\n\n\n\n\n\n\n");
+            webSocket.close(1000, "Timeout");
+            wsCloseFlag=true;
+        }
+        Thread.sleep(10);
         }
 
         // 确保连接完全关闭
