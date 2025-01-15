@@ -16,6 +16,7 @@ import controller.DeleteDocumentController;
 import controller.DocumentListViewController;
 import controller.GetDocumentsController;
 import controller.PdfViewerController;
+import controller.UpdateDocumentController;
 import controller.UserOperationController;
 import service.DocumentService;
 import logger.SimpleLogger;
@@ -74,6 +75,10 @@ public class RequestDispatchServlet extends HttpServlet {
 
             case "/deleteDocument"://删除报告
                 DeleteDocumentController.processRequest(request,response);
+                break;
+
+            case "/updateDocument":
+                UpdateDocumentController.processRequest(request,response);
                 break;
 
             case "/documentListView"://用户查看自己的报告和检索
