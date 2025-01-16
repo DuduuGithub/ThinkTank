@@ -25,19 +25,35 @@ import java.util.List;
         List<Object> params = new ArrayList<>();
         params.add(userId);
         
-        if (!title.isEmpty()) {
-            sql.append(" AND title LIKE ?");
-            params.add("%" + title + "%");
-        }
+        boolean hasCondition = false;
         
-        if (!keywords.isEmpty()) {
-            sql.append(" AND keywords LIKE ?");
-            params.add("%" + keywords + "%");
-        }
-        
-        if (!subject.isEmpty()) {
-            sql.append(" AND subject LIKE ?");
-            params.add("%" + subject + "%");
+        if (!title.isEmpty() || !keywords.isEmpty() || !subject.isEmpty()) {
+            sql.append(" AND (");
+            
+            if (!title.isEmpty()) {
+                sql.append("title LIKE ?");
+                params.add("%" + title + "%");
+                hasCondition = true;
+            }
+            
+            if (!keywords.isEmpty()) {
+                if (hasCondition) {
+                    sql.append(" OR ");
+                }
+                sql.append("keywords LIKE ?");
+                params.add("%" + keywords + "%");
+                hasCondition = true;
+            }
+            
+            if (!subject.isEmpty()) {
+                if (hasCondition) {
+                    sql.append(" OR ");
+                }
+                sql.append("subject LIKE ?");
+                params.add("%" + subject + "%");
+            }
+            
+            sql.append(")");
         }
 
         // 添加分页
