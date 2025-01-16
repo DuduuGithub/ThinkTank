@@ -135,6 +135,37 @@
                                     </tr>
                                 </tbody>
                             </table>
+
+                            <!-- 文档列表分页控件 -->
+                            <div class="row" th:if="${documentList != null and !documentList.empty}">
+                                <div class="col-md-12 text-center">
+                                    <nav aria-label="Document list navigation">
+                                        <ul class="pagination">
+                                            <!-- 上一页 -->
+                                            <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled' : ''">
+                                                <a class="page-link" th:href="@{/app/bagDocumentListView(bagId=${bagId},page=${currentPage - 1})}" 
+                                                   th:if="${currentPage > 1}">上一页</a>
+                                                <span class="page-link" th:if="${currentPage == 1}">上一页</span>
+                                            </li>
+                                            
+                                            <!-- 页码 -->
+                                            <li class="page-item" th:each="pageNum : ${#numbers.sequence(1, totalPages)}"
+                                                th:classappend="${pageNum == currentPage} ? 'active' : ''">
+                                                <a class="page-link" 
+                                                   th:href="@{/app/bagDocumentListView(bagId=${bagId},page=${pageNum})}"
+                                                   th:text="${pageNum}">1</a>
+                                            </li>
+                                            
+                                            <!-- 下一页 -->
+                                            <li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled' : ''">
+                                                <a class="page-link" th:href="@{/app/bagDocumentListView(bagId=${bagId},page=${currentPage + 1})}"
+                                                   th:if="${currentPage < totalPages}">下一页</a>
+                                                <span class="page-link" th:if="${currentPage == totalPages}">下一页</span>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -165,6 +196,37 @@
                                 </tr>
                             </tbody>
                         </table>
+
+                        <!-- 推荐文档分页控件 -->
+                        <div class="row" th:if="${recommendedDocuments != null and !recommendedDocuments.empty}">
+                            <div class="col-md-12 text-center">
+                                <nav aria-label="Recommended documents navigation">
+                                    <ul class="pagination">
+                                        <!-- 上一页 -->
+                                        <li class="page-item" th:classappend="${recommendedCurrentPage == 1} ? 'disabled' : ''">
+                                            <a class="page-link" th:href="@{/app/bagDocumentListView(bagId=${bagId},page=${currentPage},recommendedPage=${recommendedCurrentPage - 1})}" 
+                                               th:if="${recommendedCurrentPage > 1}">上一页</a>
+                                            <span class="page-link" th:if="${recommendedCurrentPage == 1}">上一页</span>
+                                        </li>
+                                        
+                                        <!-- 页码 -->
+                                        <li class="page-item" th:each="pageNum : ${#numbers.sequence(1, recommendedTotalPages)}"
+                                            th:classappend="${pageNum == recommendedCurrentPage} ? 'active' : ''">
+                                            <a class="page-link" 
+                                               th:href="@{/app/bagDocumentListView(bagId=${bagId},page=${currentPage},recommendedPage=${pageNum})}"
+                                               th:text="${pageNum}">1</a>
+                                        </li>
+                                        
+                                        <!-- 下一页 -->
+                                        <li class="page-item" th:classappend="${recommendedCurrentPage == recommendedTotalPages} ? 'disabled' : ''">
+                                            <a class="page-link" th:href="@{/app/bagDocumentListView(bagId=${bagId},page=${currentPage},recommendedPage=${recommendedCurrentPage + 1})}"
+                                               th:if="${recommendedCurrentPage < recommendedTotalPages}">下一页</a>
+                                            <span class="page-link" th:if="${recommendedCurrentPage == recommendedTotalPages}">下一页</span>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

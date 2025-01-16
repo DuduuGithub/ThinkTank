@@ -18,7 +18,7 @@ import java.util.List;
  public class DocumentDaoImpl implements DocumentDao {
 
     // 高级搜索文档：根据标题、关键词、主题和内容进行筛选
-    public List<Document> searchDocuments(int userId, String title, String keywords, String subject) {
+    public List<Document> searchDocuments(int userId, String title, String keywords, String subject, int page, int pageSize) {
         StringBuilder sql = new StringBuilder("SELECT * FROM document WHERE user_id = ?");
         
         // 动态添加搜索条件
@@ -39,6 +39,11 @@ import java.util.List;
             sql.append(" AND subject LIKE ?");
             params.add("%" + subject + "%");
         }
+
+        // 添加分页
+        sql.append(" LIMIT ? OFFSET ?");
+        params.add(pageSize);
+        params.add((page - 1) * pageSize);
         
         // 执行查询
         Connection conn = null;
@@ -60,6 +65,50 @@ import java.util.List;
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException("查询文档数据失败", e);
+        } finally {
+            DBUtil.closeConnection(conn);
+        }
+    }
+
+    // 获取总文档数
+    public int getTotalDocuments(int userId, String title, String keywords, String subject) {
+        StringBuilder sql = new StringBuilder("SELECT COUNT(*) FROM document WHERE user_id = ?");
+        
+        List<Object> params = new ArrayList<>();
+        params.add(userId);
+        
+        if (!title.isEmpty()) {
+            sql.append(" AND title LIKE ?");
+            params.add("%" + title + "%");
+        }
+        
+        if (!keywords.isEmpty()) {
+            sql.append(" AND keywords LIKE ?");
+            params.add("%" + keywords + "%");
+        }
+        
+        if (!subject.isEmpty()) {
+            sql.append(" AND subject LIKE ?");
+            params.add("%" + subject + "%");
+        }
+        
+        Connection conn = null;
+        try {
+            conn = DBUtil.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+            
+            for (int i = 0; i < params.size(); i++) {
+                pstmt.setObject(i + 1, params.get(i));
+            }
+            
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+            return 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("获取文档总数失败", e);
         } finally {
             DBUtil.closeConnection(conn);
         }
@@ -351,7 +400,7 @@ import java.util.List;
      * 从ResultSet中提取论文数据的私有辅助方法。
      * @param rs 查询结果集
      * @return 填充完成的Paper对象
-     * @throws SQLException ��果读取ResultSet时出现问题将抛出该异常
+     * @throws SQLException 果读取ResultSet时出现问题将抛出该异常
      */
     private Document extractDocumentFromResultSet(ResultSet rs) throws SQLException {
         Document document = new Document();

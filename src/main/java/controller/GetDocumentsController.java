@@ -19,7 +19,7 @@ public class GetDocumentsController {
         Integer userId = (Integer) session.getAttribute("userId");
         
         DocumentService documentService = new DocumentService();
-        List<Document> documents = documentService.searchDocuments(userId,null,null,null);
+        List<Document> documents = documentService.searchDocuments(userId, "", "", "", 1, Integer.MAX_VALUE);
 
         // 转换为简化的DTO列表
         List<DocumentDTO> simplifiedDocs = new ArrayList<>();

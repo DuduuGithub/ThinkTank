@@ -303,7 +303,35 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <div class="pagination" id="paginationControls"></div>
+                            <div class="row" th:if="${documentList != null and !documentList.empty}">
+                                <div class="col-md-12 text-center">
+                                    <nav aria-label="Document list navigation">
+                                        <ul class="pagination">
+                                            <!-- 上一页 - 只传递文档列表相关参数 -->
+                                            <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled' : ''">
+                                                <a class="page-link" th:href="@{/app/documentListView(page=${currentPage - 1},title=${titleFilter},keywords=${keywordsFilter},subject=${subjectFilter})}" 
+                                                   th:if="${currentPage > 1}">上一页</a>
+                                                <span class="page-link" th:if="${currentPage == 1}">上一页</span>
+                                            </li>
+                                            
+                                            <!-- 页码 - 只传递文档列表相关参数 -->
+                                            <li class="page-item" th:each="pageNum : ${#numbers.sequence(1, totalPages)}"
+                                                th:classappend="${pageNum == currentPage} ? 'active' : ''">
+                                                <a class="page-link" 
+                                                   th:href="@{/app/documentListView(page=${pageNum},title=${titleFilter},keywords=${keywordsFilter},subject=${subjectFilter})}"
+                                                   th:text="${pageNum}">1</a>
+                                            </li>
+                                            
+                                            <!-- 下一页 - 只传递文档列表相关参数 -->
+                                            <li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled' : ''">
+                                                <a class="page-link" th:href="@{/app/documentListView(page=${currentPage + 1},title=${titleFilter},keywords=${keywordsFilter},subject=${subjectFilter})}"
+                                                   th:if="${currentPage < totalPages}">下一页</a>
+                                                <span class="page-link" th:if="${currentPage == totalPages}">下一页</span>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
 
                             <div class="recommended-documents">
                                 <h3>推荐报告</h3>
@@ -331,6 +359,35 @@
                                             </tr>
                                         </tbody>
                                     </table>
+                                </div>
+                            </div>
+                            <div class="row" th:if="${recommendedDocuments != null and !recommendedDocuments.empty}">
+                                <div class="col-md-12 text-center">
+                                    <nav aria-label="Recommended documents navigation">
+                                        <ul class="pagination">
+                                            <!-- 上一页 - 只传递推荐列表相关参数 -->
+                                            <li class="page-item" th:classappend="${recommendedCurrentPage == 1} ? 'disabled' : ''">
+                                                <a class="page-link" th:href="@{/app/documentListView(recommendedPage=${recommendedCurrentPage - 1})}" 
+                                                   th:if="${recommendedCurrentPage > 1}">上一页</a>
+                                                <span class="page-link" th:if="${recommendedCurrentPage == 1}">上一页</span>
+                                            </li>
+                                            
+                                            <!-- 页码 - 只传递推荐列表相关参数 -->
+                                            <li class="page-item" th:each="pageNum : ${#numbers.sequence(1, recommendedTotalPages)}"
+                                                th:classappend="${pageNum == recommendedCurrentPage} ? 'active' : ''">
+                                                <a class="page-link" 
+                                                   th:href="@{/app/documentListView(recommendedPage=${pageNum})}"
+                                                   th:text="${pageNum}">1</a>
+                                            </li>
+                                            
+                                            <!-- 下一页 - 只传递推荐列表相关参数 -->
+                                            <li class="page-item" th:classappend="${recommendedCurrentPage == recommendedTotalPages} ? 'disabled' : ''">
+                                                <a class="page-link" th:href="@{/app/documentListView(recommendedPage=${recommendedCurrentPage + 1})}"
+                                                   th:if="${recommendedCurrentPage < recommendedTotalPages}">下一页</a>
+                                                <span class="page-link" th:if="${recommendedCurrentPage == recommendedTotalPages}">下一页</span>
+                                            </li>
+                                        </ul>
+                                    </nav>
                                 </div>
                             </div>
                         </div>

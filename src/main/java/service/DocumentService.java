@@ -12,12 +12,15 @@ import db.factory.DaoFactory;
 import db.vo.Document;
 import db.vo.Bag2document;
 import logger.SimpleLogger;
+import service.KeywordEnhanceService;
 
 public class DocumentService {
     private DocumentDaoProxy documentDaoProxy;
+    private KeywordEnhanceService keywordEnhanceService;
 
     public DocumentService() {
         this.documentDaoProxy = DaoFactory.getInstance().getDocumentDao();
+        this.keywordEnhanceService = new KeywordEnhanceService(this);
     }
 
     public Document getDocumentById(Integer id) {
@@ -25,8 +28,18 @@ public class DocumentService {
     }
 
     // 高级搜索：根据用户ID和搜索条件返回匹配的文档列表
-    public List<Document> searchDocuments(int userId, String title, String keywords, String subject) {
-        return documentDaoProxy.searchDocuments(userId, title, keywords, subject);
+    public List<Document> searchDocuments(int userId, String title, String keywords, String subject, int page, int pageSize) {
+        // 如果提供了关键词，使用 AI 增强关键词
+        if (keywords != null && !keywords.trim().isEmpty()) {
+            String enhancedKeywords = keywordEnhanceService.enhanceKeywords(keywords);
+            // 如果 AI 返回了增强的关键词，就使用增强的关键词
+            if (!enhancedKeywords.isEmpty()) {
+                SimpleLogger.log("Original keywords: " + keywords);
+                SimpleLogger.log("Enhanced keywords: " + enhancedKeywords);
+                keywords = enhancedKeywords;
+            }
+        }
+        return documentDaoProxy.searchDocuments(userId, title, keywords, subject, page, pageSize);
     }
 
     public List<Document> getDocumentsInBag(int bagId) {
@@ -96,5 +109,18 @@ public class DocumentService {
             SimpleLogger.log("Error adding document to bag: " + e.getMessage());
             return false;
         }
+    }
+
+    // 获取总文档数
+    public int getTotalDocuments(int userId, String title, String keywords, String subject) {
+        return documentDaoProxy.getTotalDocuments(userId, title, keywords, subject);
+    }
+
+    /**
+     * 获取所有文档
+     * @return 所有文档列表
+     */
+    public List<Document> getAllDocuments() {
+        return documentDaoProxy.getAllDocuments();
     }
 }
