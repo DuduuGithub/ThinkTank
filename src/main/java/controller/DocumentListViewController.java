@@ -4,7 +4,7 @@ import db.vo.Document;
 import service.DocumentService;
 import view.ThymeleafViewResolver;
 import org.thymeleaf.context.Context;
-import logger.SimpleLogger; // 引入自定义的 SimpleLogger
+import logger.SimpleLogger;
 import service.VectorService;
 import service.ClsTokenGenerater;
 
@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import logger.SimpleLogger;
 import java.io.File;
 import java.io.IOException;
 import org.thymeleaf.context.WebContext;
@@ -88,19 +87,22 @@ public class DocumentListViewController {
         String subject = "";
 
         if ("GET".equals(method)) {
-            // GET请求：获取用户所有文档并基于这些文档推荐
-            documentList = documentService.searchDocuments(userId, "", "", "", page, pageSize);
-            recommendedDocuments = getRecommendedDocuments(userId, documentList, null);
+            // GET请求：获取用户所有文档
+            List<Document> allUserDocuments = documentService.searchDocuments(userId, "", "", "", 1, Integer.MAX_VALUE);
+            documentList = allUserDocuments.subList((page - 1) * pageSize, Math.min(page * pageSize, allUserDocuments.size()));
+            recommendedDocuments = getRecommendedDocuments(userId, allUserDocuments, null);
         } else {
             // POST请求：根据搜索条件筛选文档
             title = request.getParameter("title") != null ? request.getParameter("title") : "";
             keywords = request.getParameter("keywords") != null ? request.getParameter("keywords") : "";
             subject = request.getParameter("subject") != null ? request.getParameter("subject") : "";
 
-            documentList = documentService.searchDocuments(userId, title, keywords, subject, page, pageSize);
-            
-            // 基于搜索结果进行推荐
-            recommendedDocuments = getRecommendedDocuments(userId, documentList, null);
+            // 获取所有符合条件的文档
+            List<Document> allSearchResults = documentService.searchDocuments(userId, title, keywords, subject, 1, Integer.MAX_VALUE);
+            // 对搜索结果分页
+            documentList = allSearchResults.subList((page - 1) * pageSize, Math.min(page * pageSize, allSearchResults.size()));
+            // 基于所有搜索结果进行推荐
+            recommendedDocuments = getRecommendedDocuments(userId, allSearchResults, null);
 
             // 设置搜索条件到上下文中，用于在页面上保持搜索条件
             context.setVariable("titleFilter", title);

@@ -3,7 +3,7 @@ package controller;
 import db.vo.Document;
 import service.DocumentService;
 import view.ThymeleafViewResolver;
-import org.thymeleaf.context.Context;
+import org.thymeleaf.context.WebContext;
 import logger.SimpleLogger;
 import service.VectorService;
 
@@ -22,9 +22,11 @@ public class BagDocumentListViewController {
     private ThymeleafViewResolver viewResolver;
     private VectorService vectorService;
     private static final String VECTOR_DIR = "D:\\java_hm_work\\tokens\\";
+    private ServletContext servletContext;
 
     public BagDocumentListViewController(DocumentService documentService, ServletContext servletContext) {
         this.documentService = documentService;
+        this.servletContext = servletContext;
         this.viewResolver = new ThymeleafViewResolver(servletContext);
         this.vectorService = new VectorService();
     }
@@ -55,16 +57,62 @@ public class BagDocumentListViewController {
             return;
         }
 
-        int bagId = Integer.parseInt(bagIdStr);
-        List<Document> documentList = documentService.getDocumentsInBag(bagId);
-        List<Document> recommendedDocuments = getRecommendedDocuments(userId, documentList);
+        // 获取分页参数
+        int page = 1;
+        int pageSize = 5; // 每页显示5条记录
+        String pageStr = request.getParameter("page");
+        if (pageStr != null && !pageStr.isEmpty()) {
+            try {
+                page = Integer.parseInt(pageStr);
+                if (page < 1) page = 1;
+            } catch (NumberFormatException e) {
+                // 如果解析失败，使用默认值1
+            }
+        }
 
-        Context context = new Context();
+        // 获取推荐报告的分页参数
+        int recommendedPage = 1;
+        int recommendedPageSize = 5; // 每页显示5条推荐记录
+        String recommendedPageStr = request.getParameter("recommendedPage");
+        if (recommendedPageStr != null && !recommendedPageStr.isEmpty()) {
+            try {
+                recommendedPage = Integer.parseInt(recommendedPageStr);
+                if (recommendedPage < 1) recommendedPage = 1;
+            } catch (NumberFormatException e) {
+                // 如果解析失败，使用默认值1
+            }
+        }
+
+        int bagId = Integer.parseInt(bagIdStr);
+        List<Document> allDocuments = documentService.getDocumentsInBag(bagId);
+        
+        // 计算总页数
+        int totalPages = (int) Math.ceil((double) allDocuments.size() / pageSize);
+        // 获取当前页的文档
+        int startIndex = (page - 1) * pageSize;
+        int endIndex = Math.min(startIndex + pageSize, allDocuments.size());
+        List<Document> documentList = allDocuments.subList(startIndex, endIndex);
+
+        // 获取推荐文档
+        List<Document> allRecommendedDocuments = getRecommendedDocuments(userId, documentList);
+        // 计算推荐文档的总页数
+        int recommendedTotalPages = (int) Math.ceil((double) allRecommendedDocuments.size() / recommendedPageSize);
+        // 获取当前页的推荐文档
+        startIndex = (recommendedPage - 1) * recommendedPageSize;
+        endIndex = Math.min(startIndex + recommendedPageSize, allRecommendedDocuments.size());
+        List<Document> recommendedDocuments = allRecommendedDocuments.subList(startIndex, endIndex);
+
+        WebContext context = new WebContext(request, response, servletContext);
         context.setVariable("documentList", documentList);
         context.setVariable("recommendedDocuments", recommendedDocuments);
         context.setVariable("bagId", bagId);
+        // 设置分页相关的变量
+        context.setVariable("currentPage", page);
+        context.setVariable("totalPages", totalPages);
+        context.setVariable("recommendedCurrentPage", recommendedPage);
+        context.setVariable("recommendedTotalPages", recommendedTotalPages);
 
-        String renderedHtml = viewResolver.render("BagDocumentListView", context);
+        String renderedHtml = viewResolver.render("BagDocumentListView", request, response, context);
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html");
         response.getWriter().write(renderedHtml);
