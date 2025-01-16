@@ -32,7 +32,7 @@ public class BigModelNew extends WebSocketListener {
     private static StringBuilder currentResponse = new StringBuilder();
     private static OkHttpClient client;
     private static long lastMessageTime;  // 新增：最后一条消息的时间
-    private static final long TIMEOUT_MS = 30000;  // 新增：超时时间，10秒
+    private static final long TIMEOUT_MS = 100000;  // 新增：超时时间，100秒
 
     // 线程来发送音频与参数
     class MyThread extends Thread {
