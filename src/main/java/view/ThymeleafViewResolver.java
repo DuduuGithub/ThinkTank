@@ -11,6 +11,9 @@ import java.io.StringWriter;
 import logger.SimpleLogger;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.thymeleaf.context.WebContext;
 
 public class ThymeleafViewResolver {
 
@@ -37,28 +40,10 @@ public class ThymeleafViewResolver {
         templateEngine.setTemplateResolver(templateResolver);
     }
 
-    // 渲染模板的方法，传入 Context 和 Writer（如 StringWriter）
-    public String render(String templateName, Context context) {
+    // 渲染模板的方法
+    public String render(String templateName, HttpServletRequest request, HttpServletResponse response, WebContext context) {
         StringWriter writer = new StringWriter();
-
-       // 假设 documentList 是一个 List<Document> 类型的集合
-        List<Document> documentList = (List<Document>) context.getVariable("documentList");
-
-        // 遍历 documentList 中的每个 Document 对象
-        StringBuilder sb = new StringBuilder();
-        for (Document document : documentList) {
-            // 获取 Document 的各个属性值
-            sb.append("Document ID: ").append(document.getDocumentId()).append(", ");
-            sb.append("Title: ").append(document.getTitle()).append(", ");
-            sb.append("Keywords: ").append(document.getKeywords()).append(", ");
-            sb.append("Subject: ").append(document.getSubject()).append("\n");
-        }
-
-        // 记录日志
-        SimpleLogger.log("context documentList details:\n" + sb.toString());
-
-
-        templateEngine.process(templateName, context, writer); // 生成 HTML 字符串
-        return writer.toString();  // 返回渲染的 HTML 字符串
+        templateEngine.process(templateName, context, writer);
+        return writer.toString();
     }
 }

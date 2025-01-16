@@ -4,7 +4,7 @@ import db.vo.Document;
 import service.DocumentService;
 import view.ThymeleafViewResolver;
 import org.thymeleaf.context.Context;
-import logger.SimpleLogger; // 引入自定义的 SimpleLogger
+import logger.SimpleLogger;
 import service.VectorService;
 import service.ClsTokenGenerater;
 
@@ -15,9 +15,10 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import logger.SimpleLogger;
 import java.io.File;
 import java.io.IOException;
+import org.thymeleaf.context.WebContext;
+import javax.servlet.http.HttpSession;
 
 public class DocumentListViewController {
 
@@ -25,16 +26,21 @@ public class DocumentListViewController {
     private ThymeleafViewResolver viewResolver;
     private VectorService vectorService;
     private static final String VECTOR_DIR = "D:\\java_hm_work\\tokens\\";
+    private ServletContext servletContext;
 
-    public DocumentListViewController(DocumentService documentService,ServletContext servletContext) {
+    public DocumentListViewController(DocumentService documentService, ServletContext servletContext) {
         this.documentService = documentService;
-
-        this.viewResolver = new ThymeleafViewResolver(servletContext);  // 使用你自己的 Thymeleaf 视图解析器
+        this.servletContext = servletContext;
+        this.viewResolver = new ThymeleafViewResolver(servletContext);
         this.vectorService = new VectorService();
     }
 
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        // 设置请求和响应的字符编码
         request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        
         String method = request.getMethod();
         SimpleLogger.log("Received " + method + " request for document list view");
 
@@ -46,40 +52,136 @@ public class DocumentListViewController {
             return;
         }
 
-        // 处理加入库请求
-        if ("POST".equals(method) && "addToLibrary".equals(request.getParameter("action"))) {
-            handleAddToLibrary(request, response, userId);
-            return;
+        // 获取分页参数
+        int page = 1;
+        int pageSize = 5; // 每页显示5条记录
+        String pageStr = request.getParameter("page");
+        if (pageStr != null && !pageStr.isEmpty()) {
+            try {
+                page = Integer.parseInt(pageStr);
+                if (page < 1) page = 1;
+            } catch (NumberFormatException e) {
+                // 如果解析失败，使用默认值1
+            }
         }
 
-        List<Document> documentList;
-        List<Document> recommendedDocuments;
-        Context context = new Context();
+        // 获取推荐报告的分页参数
+        int recommendedPage = 1;
+        int recommendedPageSize = 5; // 每页显示5条推荐记录
+        String recommendedPageStr = request.getParameter("recommendedPage");
+        if (recommendedPageStr != null && !recommendedPageStr.isEmpty()) {
+            try {
+                recommendedPage = Integer.parseInt(recommendedPageStr);
+                if (recommendedPage < 1) recommendedPage = 1;
+            } catch (NumberFormatException e) {
+                // 如果解析失败，使用默认值1
+            }
+        }
 
-        if ("GET".equals(method)) {
-            // GET请求：获取用户所有文档并基于这些文档推荐
-            documentList = documentService.searchDocuments(userId, "", "", "");
-            recommendedDocuments = getRecommendedDocuments(userId, documentList, null);
+        WebContext context = new WebContext(request, response, servletContext);
+        String title = "";
+        String keywords = "";
+        String subject = "";
+        List<Document> documentList = new ArrayList<>();
+        List<Document> recommendedDocuments = new ArrayList<>();
+
+        if ("POST".equals(method)) {
+            // 处理搜索请求
+            title = request.getParameter("title");
+            keywords = request.getParameter("keywords");
+            subject = request.getParameter("subject");
+            String useAIStr = request.getParameter("useAI");
+            boolean useAI = "true".equals(useAIStr);
+
+            SimpleLogger.log("Raw search parameters - title: " + title + ", keywords: " + keywords + ", subject: " + subject);
+
+            // 处理加入库操作
+            if ("addToLibrary".equals(request.getParameter("action"))) {
+                handleAddToLibrary(request, response, userId);
+                return;
+            }
+
+            // 进行搜索
+            if (title != null || keywords != null || subject != null) {
+                title = title != null ? title.trim() : "";
+                keywords = keywords != null ? keywords.trim() : "";
+                subject = subject != null ? subject.trim() : "";
+
+                SimpleLogger.log("Processed search parameters - title: " + title + ", keywords: " + keywords + ", subject: " + subject);
+
+                if (useAI) {
+                    SimpleLogger.log("Using AI-enhanced search");
+                    documentList = documentService.searchDocumentsWithAI(userId, title, keywords, subject, page, pageSize);
+                } else {
+                    SimpleLogger.log("Using regular search");
+                    documentList = documentService.searchDocuments(userId, title, keywords, subject, page, pageSize);
+                }
+                
+                // 只在搜索条件改变时重新计算推荐报告
+                HttpSession session = request.getSession();
+                String lastSearchKey = (String) session.getAttribute("lastSearchKey");
+                String currentSearchKey = title + keywords + subject;
+                
+                if (!currentSearchKey.equals(lastSearchKey)) {
+                    SimpleLogger.log("Search conditions changed, recalculating recommendations");
+                    // 获取所有搜索结果（不分页）用于推荐
+                    List<Document> allResults = useAI ? 
+                        documentService.searchDocumentsWithAI(userId, title, keywords, subject, 1, Integer.MAX_VALUE) :
+                        documentService.searchDocuments(userId, title, keywords, subject, 1, Integer.MAX_VALUE);
+                    recommendedDocuments = getRecommendedDocuments(userId, allResults, null);
+                    session.setAttribute("lastSearchKey", currentSearchKey);
+                    session.setAttribute("cachedRecommendations", recommendedDocuments);
+                } else {
+                    SimpleLogger.log("Using cached recommendations");
+                    recommendedDocuments = (List<Document>) session.getAttribute("cachedRecommendations");
+                }
+            }
         } else {
-            // POST请求：根据搜索条件筛选文档
-            String title = request.getParameter("title") != null ? request.getParameter("title") : "";
-            String keywords = request.getParameter("keywords") != null ? request.getParameter("keywords") : "";
-            String subject = request.getParameter("subject") != null ? request.getParameter("subject") : "";
-
-            documentList = documentService.searchDocuments(userId, title, keywords, subject);
+            // GET 请求：显示所有文档或处理分页
+            documentList = documentService.searchDocuments(userId, "", "", "", page, pageSize);
             
-            // 基于搜索结果进行推荐，而不是搜索文本
-            recommendedDocuments = getRecommendedDocuments(userId, documentList, null);
-
-            context.setVariable("titleFilter", title);
-            context.setVariable("keywordsFilter", keywords);
-            context.setVariable("subjectFilter", subject);
+            // 从session获取缓存的推荐报告
+            HttpSession session = request.getSession();
+            List<Document> cachedRecommendations = (List<Document>) session.getAttribute("cachedRecommendations");
+            if (cachedRecommendations != null) {
+                SimpleLogger.log("Using cached recommendations for pagination");
+                recommendedDocuments = cachedRecommendations;
+            } else {
+                SimpleLogger.log("No cached recommendations found, calculating new ones");
+                recommendedDocuments = getRecommendedDocuments(userId, documentList, null);
+                session.setAttribute("cachedRecommendations", recommendedDocuments);
+            }
         }
 
+        // 设置搜索条件到上下文中，用于在页面上保持搜索条件
+        context.setVariable("titleFilter", title);
+        context.setVariable("keywordsFilter", keywords);
+        context.setVariable("subjectFilter", subject);
+
+        // 计算用户文档的总页数
+        int totalDocuments = documentService.getTotalDocuments(userId, title, keywords, subject);
+        int totalPages = (int) Math.ceil((double) totalDocuments / pageSize);
+
+        // 对推荐文档进行分页处理
+        int startIndex = (recommendedPage - 1) * recommendedPageSize;
+        int endIndex = Math.min(startIndex + recommendedPageSize, recommendedDocuments.size());
+        // 获取当前页的推荐文档
+        List<Document> pagedRecommendedDocuments = recommendedDocuments.subList(startIndex, endIndex);
+        // 计算推荐文档的总页数
+        int recommendedTotalPages = (int) Math.ceil((double) recommendedDocuments.size() / recommendedPageSize);
+
+        // 设置分页相关的变量到上下文中
+        // 用户文档分页信息
+        context.setVariable("currentPage", page);
+        context.setVariable("totalPages", totalPages);
         context.setVariable("documentList", documentList);
-        context.setVariable("recommendedDocuments", recommendedDocuments);
+        // 推荐文档分页信息
+        context.setVariable("recommendedDocuments", pagedRecommendedDocuments);
+        context.setVariable("recommendedCurrentPage", recommendedPage);
+        context.setVariable("recommendedTotalPages", recommendedTotalPages);
         
-        String renderedHtml = viewResolver.render("DocumentListView", context);
+        // 渲染页面并返回
+        String renderedHtml = viewResolver.render("DocumentListView", request, response, context);
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html");
         response.getWriter().write(renderedHtml);

@@ -62,11 +62,12 @@ public class PdfMetaDataService {
         if(pdfContent.length() >6000){
             pdfContent = pdfContent.substring(0, 6000);
         }
-
-        String prompt = "请仅提取以下内容，并按指定格式返回JSON：\n" +
+        
+        // 修改提示词，使其更加明确和简洁
+        String prompt = "请仅提取以下内容，且这些内容都必须在返回json中的key中存在，并按指定格式返回JSON：\n" +
                        "1. 文章标题(title)\n" +
                        "2. 文章关键词(keywords)\n" +
-                       "3. 根据全文内容生成主题词(subject)\n" +
+                       "3. 根据全文内容摘录6句关键句(subject)\n" +
                        "你的回答只能有包含如下key的，如下格式的JSON内容，不要包含其他任何内容：\n" +
                        "{\"title\":,\"keywords\":,\"subject\":}\n" +
                        "注意：所有字段必须是字符串，不能是数组\n" +

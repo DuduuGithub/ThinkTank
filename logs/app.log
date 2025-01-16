@@ -1,0 +1,1235 @@
+2025-01-16 17:36:44 - 用户1搜索了标题包含、关键词包含、主题包含的文档，第1页
+2025-01-16 17:36:47 - Forwarding request to DocumentListViewController
+2025-01-16 17:36:47 - Received GET request for document list view
+2025-01-16 17:36:47 - 用户1搜索了标题包含、关键词包含、主题包含的文档，第1页
+2025-01-16 17:36:47 - No cached recommendations found, calculating new ones
+2025-01-16 17:36:47 - Source document titles: [教育科技创新报告, 可持续发展白皮书, 自然语言处理技术综述, 机器学习在图像识别中的应用, 人工智能发展报告2023]
+2025-01-16 17:36:47 - Source document IDs: [1, 2, 5, 36, 37]
+2025-01-16 17:36:47 - Candidate document IDs: [3, 4, 41, 42, 43, 44, 45, 51, 52]
+2025-01-16 17:36:47 - Finding similar articles for source docs: [1, 2, 5, 36, 37]
+2025-01-16 17:36:47 - Reading vector from file: D:\java_hm_work\tokens\1.txt
+2025-01-16 17:36:47 - Error reading vector for document 1: D:\java_hm_work\tokens\1.txt (系统找不到指定的文件。)
+2025-01-16 17:36:47 - Reading vector from file: D:\java_hm_work\tokens\2.txt
+2025-01-16 17:36:47 - Error reading vector for document 2: D:\java_hm_work\tokens\2.txt (系统找不到指定的文件。)
+2025-01-16 17:36:47 - Reading vector from file: D:\java_hm_work\tokens\5.txt
+2025-01-16 17:36:47 - Error reading vector for document 5: D:\java_hm_work\tokens\5.txt (系统找不到指定的文件。)
+2025-01-16 17:36:47 - Reading vector from file: D:\java_hm_work\tokens\36.txt
+2025-01-16 17:36:47 - Reading vector from file: D:\java_hm_work\tokens\37.txt
+2025-01-16 17:36:47 - Reading vector from file: D:\java_hm_work\tokens\3.txt
+2025-01-16 17:36:47 - Reading vector from file: D:\java_hm_work\tokens\4.txt
+2025-01-16 17:36:47 - Error reading vector for candidate 4: D:\java_hm_work\tokens\4.txt (系统找不到指定的文件。)
+2025-01-16 17:36:47 - Reading vector from file: D:\java_hm_work\tokens\41.txt
+2025-01-16 17:36:47 - Reading vector from file: D:\java_hm_work\tokens\42.txt
+2025-01-16 17:36:47 - Reading vector from file: D:\java_hm_work\tokens\43.txt
+2025-01-16 17:36:47 - Reading vector from file: D:\java_hm_work\tokens\44.txt
+2025-01-16 17:36:47 - Reading vector from file: D:\java_hm_work\tokens\45.txt
+2025-01-16 17:36:47 - Reading vector from file: D:\java_hm_work\tokens\51.txt
+2025-01-16 17:36:47 - Reading vector from file: D:\java_hm_work\tokens\52.txt
+2025-01-16 17:36:47 - Error reading vector for candidate 52: D:\java_hm_work\tokens\52.txt (系统找不到指定的文件。)
+2025-01-16 17:36:47 - Similar document IDs: [3, 41, 43, 44, 42, 45, 51]
+2025-01-16 17:36:56 - Forwarding request to DocumentListViewController
+2025-01-16 17:36:56 - Received POST request for document list view
+2025-01-16 17:36:56 - Raw search parameters - title: , keywords: deep learning, subject: 
+2025-01-16 17:36:56 - Processed search parameters - title: , keywords: deep learning, subject: 
+2025-01-16 17:36:56 - Using AI-enhanced search
+2025-01-16 17:36:56 - 开始执行AI增强搜索...
+2025-01-16 17:36:56 - 用户ID：1
+2025-01-16 17:36:56 - 页码：1
+2025-01-16 17:36:56 - 每页大小：5
+2025-01-16 17:36:56 - 原始搜索条件 - 标题：[], 关键词：[deep learning], 主题：[]
+2025-01-16 17:36:56 - 检测到有效的搜索条件，准备调用AI增强服务...
+2025-01-16 17:36:56 - 开始AI增强搜索 - 原始输入：
+2025-01-16 17:36:56 - 标题：
+2025-01-16 17:36:56 - 关键词：deep learning
+2025-01-16 17:36:56 - 主题：
+2025-01-16 17:36:56 - 获取到文档总数：24
+2025-01-16 17:36:56 - 现有标题数量：15
+2025-01-16 17:36:56 - 现有关键词数量：40
+2025-01-16 17:36:56 - 现有主题数量：12
+2025-01-16 17:36:56 - 现有标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023
+2025-01-16 17:36:56 - 现有关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技
+2025-01-16 17:36:56 - 现有主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告
+2025-01-16 17:36:56 - 发送给AI的提示：我有一个文档库，包含以下内容：
+标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023
+关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技
+主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告
+
+用户搜索条件：
+关键词：deep learning
+
+请根据用户的搜索条件，从已有的内容中选择最相关的：
+1. 如果用户输入了标题，从已有标题中选择2-3个最相关的
+2. 如果用户输入了关键词，从已有关键词中选择3-5个最相关的
+3. 如果用户输入了主题，从已有主题中选择1-2个最相关的
+请按以下格式返回（每个字段用竖线|分隔，如果某个字段没有相关结果则返回空）：
+标题结果|关键词结果|主题结果
+2025-01-16 17:36:56 - Request payload: {"max_tokens":100,"temperature":0.7,"messages":[{"role":"user","content":"我有一个文档库，包含以下内容：\n标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023\n关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技\n主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告\n\n用户搜索条件：\n关键词：deep learning\n\n请根据用户的搜索条件，从已有的内容中选择最相关的：\n1. 如果用户输入了标题，从已有标题中选择2-3个最相关的\n2. 如果用户输入了关键词，从已有关键词中选择3-5个最相关的\n3. 如果用户输入了主题，从已有主题中选择1-2个最相关的\n请按以下格式返回（每个字段用竖线|分隔，如果某个字段没有相关结果则返回空）：\n标题结果|关键词结果|主题结果"}],"model":"deepseek-chat"}
+2025-01-16 17:36:56 - Error calling DeepSeek API: 不知道这样的主机。 (api.deepseek.ai)
+2025-01-16 17:36:56 - Stack trace: [java.base/java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method), java.base/java.net.InetAddress$PlatformNameService.lookupAllHostAddr(InetAddress.java:929), java.base/java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1529), java.base/java.net.InetAddress$NameServiceAddresses.get(InetAddress.java:848), java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1519), java.base/java.net.InetAddress.getAllByName(InetAddress.java:1378), java.base/java.net.InetAddress.getAllByName(InetAddress.java:1306), okhttp3.Dns$Companion$DnsSystem.lookup(Dns.kt:49), okhttp3.internal.connection.RouteSelector.resetNextInetSocketAddress(RouteSelector.kt:164), okhttp3.internal.connection.RouteSelector.nextProxy(RouteSelector.kt:129), okhttp3.internal.connection.RouteSelector.next(RouteSelector.kt:71), okhttp3.internal.connection.ExchangeFinder.findConnection(ExchangeFinder.kt:205), okhttp3.internal.connection.ExchangeFinder.findHealthyConnection(ExchangeFinder.kt:106), okhttp3.internal.connection.ExchangeFinder.find(ExchangeFinder.kt:74), okhttp3.internal.connection.RealCall.initExchange$okhttp(RealCall.kt:255), okhttp3.internal.connection.ConnectInterceptor.intercept(ConnectInterceptor.kt:32), okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109), okhttp3.internal.cache.CacheInterceptor.intercept(CacheInterceptor.kt:95), okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109), okhttp3.internal.http.BridgeInterceptor.intercept(BridgeInterceptor.kt:83), okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109), okhttp3.internal.http.RetryAndFollowUpInterceptor.intercept(RetryAndFollowUpInterceptor.kt:76), okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109), okhttp3.internal.connection.RealCall.getResponseWithInterceptorChain$okhttp(RealCall.kt:201), okhttp3.internal.connection.RealCall.execute(RealCall.kt:154), service.AiService.getCompletion(AiService.java:50), service.KeywordEnhanceService.enhanceSearchTerms(KeywordEnhanceService.java:86), service.DocumentService.searchDocumentsWithAI(DocumentService.java:133), controller.DocumentListViewController.processRequest(DocumentListViewController.java:114), RequestDispatchServlet.dispatch(RequestDispatchServlet.java:93), RequestDispatchServlet.doPost(RequestDispatchServlet.java:43), javax.servlet.http.HttpServlet.service(HttpServlet.java:647), javax.servlet.http.HttpServlet.service(HttpServlet.java:728), org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:305), org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210), org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51), org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243), org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210), org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222), org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123), org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502), org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171), org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:100), org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:953), org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118), org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:408), org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1041), org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:603), org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:312), java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128), java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628), java.base/java.lang.Thread.run(Thread.java:829)]
+2025-01-16 17:36:56 - AI返回的原始响应：
+2025-01-16 17:36:56 - AI响应解析后的部分数量：1
+2025-01-16 17:36:56 - AI增强后的结果：
+2025-01-16 17:36:56 - 增强后的标题：
+2025-01-16 17:36:56 - 增强后的关键词：
+2025-01-16 17:36:56 - 增强后的主题：
+2025-01-16 17:36:56 - AI增强服务返回结果：{keywords=, subject=, title=}
+2025-01-16 17:36:56 - 处理AI返回的增强结果：
+2025-01-16 17:36:56 - AI未返回有效的标题增强结果，保持原标题不变
+2025-01-16 17:36:56 - AI未返回有效的关键词增强结果，保持原关键词不变
+2025-01-16 17:36:56 - AI未返回有效的主题增强结果，保持原主题不变
+2025-01-16 17:36:56 - 最终使用的搜索条件 - 标题：[], 关键词：[deep learning], 主题：[]
+2025-01-16 17:36:56 - 开始执行数据库搜索...
+2025-01-16 17:36:56 - 用户1搜索了标题包含、关键词包含deep learning、主题包含的文档，第1页
+2025-01-16 17:36:56 - 数据库搜索完成，返回结果数量：0
+2025-01-16 17:36:56 - Search conditions changed, recalculating recommendations
+2025-01-16 17:36:56 - 开始执行AI增强搜索...
+2025-01-16 17:36:56 - 用户ID：1
+2025-01-16 17:36:56 - 页码：1
+2025-01-16 17:36:56 - 每页大小：2147483647
+2025-01-16 17:36:56 - 原始搜索条件 - 标题：[], 关键词：[deep learning], 主题：[]
+2025-01-16 17:36:56 - 检测到有效的搜索条件，准备调用AI增强服务...
+2025-01-16 17:36:56 - 开始AI增强搜索 - 原始输入：
+2025-01-16 17:36:56 - 标题：
+2025-01-16 17:36:56 - 关键词：deep learning
+2025-01-16 17:36:56 - 主题：
+2025-01-16 17:36:56 - 获取到文档总数：24
+2025-01-16 17:36:56 - 现有标题数量：15
+2025-01-16 17:36:56 - 现有关键词数量：40
+2025-01-16 17:36:56 - 现有主题数量：12
+2025-01-16 17:36:56 - 现有标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023
+2025-01-16 17:36:56 - 现有关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技
+2025-01-16 17:36:56 - 现有主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告
+2025-01-16 17:36:56 - 发送给AI的提示：我有一个文档库，包含以下内容：
+标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023
+关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技
+主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告
+
+用户搜索条件：
+关键词：deep learning
+
+请根据用户的搜索条件，从已有的内容中选择最相关的：
+1. 如果用户输入了标题，从已有标题中选择2-3个最相关的
+2. 如果用户输入了关键词，从已有关键词中选择3-5个最相关的
+3. 如果用户输入了主题，从已有主题中选择1-2个最相关的
+请按以下格式返回（每个字段用竖线|分隔，如果某个字段没有相关结果则返回空）：
+标题结果|关键词结果|主题结果
+2025-01-16 17:36:56 - Request payload: {"max_tokens":100,"temperature":0.7,"messages":[{"role":"user","content":"我有一个文档库，包含以下内容：\n标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023\n关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技\n主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告\n\n用户搜索条件：\n关键词：deep learning\n\n请根据用户的搜索条件，从已有的内容中选择最相关的：\n1. 如果用户输入了标题，从已有标题中选择2-3个最相关的\n2. 如果用户输入了关键词，从已有关键词中选择3-5个最相关的\n3. 如果用户输入了主题，从已有主题中选择1-2个最相关的\n请按以下格式返回（每个字段用竖线|分隔，如果某个字段没有相关结果则返回空）：\n标题结果|关键词结果|主题结果"}],"model":"deepseek-chat"}
+2025-01-16 17:36:56 - Error calling DeepSeek API: api.deepseek.ai
+2025-01-16 17:36:56 - Stack trace: [java.base/java.net.InetAddress$CachedAddresses.get(InetAddress.java:797), java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1519), java.base/java.net.InetAddress.getAllByName(InetAddress.java:1378), java.base/java.net.InetAddress.getAllByName(InetAddress.java:1306), okhttp3.Dns$Companion$DnsSystem.lookup(Dns.kt:49), okhttp3.internal.connection.RouteSelector.resetNextInetSocketAddress(RouteSelector.kt:164), okhttp3.internal.connection.RouteSelector.nextProxy(RouteSelector.kt:129), okhttp3.internal.connection.RouteSelector.next(RouteSelector.kt:71), okhttp3.internal.connection.ExchangeFinder.findConnection(ExchangeFinder.kt:205), okhttp3.internal.connection.ExchangeFinder.findHealthyConnection(ExchangeFinder.kt:106), okhttp3.internal.connection.ExchangeFinder.find(ExchangeFinder.kt:74), okhttp3.internal.connection.RealCall.initExchange$okhttp(RealCall.kt:255), okhttp3.internal.connection.ConnectInterceptor.intercept(ConnectInterceptor.kt:32), okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109), okhttp3.internal.cache.CacheInterceptor.intercept(CacheInterceptor.kt:95), okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109), okhttp3.internal.http.BridgeInterceptor.intercept(BridgeInterceptor.kt:83), okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109), okhttp3.internal.http.RetryAndFollowUpInterceptor.intercept(RetryAndFollowUpInterceptor.kt:76), okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109), okhttp3.internal.connection.RealCall.getResponseWithInterceptorChain$okhttp(RealCall.kt:201), okhttp3.internal.connection.RealCall.execute(RealCall.kt:154), service.AiService.getCompletion(AiService.java:50), service.KeywordEnhanceService.enhanceSearchTerms(KeywordEnhanceService.java:86), service.DocumentService.searchDocumentsWithAI(DocumentService.java:133), controller.DocumentListViewController.processRequest(DocumentListViewController.java:129), RequestDispatchServlet.dispatch(RequestDispatchServlet.java:93), RequestDispatchServlet.doPost(RequestDispatchServlet.java:43), javax.servlet.http.HttpServlet.service(HttpServlet.java:647), javax.servlet.http.HttpServlet.service(HttpServlet.java:728), org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:305), org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210), org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51), org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243), org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210), org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222), org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123), org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502), org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171), org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:100), org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:953), org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118), org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:408), org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1041), org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:603), org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:312), java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128), java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628), java.base/java.lang.Thread.run(Thread.java:829)]
+2025-01-16 17:36:56 - AI返回的原始响应：
+2025-01-16 17:36:56 - AI响应解析后的部分数量：1
+2025-01-16 17:36:56 - AI增强后的结果：
+2025-01-16 17:36:56 - 增强后的标题：
+2025-01-16 17:36:56 - 增强后的关键词：
+2025-01-16 17:36:56 - 增强后的主题：
+2025-01-16 17:36:56 - AI增强服务返回结果：{keywords=, subject=, title=}
+2025-01-16 17:36:56 - 处理AI返回的增强结果：
+2025-01-16 17:36:56 - AI未返回有效的标题增强结果，保持原标题不变
+2025-01-16 17:36:56 - AI未返回有效的关键词增强结果，保持原关键词不变
+2025-01-16 17:36:56 - AI未返回有效的主题增强结果，保持原主题不变
+2025-01-16 17:36:56 - 最终使用的搜索条件 - 标题：[], 关键词：[deep learning], 主题：[]
+2025-01-16 17:36:56 - 开始执行数据库搜索...
+2025-01-16 17:36:56 - 用户1搜索了标题包含、关键词包含deep learning、主题包含的文档，第1页
+2025-01-16 17:36:56 - 数据库搜索完成，返回结果数量：0
+2025-01-16 17:36:56 - Source document titles: []
+2025-01-16 17:36:56 - No documents available for recommendation
+2025-01-16 17:37:14 - Forwarding request to DocumentListViewController
+2025-01-16 17:37:14 - Received POST request for document list view
+2025-01-16 17:37:14 - Raw search parameters - title: , keywords: deep learning, subject: 
+2025-01-16 17:37:14 - Processed search parameters - title: , keywords: deep learning, subject: 
+2025-01-16 17:37:14 - Using AI-enhanced search
+2025-01-16 17:37:14 - 开始执行AI增强搜索...
+2025-01-16 17:37:14 - 用户ID：1
+2025-01-16 17:37:14 - 页码：1
+2025-01-16 17:37:14 - 每页大小：5
+2025-01-16 17:37:14 - 原始搜索条件 - 标题：[], 关键词：[deep learning], 主题：[]
+2025-01-16 17:37:14 - 检测到有效的搜索条件，准备调用AI增强服务...
+2025-01-16 17:37:14 - 开始AI增强搜索 - 原始输入：
+2025-01-16 17:37:14 - 标题：
+2025-01-16 17:37:14 - 关键词：deep learning
+2025-01-16 17:37:14 - 主题：
+2025-01-16 17:37:14 - 获取到文档总数：24
+2025-01-16 17:37:14 - 现有标题数量：15
+2025-01-16 17:37:14 - 现有关键词数量：40
+2025-01-16 17:37:14 - 现有主题数量：12
+2025-01-16 17:37:14 - 现有标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023
+2025-01-16 17:37:14 - 现有关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技
+2025-01-16 17:37:14 - 现有主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告
+2025-01-16 17:37:14 - 发送给AI的提示：我有一个文档库，包含以下内容：
+标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023
+关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技
+主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告
+
+用户搜索条件：
+关键词：deep learning
+
+请根据用户的搜索条件，从已有的内容中选择最相关的：
+1. 如果用户输入了标题，从已有标题中选择2-3个最相关的
+2. 如果用户输入了关键词，从已有关键词中选择3-5个最相关的
+3. 如果用户输入了主题，从已有主题中选择1-2个最相关的
+请按以下格式返回（每个字段用竖线|分隔，如果某个字段没有相关结果则返回空）：
+标题结果|关键词结果|主题结果
+2025-01-16 17:37:14 - Request payload: {"max_tokens":100,"temperature":0.7,"messages":[{"role":"user","content":"我有一个文档库，包含以下内容：\n标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023\n关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技\n主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告\n\n用户搜索条件：\n关键词：deep learning\n\n请根据用户的搜索条件，从已有的内容中选择最相关的：\n1. 如果用户输入了标题，从已有标题中选择2-3个最相关的\n2. 如果用户输入了关键词，从已有关键词中选择3-5个最相关的\n3. 如果用户输入了主题，从已有主题中选择1-2个最相关的\n请按以下格式返回（每个字段用竖线|分隔，如果某个字段没有相关结果则返回空）：\n标题结果|关键词结果|主题结果"}],"model":"deepseek-chat"}
+2025-01-16 17:37:14 - Error calling DeepSeek API: 不知道这样的主机。 (api.deepseek.ai)
+2025-01-16 17:37:14 - Stack trace: [java.base/java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method), java.base/java.net.InetAddress$PlatformNameService.lookupAllHostAddr(InetAddress.java:929), java.base/java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1529), java.base/java.net.InetAddress$NameServiceAddresses.get(InetAddress.java:848), java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1519), java.base/java.net.InetAddress.getAllByName(InetAddress.java:1378), java.base/java.net.InetAddress.getAllByName(InetAddress.java:1306), okhttp3.Dns$Companion$DnsSystem.lookup(Dns.kt:49), okhttp3.internal.connection.RouteSelector.resetNextInetSocketAddress(RouteSelector.kt:164), okhttp3.internal.connection.RouteSelector.nextProxy(RouteSelector.kt:129), okhttp3.internal.connection.RouteSelector.next(RouteSelector.kt:71), okhttp3.internal.connection.ExchangeFinder.findConnection(ExchangeFinder.kt:205), okhttp3.internal.connection.ExchangeFinder.findHealthyConnection(ExchangeFinder.kt:106), okhttp3.internal.connection.ExchangeFinder.find(ExchangeFinder.kt:74), okhttp3.internal.connection.RealCall.initExchange$okhttp(RealCall.kt:255), okhttp3.internal.connection.ConnectInterceptor.intercept(ConnectInterceptor.kt:32), okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109), okhttp3.internal.cache.CacheInterceptor.intercept(CacheInterceptor.kt:95), okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109), okhttp3.internal.http.BridgeInterceptor.intercept(BridgeInterceptor.kt:83), okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109), okhttp3.internal.http.RetryAndFollowUpInterceptor.intercept(RetryAndFollowUpInterceptor.kt:76), okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109), okhttp3.internal.connection.RealCall.getResponseWithInterceptorChain$okhttp(RealCall.kt:201), okhttp3.internal.connection.RealCall.execute(RealCall.kt:154), service.AiService.getCompletion(AiService.java:50), service.KeywordEnhanceService.enhanceSearchTerms(KeywordEnhanceService.java:86), service.DocumentService.searchDocumentsWithAI(DocumentService.java:133), controller.DocumentListViewController.processRequest(DocumentListViewController.java:114), RequestDispatchServlet.dispatch(RequestDispatchServlet.java:93), RequestDispatchServlet.doPost(RequestDispatchServlet.java:43), javax.servlet.http.HttpServlet.service(HttpServlet.java:647), javax.servlet.http.HttpServlet.service(HttpServlet.java:728), org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:305), org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210), org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51), org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243), org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210), org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222), org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123), org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502), org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171), org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:100), org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:953), org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118), org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:408), org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1041), org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:603), org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:312), java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128), java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628), java.base/java.lang.Thread.run(Thread.java:829)]
+2025-01-16 17:37:14 - AI返回的原始响应：
+2025-01-16 17:37:14 - AI响应解析后的部分数量：1
+2025-01-16 17:37:14 - AI增强后的结果：
+2025-01-16 17:37:14 - 增强后的标题：
+2025-01-16 17:37:14 - 增强后的关键词：
+2025-01-16 17:37:14 - 增强后的主题：
+2025-01-16 17:37:14 - AI增强服务返回结果：{keywords=, subject=, title=}
+2025-01-16 17:37:14 - 处理AI返回的增强结果：
+2025-01-16 17:37:14 - AI未返回有效的标题增强结果，保持原标题不变
+2025-01-16 17:37:14 - AI未返回有效的关键词增强结果，保持原关键词不变
+2025-01-16 17:37:14 - AI未返回有效的主题增强结果，保持原主题不变
+2025-01-16 17:37:14 - 最终使用的搜索条件 - 标题：[], 关键词：[deep learning], 主题：[]
+2025-01-16 17:37:14 - 开始执行数据库搜索...
+2025-01-16 17:37:14 - 用户1搜索了标题包含、关键词包含deep learning、主题包含的文档，第1页
+2025-01-16 17:37:14 - 数据库搜索完成，返回结果数量：0
+2025-01-16 17:37:14 - Using cached recommendations
+2025-01-16 17:37:16 - Forwarding request to DocumentListViewController
+2025-01-16 17:37:16 - Received POST request for document list view
+2025-01-16 17:37:16 - Raw search parameters - title: , keywords: deep learning, subject: 
+2025-01-16 17:37:16 - Processed search parameters - title: , keywords: deep learning, subject: 
+2025-01-16 17:37:16 - Using regular search
+2025-01-16 17:37:16 - 用户1搜索了标题包含、关键词包含deep learning、主题包含的文档，第1页
+2025-01-16 17:37:16 - Using cached recommendations
+2025-01-16 17:37:16 - Forwarding request to DocumentListViewController
+2025-01-16 17:37:16 - Received POST request for document list view
+2025-01-16 17:37:16 - Raw search parameters - title: , keywords: deep learning, subject: 
+2025-01-16 17:37:16 - Processed search parameters - title: , keywords: deep learning, subject: 
+2025-01-16 17:37:16 - Using AI-enhanced search
+2025-01-16 17:37:16 - 开始执行AI增强搜索...
+2025-01-16 17:37:16 - 用户ID：1
+2025-01-16 17:37:16 - 页码：1
+2025-01-16 17:37:16 - 每页大小：5
+2025-01-16 17:37:16 - 原始搜索条件 - 标题：[], 关键词：[deep learning], 主题：[]
+2025-01-16 17:37:16 - 检测到有效的搜索条件，准备调用AI增强服务...
+2025-01-16 17:37:16 - 开始AI增强搜索 - 原始输入：
+2025-01-16 17:37:16 - 标题：
+2025-01-16 17:37:16 - 关键词：deep learning
+2025-01-16 17:37:16 - 主题：
+2025-01-16 17:37:16 - 获取到文档总数：24
+2025-01-16 17:37:16 - 现有标题数量：15
+2025-01-16 17:37:16 - 现有关键词数量：40
+2025-01-16 17:37:16 - 现有主题数量：12
+2025-01-16 17:37:16 - 现有标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023
+2025-01-16 17:37:16 - 现有关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技
+2025-01-16 17:37:16 - 现有主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告
+2025-01-16 17:37:16 - 发送给AI的提示：我有一个文档库，包含以下内容：
+标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023
+关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技
+主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告
+
+用户搜索条件：
+关键词：deep learning
+
+请根据用户的搜索条件，从已有的内容中选择最相关的：
+1. 如果用户输入了标题，从已有标题中选择2-3个最相关的
+2. 如果用户输入了关键词，从已有关键词中选择3-5个最相关的
+3. 如果用户输入了主题，从已有主题中选择1-2个最相关的
+请按以下格式返回（每个字段用竖线|分隔，如果某个字段没有相关结果则返回空）：
+标题结果|关键词结果|主题结果
+2025-01-16 17:37:16 - Request payload: {"max_tokens":100,"temperature":0.7,"messages":[{"role":"user","content":"我有一个文档库，包含以下内容：\n标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023\n关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技\n主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告\n\n用户搜索条件：\n关键词：deep learning\n\n请根据用户的搜索条件，从已有的内容中选择最相关的：\n1. 如果用户输入了标题，从已有标题中选择2-3个最相关的\n2. 如果用户输入了关键词，从已有关键词中选择3-5个最相关的\n3. 如果用户输入了主题，从已有主题中选择1-2个最相关的\n请按以下格式返回（每个字段用竖线|分隔，如果某个字段没有相关结果则返回空）：\n标题结果|关键词结果|主题结果"}],"model":"deepseek-chat"}
+2025-01-16 17:37:16 - Error calling DeepSeek API: api.deepseek.ai
+2025-01-16 17:37:16 - Stack trace: [java.base/java.net.InetAddress$CachedAddresses.get(InetAddress.java:797), java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1519), java.base/java.net.InetAddress.getAllByName(InetAddress.java:1378), java.base/java.net.InetAddress.getAllByName(InetAddress.java:1306), okhttp3.Dns$Companion$DnsSystem.lookup(Dns.kt:49), okhttp3.internal.connection.RouteSelector.resetNextInetSocketAddress(RouteSelector.kt:164), okhttp3.internal.connection.RouteSelector.nextProxy(RouteSelector.kt:129), okhttp3.internal.connection.RouteSelector.next(RouteSelector.kt:71), okhttp3.internal.connection.ExchangeFinder.findConnection(ExchangeFinder.kt:205), okhttp3.internal.connection.ExchangeFinder.findHealthyConnection(ExchangeFinder.kt:106), okhttp3.internal.connection.ExchangeFinder.find(ExchangeFinder.kt:74), okhttp3.internal.connection.RealCall.initExchange$okhttp(RealCall.kt:255), okhttp3.internal.connection.ConnectInterceptor.intercept(ConnectInterceptor.kt:32), okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109), okhttp3.internal.cache.CacheInterceptor.intercept(CacheInterceptor.kt:95), okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109), okhttp3.internal.http.BridgeInterceptor.intercept(BridgeInterceptor.kt:83), okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109), okhttp3.internal.http.RetryAndFollowUpInterceptor.intercept(RetryAndFollowUpInterceptor.kt:76), okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109), okhttp3.internal.connection.RealCall.getResponseWithInterceptorChain$okhttp(RealCall.kt:201), okhttp3.internal.connection.RealCall.execute(RealCall.kt:154), service.AiService.getCompletion(AiService.java:50), service.KeywordEnhanceService.enhanceSearchTerms(KeywordEnhanceService.java:86), service.DocumentService.searchDocumentsWithAI(DocumentService.java:133), controller.DocumentListViewController.processRequest(DocumentListViewController.java:114), RequestDispatchServlet.dispatch(RequestDispatchServlet.java:93), RequestDispatchServlet.doPost(RequestDispatchServlet.java:43), javax.servlet.http.HttpServlet.service(HttpServlet.java:647), javax.servlet.http.HttpServlet.service(HttpServlet.java:728), org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:305), org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210), org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51), org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243), org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210), org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222), org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123), org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502), org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171), org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:100), org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:953), org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118), org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:408), org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1041), org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:603), org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:312), java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128), java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628), java.base/java.lang.Thread.run(Thread.java:829)]
+2025-01-16 17:37:16 - AI返回的原始响应：
+2025-01-16 17:37:16 - AI响应解析后的部分数量：1
+2025-01-16 17:37:16 - AI增强后的结果：
+2025-01-16 17:37:16 - 增强后的标题：
+2025-01-16 17:37:16 - 增强后的关键词：
+2025-01-16 17:37:16 - 增强后的主题：
+2025-01-16 17:37:16 - AI增强服务返回结果：{keywords=, subject=, title=}
+2025-01-16 17:37:16 - 处理AI返回的增强结果：
+2025-01-16 17:37:16 - AI未返回有效的标题增强结果，保持原标题不变
+2025-01-16 17:37:16 - AI未返回有效的关键词增强结果，保持原关键词不变
+2025-01-16 17:37:16 - AI未返回有效的主题增强结果，保持原主题不变
+2025-01-16 17:37:16 - 最终使用的搜索条件 - 标题：[], 关键词：[deep learning], 主题：[]
+2025-01-16 17:37:16 - 开始执行数据库搜索...
+2025-01-16 17:37:16 - 用户1搜索了标题包含、关键词包含deep learning、主题包含的文档，第1页
+2025-01-16 17:37:16 - 数据库搜索完成，返回结果数量：0
+2025-01-16 17:37:16 - Using cached recommendations
+2025-01-16 17:37:17 - Forwarding request to DocumentListViewController
+2025-01-16 17:37:17 - Received POST request for document list view
+2025-01-16 17:37:17 - Raw search parameters - title: , keywords: deep learning, subject: 
+2025-01-16 17:37:17 - Processed search parameters - title: , keywords: deep learning, subject: 
+2025-01-16 17:37:17 - Using AI-enhanced search
+2025-01-16 17:37:17 - 开始执行AI增强搜索...
+2025-01-16 17:37:17 - 用户ID：1
+2025-01-16 17:37:17 - 页码：1
+2025-01-16 17:37:17 - 每页大小：5
+2025-01-16 17:37:17 - 原始搜索条件 - 标题：[], 关键词：[deep learning], 主题：[]
+2025-01-16 17:37:17 - 检测到有效的搜索条件，准备调用AI增强服务...
+2025-01-16 17:37:17 - 开始AI增强搜索 - 原始输入：
+2025-01-16 17:37:17 - 标题：
+2025-01-16 17:37:17 - 关键词：deep learning
+2025-01-16 17:37:17 - 主题：
+2025-01-16 17:37:17 - 获取到文档总数：24
+2025-01-16 17:37:17 - 现有标题数量：15
+2025-01-16 17:37:17 - 现有关键词数量：40
+2025-01-16 17:37:17 - 现有主题数量：12
+2025-01-16 17:37:17 - 现有标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023
+2025-01-16 17:37:17 - 现有关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技
+2025-01-16 17:37:17 - 现有主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告
+2025-01-16 17:37:17 - 发送给AI的提示：我有一个文档库，包含以下内容：
+标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023
+关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技
+主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告
+
+用户搜索条件：
+关键词：deep learning
+
+请根据用户的搜索条件，从已有的内容中选择最相关的：
+1. 如果用户输入了标题，从已有标题中选择2-3个最相关的
+2. 如果用户输入了关键词，从已有关键词中选择3-5个最相关的
+3. 如果用户输入了主题，从已有主题中选择1-2个最相关的
+请按以下格式返回（每个字段用竖线|分隔，如果某个字段没有相关结果则返回空）：
+标题结果|关键词结果|主题结果
+2025-01-16 17:37:17 - Request payload: {"max_tokens":100,"temperature":0.7,"messages":[{"role":"user","content":"我有一个文档库，包含以下内容：\n标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023\n关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技\n主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告\n\n用户搜索条件：\n关键词：deep learning\n\n请根据用户的搜索条件，从已有的内容中选择最相关的：\n1. 如果用户输入了标题，从已有标题中选择2-3个最相关的\n2. 如果用户输入了关键词，从已有关键词中选择3-5个最相关的\n3. 如果用户输入了主题，从已有主题中选择1-2个最相关的\n请按以下格式返回（每个字段用竖线|分隔，如果某个字段没有相关结果则返回空）：\n标题结果|关键词结果|主题结果"}],"model":"deepseek-chat"}
+2025-01-16 17:37:17 - Error calling DeepSeek API: api.deepseek.ai
+2025-01-16 17:37:17 - Stack trace: [java.base/java.net.InetAddress$CachedAddresses.get(InetAddress.java:797), java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1519), java.base/java.net.InetAddress.getAllByName(InetAddress.java:1378), java.base/java.net.InetAddress.getAllByName(InetAddress.java:1306), okhttp3.Dns$Companion$DnsSystem.lookup(Dns.kt:49), okhttp3.internal.connection.RouteSelector.resetNextInetSocketAddress(RouteSelector.kt:164), okhttp3.internal.connection.RouteSelector.nextProxy(RouteSelector.kt:129), okhttp3.internal.connection.RouteSelector.next(RouteSelector.kt:71), okhttp3.internal.connection.ExchangeFinder.findConnection(ExchangeFinder.kt:205), okhttp3.internal.connection.ExchangeFinder.findHealthyConnection(ExchangeFinder.kt:106), okhttp3.internal.connection.ExchangeFinder.find(ExchangeFinder.kt:74), okhttp3.internal.connection.RealCall.initExchange$okhttp(RealCall.kt:255), okhttp3.internal.connection.ConnectInterceptor.intercept(ConnectInterceptor.kt:32), okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109), okhttp3.internal.cache.CacheInterceptor.intercept(CacheInterceptor.kt:95), okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109), okhttp3.internal.http.BridgeInterceptor.intercept(BridgeInterceptor.kt:83), okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109), okhttp3.internal.http.RetryAndFollowUpInterceptor.intercept(RetryAndFollowUpInterceptor.kt:76), okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109), okhttp3.internal.connection.RealCall.getResponseWithInterceptorChain$okhttp(RealCall.kt:201), okhttp3.internal.connection.RealCall.execute(RealCall.kt:154), service.AiService.getCompletion(AiService.java:50), service.KeywordEnhanceService.enhanceSearchTerms(KeywordEnhanceService.java:86), service.DocumentService.searchDocumentsWithAI(DocumentService.java:133), controller.DocumentListViewController.processRequest(DocumentListViewController.java:114), RequestDispatchServlet.dispatch(RequestDispatchServlet.java:93), RequestDispatchServlet.doPost(RequestDispatchServlet.java:43), javax.servlet.http.HttpServlet.service(HttpServlet.java:647), javax.servlet.http.HttpServlet.service(HttpServlet.java:728), org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:305), org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210), org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51), org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243), org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210), org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222), org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123), org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502), org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171), org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:100), org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:953), org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118), org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:408), org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1041), org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:603), org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:312), java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128), java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628), java.base/java.lang.Thread.run(Thread.java:829)]
+2025-01-16 17:37:17 - AI返回的原始响应：
+2025-01-16 17:37:17 - AI响应解析后的部分数量：1
+2025-01-16 17:37:17 - AI增强后的结果：
+2025-01-16 17:37:17 - 增强后的标题：
+2025-01-16 17:37:17 - 增强后的关键词：
+2025-01-16 17:37:17 - 增强后的主题：
+2025-01-16 17:37:17 - AI增强服务返回结果：{keywords=, subject=, title=}
+2025-01-16 17:37:17 - 处理AI返回的增强结果：
+2025-01-16 17:37:17 - AI未返回有效的标题增强结果，保持原标题不变
+2025-01-16 17:37:17 - AI未返回有效的关键词增强结果，保持原关键词不变
+2025-01-16 17:37:17 - AI未返回有效的主题增强结果，保持原主题不变
+2025-01-16 17:37:17 - 最终使用的搜索条件 - 标题：[], 关键词：[deep learning], 主题：[]
+2025-01-16 17:37:17 - 开始执行数据库搜索...
+2025-01-16 17:37:17 - 用户1搜索了标题包含、关键词包含deep learning、主题包含的文档，第1页
+2025-01-16 17:37:17 - 数据库搜索完成，返回结果数量：0
+2025-01-16 17:37:17 - Using cached recommendations
+2025-01-16 17:37:53 - Forwarding request to DocumentListViewController
+2025-01-16 17:37:53 - Received POST request for document list view
+2025-01-16 17:37:53 - Raw search parameters - title: , keywords: 机器学习, subject: 
+2025-01-16 17:37:53 - Processed search parameters - title: , keywords: 机器学习, subject: 
+2025-01-16 17:37:53 - Using regular search
+2025-01-16 17:37:53 - 用户1搜索了标题包含、关键词包含机器学习、主题包含的文档，第1页
+2025-01-16 17:37:53 - Search conditions changed, recalculating recommendations
+2025-01-16 17:37:53 - 用户1搜索了标题包含、关键词包含机器学习、主题包含的文档，第1页
+2025-01-16 17:37:53 - Source document titles: [人工智能在医疗诊断中的应用, 自然语言处理技术综述, 机器学习在图像识别中的应用, 人工智能发展报告2023]
+2025-01-16 17:37:53 - Source document IDs: [1, 36, 37, 39, 49]
+2025-01-16 17:37:53 - Candidate document IDs: [3, 4, 41, 42, 43, 44, 45, 51, 52]
+2025-01-16 17:37:53 - Finding similar articles for source docs: [1, 36, 37, 39, 49]
+2025-01-16 17:37:53 - Reading vector from file: D:\java_hm_work\tokens\1.txt
+2025-01-16 17:37:53 - Error reading vector for document 1: D:\java_hm_work\tokens\1.txt (系统找不到指定的文件。)
+2025-01-16 17:37:53 - Reading vector from file: D:\java_hm_work\tokens\36.txt
+2025-01-16 17:37:53 - Reading vector from file: D:\java_hm_work\tokens\37.txt
+2025-01-16 17:37:53 - Reading vector from file: D:\java_hm_work\tokens\39.txt
+2025-01-16 17:37:53 - Reading vector from file: D:\java_hm_work\tokens\49.txt
+2025-01-16 17:37:53 - Reading vector from file: D:\java_hm_work\tokens\3.txt
+2025-01-16 17:37:53 - Reading vector from file: D:\java_hm_work\tokens\4.txt
+2025-01-16 17:37:53 - Error reading vector for candidate 4: D:\java_hm_work\tokens\4.txt (系统找不到指定的文件。)
+2025-01-16 17:37:53 - Reading vector from file: D:\java_hm_work\tokens\41.txt
+2025-01-16 17:37:53 - Reading vector from file: D:\java_hm_work\tokens\42.txt
+2025-01-16 17:37:53 - Reading vector from file: D:\java_hm_work\tokens\43.txt
+2025-01-16 17:37:53 - Reading vector from file: D:\java_hm_work\tokens\44.txt
+2025-01-16 17:37:53 - Reading vector from file: D:\java_hm_work\tokens\45.txt
+2025-01-16 17:37:53 - Reading vector from file: D:\java_hm_work\tokens\51.txt
+2025-01-16 17:37:53 - Reading vector from file: D:\java_hm_work\tokens\52.txt
+2025-01-16 17:37:53 - Error reading vector for candidate 52: D:\java_hm_work\tokens\52.txt (系统找不到指定的文件。)
+2025-01-16 17:37:53 - Similar document IDs: [3, 41, 43, 44, 42, 45, 51]
+2025-01-16 17:37:54 - Forwarding request to DocumentListViewController
+2025-01-16 17:37:54 - Received POST request for document list view
+2025-01-16 17:37:54 - Raw search parameters - title: , keywords: 机器学习, subject: 
+2025-01-16 17:37:54 - Processed search parameters - title: , keywords: 机器学习, subject: 
+2025-01-16 17:37:54 - Using AI-enhanced search
+2025-01-16 17:37:54 - 开始执行AI增强搜索...
+2025-01-16 17:37:54 - 用户ID：1
+2025-01-16 17:37:54 - 页码：1
+2025-01-16 17:37:54 - 每页大小：5
+2025-01-16 17:37:54 - 原始搜索条件 - 标题：[], 关键词：[机器学习], 主题：[]
+2025-01-16 17:37:54 - 检测到有效的搜索条件，准备调用AI增强服务...
+2025-01-16 17:37:54 - 开始AI增强搜索 - 原始输入：
+2025-01-16 17:37:54 - 标题：
+2025-01-16 17:37:54 - 关键词：机器学习
+2025-01-16 17:37:54 - 主题：
+2025-01-16 17:37:54 - 获取到文档总数：24
+2025-01-16 17:37:54 - 现有标题数量：15
+2025-01-16 17:37:54 - 现有关键词数量：40
+2025-01-16 17:37:54 - 现有主题数量：12
+2025-01-16 17:37:54 - 现有标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023
+2025-01-16 17:37:54 - 现有关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技
+2025-01-16 17:37:54 - 现有主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告
+2025-01-16 17:37:54 - 发送给AI的提示：我有一个文档库，包含以下内容：
+标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023
+关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技
+主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告
+
+用户搜索条件：
+关键词：机器学习
+
+请根据用户的搜索条件，从已有的内容中选择最相关的：
+1. 如果用户输入了标题，从已有标题中选择2-3个最相关的
+2. 如果用户输入了关键词，从已有关键词中选择3-5个最相关的
+3. 如果用户输入了主题，从已有主题中选择1-2个最相关的
+请按以下格式返回（每个字段用竖线|分隔，如果某个字段没有相关结果则返回空）：
+标题结果|关键词结果|主题结果
+2025-01-16 17:37:54 - Request payload: {"max_tokens":100,"temperature":0.7,"messages":[{"role":"user","content":"我有一个文档库，包含以下内容：\n标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023\n关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技\n主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告\n\n用户搜索条件：\n关键词：机器学习\n\n请根据用户的搜索条件，从已有的内容中选择最相关的：\n1. 如果用户输入了标题，从已有标题中选择2-3个最相关的\n2. 如果用户输入了关键词，从已有关键词中选择3-5个最相关的\n3. 如果用户输入了主题，从已有主题中选择1-2个最相关的\n请按以下格式返回（每个字段用竖线|分隔，如果某个字段没有相关结果则返回空）：\n标题结果|关键词结果|主题结果"}],"model":"deepseek-chat"}
+2025-01-16 17:37:54 - Error calling DeepSeek API: 不知道这样的主机。 (api.deepseek.ai)
+2025-01-16 17:37:54 - Stack trace: [java.base/java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method), java.base/java.net.InetAddress$PlatformNameService.lookupAllHostAddr(InetAddress.java:929), java.base/java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1529), java.base/java.net.InetAddress$NameServiceAddresses.get(InetAddress.java:848), java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1519), java.base/java.net.InetAddress.getAllByName(InetAddress.java:1378), java.base/java.net.InetAddress.getAllByName(InetAddress.java:1306), okhttp3.Dns$Companion$DnsSystem.lookup(Dns.kt:49), okhttp3.internal.connection.RouteSelector.resetNextInetSocketAddress(RouteSelector.kt:164), okhttp3.internal.connection.RouteSelector.nextProxy(RouteSelector.kt:129), okhttp3.internal.connection.RouteSelector.next(RouteSelector.kt:71), okhttp3.internal.connection.ExchangeFinder.findConnection(ExchangeFinder.kt:205), okhttp3.internal.connection.ExchangeFinder.findHealthyConnection(ExchangeFinder.kt:106), okhttp3.internal.connection.ExchangeFinder.find(ExchangeFinder.kt:74), okhttp3.internal.connection.RealCall.initExchange$okhttp(RealCall.kt:255), okhttp3.internal.connection.ConnectInterceptor.intercept(ConnectInterceptor.kt:32), okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109), okhttp3.internal.cache.CacheInterceptor.intercept(CacheInterceptor.kt:95), okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109), okhttp3.internal.http.BridgeInterceptor.intercept(BridgeInterceptor.kt:83), okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109), okhttp3.internal.http.RetryAndFollowUpInterceptor.intercept(RetryAndFollowUpInterceptor.kt:76), okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109), okhttp3.internal.connection.RealCall.getResponseWithInterceptorChain$okhttp(RealCall.kt:201), okhttp3.internal.connection.RealCall.execute(RealCall.kt:154), service.AiService.getCompletion(AiService.java:50), service.KeywordEnhanceService.enhanceSearchTerms(KeywordEnhanceService.java:86), service.DocumentService.searchDocumentsWithAI(DocumentService.java:133), controller.DocumentListViewController.processRequest(DocumentListViewController.java:114), RequestDispatchServlet.dispatch(RequestDispatchServlet.java:93), RequestDispatchServlet.doPost(RequestDispatchServlet.java:43), javax.servlet.http.HttpServlet.service(HttpServlet.java:647), javax.servlet.http.HttpServlet.service(HttpServlet.java:728), org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:305), org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210), org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51), org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243), org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210), org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222), org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123), org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502), org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171), org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:100), org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:953), org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118), org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:408), org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1041), org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:603), org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:312), java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128), java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628), java.base/java.lang.Thread.run(Thread.java:829)]
+2025-01-16 17:37:54 - AI返回的原始响应：
+2025-01-16 17:37:54 - AI响应解析后的部分数量：1
+2025-01-16 17:37:54 - AI增强后的结果：
+2025-01-16 17:37:54 - 增强后的标题：
+2025-01-16 17:37:54 - 增强后的关键词：
+2025-01-16 17:37:54 - 增强后的主题：
+2025-01-16 17:37:54 - AI增强服务返回结果：{keywords=, subject=, title=}
+2025-01-16 17:37:54 - 处理AI返回的增强结果：
+2025-01-16 17:37:54 - AI未返回有效的标题增强结果，保持原标题不变
+2025-01-16 17:37:54 - AI未返回有效的关键词增强结果，保持原关键词不变
+2025-01-16 17:37:54 - AI未返回有效的主题增强结果，保持原主题不变
+2025-01-16 17:37:54 - 最终使用的搜索条件 - 标题：[], 关键词：[机器学习], 主题：[]
+2025-01-16 17:37:54 - 开始执行数据库搜索...
+2025-01-16 17:37:54 - 用户1搜索了标题包含、关键词包含机器学习、主题包含的文档，第1页
+2025-01-16 17:37:54 - 数据库搜索完成，返回结果数量：5
+2025-01-16 17:37:54 - Using cached recommendations
+2025-01-16 17:38:30 - Forwarding request to DocumentListViewController
+2025-01-16 17:38:30 - Received POST request for document list view
+2025-01-16 17:38:30 - Raw search parameters - title: , keywords: 机器学习, subject: 
+2025-01-16 17:38:30 - Processed search parameters - title: , keywords: 机器学习, subject: 
+2025-01-16 17:38:30 - Using AI-enhanced search
+2025-01-16 17:38:30 - 开始执行AI增强搜索...
+2025-01-16 17:38:30 - 用户ID：1
+2025-01-16 17:38:30 - 页码：1
+2025-01-16 17:38:30 - 每页大小：5
+2025-01-16 17:38:30 - 原始搜索条件 - 标题：[], 关键词：[机器学习], 主题：[]
+2025-01-16 17:38:30 - 检测到有效的搜索条件，准备调用AI增强服务...
+2025-01-16 17:38:30 - 开始AI增强搜索 - 原始输入：
+2025-01-16 17:38:30 - 标题：
+2025-01-16 17:38:30 - 关键词：机器学习
+2025-01-16 17:38:30 - 主题：
+2025-01-16 17:38:30 - 获取到文档总数：24
+2025-01-16 17:38:30 - 现有标题数量：15
+2025-01-16 17:38:30 - 现有关键词数量：40
+2025-01-16 17:38:30 - 现有主题数量：12
+2025-01-16 17:38:30 - 现有标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023
+2025-01-16 17:38:30 - 现有关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技
+2025-01-16 17:38:30 - 现有主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告
+2025-01-16 17:38:30 - 发送给AI的提示：我有一个文档库，包含以下内容：
+标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023
+关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技
+主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告
+
+用户搜索条件：
+关键词：机器学习
+
+请根据用户的搜索条件，从已有的内容中选择最相关的：
+1. 如果用户输入了标题，从已有标题中选择2-3个最相关的
+2. 如果用户输入了关键词，从已有关键词中选择3-5个最相关的
+3. 如果用户输入了主题，从已有主题中选择1-2个最相关的
+请按以下格式返回（每个字段用竖线|分隔，如果某个字段没有相关结果则返回空）：
+标题结果|关键词结果|主题结果
+2025-01-16 17:38:30 - Request payload: {"max_tokens":100,"temperature":0.7,"messages":[{"role":"user","content":"我有一个文档库，包含以下内容：\n标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023\n关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技\n主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告\n\n用户搜索条件：\n关键词：机器学习\n\n请根据用户的搜索条件，从已有的内容中选择最相关的：\n1. 如果用户输入了标题，从已有标题中选择2-3个最相关的\n2. 如果用户输入了关键词，从已有关键词中选择3-5个最相关的\n3. 如果用户输入了主题，从已有主题中选择1-2个最相关的\n请按以下格式返回（每个字段用竖线|分隔，如果某个字段没有相关结果则返回空）：\n标题结果|关键词结果|主题结果"}],"model":"deepseek-chat"}
+2025-01-16 17:38:30 - Error calling DeepSeek API: 不知道这样的主机。 (api.deepseek.ai)
+2025-01-16 17:38:30 - Stack trace: [java.base/java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method), java.base/java.net.InetAddress$PlatformNameService.lookupAllHostAddr(InetAddress.java:929), java.base/java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1529), java.base/java.net.InetAddress$NameServiceAddresses.get(InetAddress.java:848), java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1519), java.base/java.net.InetAddress.getAllByName(InetAddress.java:1378), java.base/java.net.InetAddress.getAllByName(InetAddress.java:1306), okhttp3.Dns$Companion$DnsSystem.lookup(Dns.kt:49), okhttp3.internal.connection.RouteSelector.resetNextInetSocketAddress(RouteSelector.kt:164), okhttp3.internal.connection.RouteSelector.nextProxy(RouteSelector.kt:129), okhttp3.internal.connection.RouteSelector.next(RouteSelector.kt:71), okhttp3.internal.connection.ExchangeFinder.findConnection(ExchangeFinder.kt:205), okhttp3.internal.connection.ExchangeFinder.findHealthyConnection(ExchangeFinder.kt:106), okhttp3.internal.connection.ExchangeFinder.find(ExchangeFinder.kt:74), okhttp3.internal.connection.RealCall.initExchange$okhttp(RealCall.kt:255), okhttp3.internal.connection.ConnectInterceptor.intercept(ConnectInterceptor.kt:32), okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109), okhttp3.internal.cache.CacheInterceptor.intercept(CacheInterceptor.kt:95), okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109), okhttp3.internal.http.BridgeInterceptor.intercept(BridgeInterceptor.kt:83), okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109), okhttp3.internal.http.RetryAndFollowUpInterceptor.intercept(RetryAndFollowUpInterceptor.kt:76), okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109), okhttp3.internal.connection.RealCall.getResponseWithInterceptorChain$okhttp(RealCall.kt:201), okhttp3.internal.connection.RealCall.execute(RealCall.kt:154), service.AiService.getCompletion(AiService.java:50), service.KeywordEnhanceService.enhanceSearchTerms(KeywordEnhanceService.java:86), service.DocumentService.searchDocumentsWithAI(DocumentService.java:133), controller.DocumentListViewController.processRequest(DocumentListViewController.java:114), RequestDispatchServlet.dispatch(RequestDispatchServlet.java:93), RequestDispatchServlet.doPost(RequestDispatchServlet.java:43), javax.servlet.http.HttpServlet.service(HttpServlet.java:647), javax.servlet.http.HttpServlet.service(HttpServlet.java:728), org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:305), org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210), org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51), org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243), org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210), org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222), org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123), org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502), org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171), org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:100), org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:953), org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118), org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:408), org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1041), org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:603), org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:312), java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128), java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628), java.base/java.lang.Thread.run(Thread.java:829)]
+2025-01-16 17:38:30 - AI返回的原始响应：
+2025-01-16 17:38:30 - AI响应解析后的部分数量：1
+2025-01-16 17:38:30 - AI增强后的结果：
+2025-01-16 17:38:30 - 增强后的标题：
+2025-01-16 17:38:30 - 增强后的关键词：
+2025-01-16 17:38:30 - 增强后的主题：
+2025-01-16 17:38:30 - AI增强服务返回结果：{keywords=, subject=, title=}
+2025-01-16 17:38:30 - 处理AI返回的增强结果：
+2025-01-16 17:38:30 - AI未返回有效的标题增强结果，保持原标题不变
+2025-01-16 17:38:30 - AI未返回有效的关键词增强结果，保持原关键词不变
+2025-01-16 17:38:30 - AI未返回有效的主题增强结果，保持原主题不变
+2025-01-16 17:38:30 - 最终使用的搜索条件 - 标题：[], 关键词：[机器学习], 主题：[]
+2025-01-16 17:38:30 - 开始执行数据库搜索...
+2025-01-16 17:38:30 - 用户1搜索了标题包含、关键词包含机器学习、主题包含的文档，第1页
+2025-01-16 17:38:30 - 数据库搜索完成，返回结果数量：5
+2025-01-16 17:38:30 - Using cached recommendations
+2025-01-16 17:38:32 - Forwarding request to DocumentListViewController
+2025-01-16 17:38:32 - Received POST request for document list view
+2025-01-16 17:38:32 - Raw search parameters - title: , keywords: 机器学习, subject: 
+2025-01-16 17:38:32 - Processed search parameters - title: , keywords: 机器学习, subject: 
+2025-01-16 17:38:32 - Using AI-enhanced search
+2025-01-16 17:38:32 - 开始执行AI增强搜索...
+2025-01-16 17:38:32 - 用户ID：1
+2025-01-16 17:38:32 - 页码：1
+2025-01-16 17:38:32 - 每页大小：5
+2025-01-16 17:38:32 - 原始搜索条件 - 标题：[], 关键词：[机器学习], 主题：[]
+2025-01-16 17:38:32 - 检测到有效的搜索条件，准备调用AI增强服务...
+2025-01-16 17:38:32 - 开始AI增强搜索 - 原始输入：
+2025-01-16 17:38:32 - 标题：
+2025-01-16 17:38:32 - 关键词：机器学习
+2025-01-16 17:38:32 - 主题：
+2025-01-16 17:38:32 - 获取到文档总数：24
+2025-01-16 17:38:32 - 现有标题数量：15
+2025-01-16 17:38:32 - 现有关键词数量：40
+2025-01-16 17:38:32 - 现有主题数量：12
+2025-01-16 17:38:32 - 现有标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023
+2025-01-16 17:38:32 - 现有关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技
+2025-01-16 17:38:32 - 现有主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告
+2025-01-16 17:38:32 - 发送给AI的提示：我有一个文档库，包含以下内容：
+标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023
+关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技
+主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告
+
+用户搜索条件：
+关键词：机器学习
+
+请根据用户的搜索条件，从已有的内容中选择最相关的：
+1. 如果用户输入了标题，从已有标题中选择2-3个最相关的
+2. 如果用户输入了关键词，从已有关键词中选择3-5个最相关的
+3. 如果用户输入了主题，从已有主题中选择1-2个最相关的
+请按以下格式返回（每个字段用竖线|分隔，如果某个字段没有相关结果则返回空）：
+标题结果|关键词结果|主题结果
+2025-01-16 17:38:32 - Request payload: {"max_tokens":100,"temperature":0.7,"messages":[{"role":"user","content":"我有一个文档库，包含以下内容：\n标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023\n关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技\n主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告\n\n用户搜索条件：\n关键词：机器学习\n\n请根据用户的搜索条件，从已有的内容中选择最相关的：\n1. 如果用户输入了标题，从已有标题中选择2-3个最相关的\n2. 如果用户输入了关键词，从已有关键词中选择3-5个最相关的\n3. 如果用户输入了主题，从已有主题中选择1-2个最相关的\n请按以下格式返回（每个字段用竖线|分隔，如果某个字段没有相关结果则返回空）：\n标题结果|关键词结果|主题结果"}],"model":"deepseek-chat"}
+2025-01-16 17:38:32 - Error calling DeepSeek API: api.deepseek.ai
+2025-01-16 17:38:32 - Stack trace: [java.base/java.net.InetAddress$CachedAddresses.get(InetAddress.java:797), java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1519), java.base/java.net.InetAddress.getAllByName(InetAddress.java:1378), java.base/java.net.InetAddress.getAllByName(InetAddress.java:1306), okhttp3.Dns$Companion$DnsSystem.lookup(Dns.kt:49), okhttp3.internal.connection.RouteSelector.resetNextInetSocketAddress(RouteSelector.kt:164), okhttp3.internal.connection.RouteSelector.nextProxy(RouteSelector.kt:129), okhttp3.internal.connection.RouteSelector.next(RouteSelector.kt:71), okhttp3.internal.connection.ExchangeFinder.findConnection(ExchangeFinder.kt:205), okhttp3.internal.connection.ExchangeFinder.findHealthyConnection(ExchangeFinder.kt:106), okhttp3.internal.connection.ExchangeFinder.find(ExchangeFinder.kt:74), okhttp3.internal.connection.RealCall.initExchange$okhttp(RealCall.kt:255), okhttp3.internal.connection.ConnectInterceptor.intercept(ConnectInterceptor.kt:32), okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109), okhttp3.internal.cache.CacheInterceptor.intercept(CacheInterceptor.kt:95), okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109), okhttp3.internal.http.BridgeInterceptor.intercept(BridgeInterceptor.kt:83), okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109), okhttp3.internal.http.RetryAndFollowUpInterceptor.intercept(RetryAndFollowUpInterceptor.kt:76), okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109), okhttp3.internal.connection.RealCall.getResponseWithInterceptorChain$okhttp(RealCall.kt:201), okhttp3.internal.connection.RealCall.execute(RealCall.kt:154), service.AiService.getCompletion(AiService.java:50), service.KeywordEnhanceService.enhanceSearchTerms(KeywordEnhanceService.java:86), service.DocumentService.searchDocumentsWithAI(DocumentService.java:133), controller.DocumentListViewController.processRequest(DocumentListViewController.java:114), RequestDispatchServlet.dispatch(RequestDispatchServlet.java:93), RequestDispatchServlet.doPost(RequestDispatchServlet.java:43), javax.servlet.http.HttpServlet.service(HttpServlet.java:647), javax.servlet.http.HttpServlet.service(HttpServlet.java:728), org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:305), org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210), org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51), org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243), org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210), org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222), org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123), org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502), org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171), org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:100), org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:953), org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118), org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:408), org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1041), org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:603), org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:312), java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128), java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628), java.base/java.lang.Thread.run(Thread.java:829)]
+2025-01-16 17:38:32 - AI返回的原始响应：
+2025-01-16 17:38:32 - AI响应解析后的部分数量：1
+2025-01-16 17:38:32 - AI增强后的结果：
+2025-01-16 17:38:32 - 增强后的标题：
+2025-01-16 17:38:32 - 增强后的关键词：
+2025-01-16 17:38:32 - 增强后的主题：
+2025-01-16 17:38:32 - AI增强服务返回结果：{keywords=, subject=, title=}
+2025-01-16 17:38:32 - 处理AI返回的增强结果：
+2025-01-16 17:38:32 - AI未返回有效的标题增强结果，保持原标题不变
+2025-01-16 17:38:32 - AI未返回有效的关键词增强结果，保持原关键词不变
+2025-01-16 17:38:32 - AI未返回有效的主题增强结果，保持原主题不变
+2025-01-16 17:38:32 - 最终使用的搜索条件 - 标题：[], 关键词：[机器学习], 主题：[]
+2025-01-16 17:38:32 - 开始执行数据库搜索...
+2025-01-16 17:38:32 - 用户1搜索了标题包含、关键词包含机器学习、主题包含的文档，第1页
+2025-01-16 17:38:32 - 数据库搜索完成，返回结果数量：5
+2025-01-16 17:38:32 - Using cached recommendations
+2025-01-16 17:38:33 - Forwarding request to DocumentListViewController
+2025-01-16 17:38:33 - Received POST request for document list view
+2025-01-16 17:38:33 - Raw search parameters - title: , keywords: 机器学习, subject: 
+2025-01-16 17:38:33 - Processed search parameters - title: , keywords: 机器学习, subject: 
+2025-01-16 17:38:33 - Using AI-enhanced search
+2025-01-16 17:38:33 - 开始执行AI增强搜索...
+2025-01-16 17:38:33 - 用户ID：1
+2025-01-16 17:38:33 - 页码：1
+2025-01-16 17:38:33 - 每页大小：5
+2025-01-16 17:38:33 - 原始搜索条件 - 标题：[], 关键词：[机器学习], 主题：[]
+2025-01-16 17:38:33 - 检测到有效的搜索条件，准备调用AI增强服务...
+2025-01-16 17:38:33 - 开始AI增强搜索 - 原始输入：
+2025-01-16 17:38:33 - 标题：
+2025-01-16 17:38:33 - 关键词：机器学习
+2025-01-16 17:38:33 - 主题：
+2025-01-16 17:38:33 - 获取到文档总数：24
+2025-01-16 17:38:33 - 现有标题数量：15
+2025-01-16 17:38:33 - 现有关键词数量：40
+2025-01-16 17:38:33 - 现有主题数量：12
+2025-01-16 17:38:33 - 现有标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023
+2025-01-16 17:38:33 - 现有关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技
+2025-01-16 17:38:33 - 现有主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告
+2025-01-16 17:38:33 - 发送给AI的提示：我有一个文档库，包含以下内容：
+标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023
+关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技
+主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告
+
+用户搜索条件：
+关键词：机器学习
+
+请根据用户的搜索条件，从已有的内容中选择最相关的：
+1. 如果用户输入了标题，从已有标题中选择2-3个最相关的
+2. 如果用户输入了关键词，从已有关键词中选择3-5个最相关的
+3. 如果用户输入了主题，从已有主题中选择1-2个最相关的
+请按以下格式返回（每个字段用竖线|分隔，如果某个字段没有相关结果则返回空）：
+标题结果|关键词结果|主题结果
+2025-01-16 17:38:33 - Request payload: {"max_tokens":100,"temperature":0.7,"messages":[{"role":"user","content":"我有一个文档库，包含以下内容：\n标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023\n关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技\n主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告\n\n用户搜索条件：\n关键词：机器学习\n\n请根据用户的搜索条件，从已有的内容中选择最相关的：\n1. 如果用户输入了标题，从已有标题中选择2-3个最相关的\n2. 如果用户输入了关键词，从已有关键词中选择3-5个最相关的\n3. 如果用户输入了主题，从已有主题中选择1-2个最相关的\n请按以下格式返回（每个字段用竖线|分隔，如果某个字段没有相关结果则返回空）：\n标题结果|关键词结果|主题结果"}],"model":"deepseek-chat"}
+2025-01-16 17:38:33 - Error calling DeepSeek API: api.deepseek.ai
+2025-01-16 17:38:33 - Stack trace: [java.base/java.net.InetAddress$CachedAddresses.get(InetAddress.java:797), java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1519), java.base/java.net.InetAddress.getAllByName(InetAddress.java:1378), java.base/java.net.InetAddress.getAllByName(InetAddress.java:1306), okhttp3.Dns$Companion$DnsSystem.lookup(Dns.kt:49), okhttp3.internal.connection.RouteSelector.resetNextInetSocketAddress(RouteSelector.kt:164), okhttp3.internal.connection.RouteSelector.nextProxy(RouteSelector.kt:129), okhttp3.internal.connection.RouteSelector.next(RouteSelector.kt:71), okhttp3.internal.connection.ExchangeFinder.findConnection(ExchangeFinder.kt:205), okhttp3.internal.connection.ExchangeFinder.findHealthyConnection(ExchangeFinder.kt:106), okhttp3.internal.connection.ExchangeFinder.find(ExchangeFinder.kt:74), okhttp3.internal.connection.RealCall.initExchange$okhttp(RealCall.kt:255), okhttp3.internal.connection.ConnectInterceptor.intercept(ConnectInterceptor.kt:32), okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109), okhttp3.internal.cache.CacheInterceptor.intercept(CacheInterceptor.kt:95), okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109), okhttp3.internal.http.BridgeInterceptor.intercept(BridgeInterceptor.kt:83), okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109), okhttp3.internal.http.RetryAndFollowUpInterceptor.intercept(RetryAndFollowUpInterceptor.kt:76), okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109), okhttp3.internal.connection.RealCall.getResponseWithInterceptorChain$okhttp(RealCall.kt:201), okhttp3.internal.connection.RealCall.execute(RealCall.kt:154), service.AiService.getCompletion(AiService.java:50), service.KeywordEnhanceService.enhanceSearchTerms(KeywordEnhanceService.java:86), service.DocumentService.searchDocumentsWithAI(DocumentService.java:133), controller.DocumentListViewController.processRequest(DocumentListViewController.java:114), RequestDispatchServlet.dispatch(RequestDispatchServlet.java:93), RequestDispatchServlet.doPost(RequestDispatchServlet.java:43), javax.servlet.http.HttpServlet.service(HttpServlet.java:647), javax.servlet.http.HttpServlet.service(HttpServlet.java:728), org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:305), org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210), org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51), org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243), org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210), org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222), org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123), org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502), org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171), org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:100), org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:953), org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118), org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:408), org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1041), org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:603), org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:312), java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128), java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628), java.base/java.lang.Thread.run(Thread.java:829)]
+2025-01-16 17:38:33 - AI返回的原始响应：
+2025-01-16 17:38:33 - AI响应解析后的部分数量：1
+2025-01-16 17:38:33 - AI增强后的结果：
+2025-01-16 17:38:33 - 增强后的标题：
+2025-01-16 17:38:33 - 增强后的关键词：
+2025-01-16 17:38:33 - 增强后的主题：
+2025-01-16 17:38:33 - AI增强服务返回结果：{keywords=, subject=, title=}
+2025-01-16 17:38:33 - 处理AI返回的增强结果：
+2025-01-16 17:38:33 - AI未返回有效的标题增强结果，保持原标题不变
+2025-01-16 17:38:33 - AI未返回有效的关键词增强结果，保持原关键词不变
+2025-01-16 17:38:33 - AI未返回有效的主题增强结果，保持原主题不变
+2025-01-16 17:38:33 - 最终使用的搜索条件 - 标题：[], 关键词：[机器学习], 主题：[]
+2025-01-16 17:38:33 - 开始执行数据库搜索...
+2025-01-16 17:38:33 - 用户1搜索了标题包含、关键词包含机器学习、主题包含的文档，第1页
+2025-01-16 17:38:33 - 数据库搜索完成，返回结果数量：5
+2025-01-16 17:38:33 - Using cached recommendations
+2025-01-16 17:38:37 - Forwarding request to DocumentListViewController
+2025-01-16 17:38:37 - Received POST request for document list view
+2025-01-16 17:38:37 - Raw search parameters - title: , keywords: 机器学习, subject: 
+2025-01-16 17:38:37 - Processed search parameters - title: , keywords: 机器学习, subject: 
+2025-01-16 17:38:37 - Using regular search
+2025-01-16 17:38:37 - 用户1搜索了标题包含、关键词包含机器学习、主题包含的文档，第1页
+2025-01-16 17:38:37 - Using cached recommendations
+2025-01-16 17:38:38 - Forwarding request to DocumentListViewController
+2025-01-16 17:38:38 - Received POST request for document list view
+2025-01-16 17:38:38 - Raw search parameters - title: , keywords: 机器学习, subject: 
+2025-01-16 17:38:38 - Processed search parameters - title: , keywords: 机器学习, subject: 
+2025-01-16 17:38:38 - Using AI-enhanced search
+2025-01-16 17:38:38 - 开始执行AI增强搜索...
+2025-01-16 17:38:38 - 用户ID：1
+2025-01-16 17:38:38 - 页码：1
+2025-01-16 17:38:38 - 每页大小：5
+2025-01-16 17:38:38 - 原始搜索条件 - 标题：[], 关键词：[机器学习], 主题：[]
+2025-01-16 17:38:38 - 检测到有效的搜索条件，准备调用AI增强服务...
+2025-01-16 17:38:38 - 开始AI增强搜索 - 原始输入：
+2025-01-16 17:38:38 - 标题：
+2025-01-16 17:38:38 - 关键词：机器学习
+2025-01-16 17:38:38 - 主题：
+2025-01-16 17:38:38 - 获取到文档总数：24
+2025-01-16 17:38:38 - 现有标题数量：15
+2025-01-16 17:38:38 - 现有关键词数量：40
+2025-01-16 17:38:38 - 现有主题数量：12
+2025-01-16 17:38:38 - 现有标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023
+2025-01-16 17:38:38 - 现有关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技
+2025-01-16 17:38:38 - 现有主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告
+2025-01-16 17:38:38 - 发送给AI的提示：我有一个文档库，包含以下内容：
+标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023
+关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技
+主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告
+
+用户搜索条件：
+关键词：机器学习
+
+请根据用户的搜索条件，从已有的内容中选择最相关的：
+1. 如果用户输入了标题，从已有标题中选择2-3个最相关的
+2. 如果用户输入了关键词，从已有关键词中选择3-5个最相关的
+3. 如果用户输入了主题，从已有主题中选择1-2个最相关的
+请按以下格式返回（每个字段用竖线|分隔，如果某个字段没有相关结果则返回空）：
+标题结果|关键词结果|主题结果
+2025-01-16 17:38:38 - Request payload: {"max_tokens":100,"temperature":0.7,"messages":[{"role":"user","content":"我有一个文档库，包含以下内容：\n标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023\n关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技\n主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告\n\n用户搜索条件：\n关键词：机器学习\n\n请根据用户的搜索条件，从已有的内容中选择最相关的：\n1. 如果用户输入了标题，从已有标题中选择2-3个最相关的\n2. 如果用户输入了关键词，从已有关键词中选择3-5个最相关的\n3. 如果用户输入了主题，从已有主题中选择1-2个最相关的\n请按以下格式返回（每个字段用竖线|分隔，如果某个字段没有相关结果则返回空）：\n标题结果|关键词结果|主题结果"}],"model":"deepseek-chat"}
+2025-01-16 17:38:38 - Error calling DeepSeek API: api.deepseek.ai
+2025-01-16 17:38:38 - Stack trace: [java.base/java.net.InetAddress$CachedAddresses.get(InetAddress.java:797), java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1519), java.base/java.net.InetAddress.getAllByName(InetAddress.java:1378), java.base/java.net.InetAddress.getAllByName(InetAddress.java:1306), okhttp3.Dns$Companion$DnsSystem.lookup(Dns.kt:49), okhttp3.internal.connection.RouteSelector.resetNextInetSocketAddress(RouteSelector.kt:164), okhttp3.internal.connection.RouteSelector.nextProxy(RouteSelector.kt:129), okhttp3.internal.connection.RouteSelector.next(RouteSelector.kt:71), okhttp3.internal.connection.ExchangeFinder.findConnection(ExchangeFinder.kt:205), okhttp3.internal.connection.ExchangeFinder.findHealthyConnection(ExchangeFinder.kt:106), okhttp3.internal.connection.ExchangeFinder.find(ExchangeFinder.kt:74), okhttp3.internal.connection.RealCall.initExchange$okhttp(RealCall.kt:255), okhttp3.internal.connection.ConnectInterceptor.intercept(ConnectInterceptor.kt:32), okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109), okhttp3.internal.cache.CacheInterceptor.intercept(CacheInterceptor.kt:95), okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109), okhttp3.internal.http.BridgeInterceptor.intercept(BridgeInterceptor.kt:83), okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109), okhttp3.internal.http.RetryAndFollowUpInterceptor.intercept(RetryAndFollowUpInterceptor.kt:76), okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109), okhttp3.internal.connection.RealCall.getResponseWithInterceptorChain$okhttp(RealCall.kt:201), okhttp3.internal.connection.RealCall.execute(RealCall.kt:154), service.AiService.getCompletion(AiService.java:50), service.KeywordEnhanceService.enhanceSearchTerms(KeywordEnhanceService.java:86), service.DocumentService.searchDocumentsWithAI(DocumentService.java:133), controller.DocumentListViewController.processRequest(DocumentListViewController.java:114), RequestDispatchServlet.dispatch(RequestDispatchServlet.java:93), RequestDispatchServlet.doPost(RequestDispatchServlet.java:43), javax.servlet.http.HttpServlet.service(HttpServlet.java:647), javax.servlet.http.HttpServlet.service(HttpServlet.java:728), org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:305), org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210), org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51), org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243), org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210), org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222), org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123), org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502), org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171), org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:100), org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:953), org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118), org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:408), org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1041), org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:603), org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:312), java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128), java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628), java.base/java.lang.Thread.run(Thread.java:829)]
+2025-01-16 17:38:38 - AI返回的原始响应：
+2025-01-16 17:38:38 - AI响应解析后的部分数量：1
+2025-01-16 17:38:38 - AI增强后的结果：
+2025-01-16 17:38:38 - 增强后的标题：
+2025-01-16 17:38:38 - 增强后的关键词：
+2025-01-16 17:38:38 - 增强后的主题：
+2025-01-16 17:38:38 - AI增强服务返回结果：{keywords=, subject=, title=}
+2025-01-16 17:38:38 - 处理AI返回的增强结果：
+2025-01-16 17:38:38 - AI未返回有效的标题增强结果，保持原标题不变
+2025-01-16 17:38:38 - AI未返回有效的关键词增强结果，保持原关键词不变
+2025-01-16 17:38:38 - AI未返回有效的主题增强结果，保持原主题不变
+2025-01-16 17:38:38 - 最终使用的搜索条件 - 标题：[], 关键词：[机器学习], 主题：[]
+2025-01-16 17:38:38 - 开始执行数据库搜索...
+2025-01-16 17:38:38 - 用户1搜索了标题包含、关键词包含机器学习、主题包含的文档，第1页
+2025-01-16 17:38:38 - 数据库搜索完成，返回结果数量：5
+2025-01-16 17:38:38 - Using cached recommendations
+2025-01-16 17:42:48 - 用户1搜索了标题包含、关键词包含、主题包含的文档，第1页
+2025-01-16 17:42:49 - Forwarding request to DocumentListViewController
+2025-01-16 17:42:49 - Received GET request for document list view
+2025-01-16 17:42:49 - 用户1搜索了标题包含、关键词包含、主题包含的文档，第1页
+2025-01-16 17:42:49 - No cached recommendations found, calculating new ones
+2025-01-16 17:42:49 - Source document titles: [教育科技创新报告, 可持续发展白皮书, 自然语言处理技术综述, 机器学习在图像识别中的应用, 人工智能发展报告2023]
+2025-01-16 17:42:49 - Source document IDs: [1, 2, 5, 36, 37]
+2025-01-16 17:42:49 - Candidate document IDs: [3, 4, 41, 42, 43, 44, 45, 51, 52]
+2025-01-16 17:42:49 - Finding similar articles for source docs: [1, 2, 5, 36, 37]
+2025-01-16 17:42:49 - Reading vector from file: D:\java_hm_work\tokens\1.txt
+2025-01-16 17:42:49 - Error reading vector for document 1: D:\java_hm_work\tokens\1.txt (系统找不到指定的文件。)
+2025-01-16 17:42:49 - Reading vector from file: D:\java_hm_work\tokens\2.txt
+2025-01-16 17:42:49 - Error reading vector for document 2: D:\java_hm_work\tokens\2.txt (系统找不到指定的文件。)
+2025-01-16 17:42:49 - Reading vector from file: D:\java_hm_work\tokens\5.txt
+2025-01-16 17:42:49 - Error reading vector for document 5: D:\java_hm_work\tokens\5.txt (系统找不到指定的文件。)
+2025-01-16 17:42:49 - Reading vector from file: D:\java_hm_work\tokens\36.txt
+2025-01-16 17:42:49 - Reading vector from file: D:\java_hm_work\tokens\37.txt
+2025-01-16 17:42:49 - Reading vector from file: D:\java_hm_work\tokens\3.txt
+2025-01-16 17:42:49 - Reading vector from file: D:\java_hm_work\tokens\4.txt
+2025-01-16 17:42:49 - Error reading vector for candidate 4: D:\java_hm_work\tokens\4.txt (系统找不到指定的文件。)
+2025-01-16 17:42:49 - Reading vector from file: D:\java_hm_work\tokens\41.txt
+2025-01-16 17:42:49 - Reading vector from file: D:\java_hm_work\tokens\42.txt
+2025-01-16 17:42:49 - Reading vector from file: D:\java_hm_work\tokens\43.txt
+2025-01-16 17:42:49 - Reading vector from file: D:\java_hm_work\tokens\44.txt
+2025-01-16 17:42:49 - Reading vector from file: D:\java_hm_work\tokens\45.txt
+2025-01-16 17:42:49 - Reading vector from file: D:\java_hm_work\tokens\51.txt
+2025-01-16 17:42:49 - Reading vector from file: D:\java_hm_work\tokens\52.txt
+2025-01-16 17:42:49 - Error reading vector for candidate 52: D:\java_hm_work\tokens\52.txt (系统找不到指定的文件。)
+2025-01-16 17:42:49 - Similar document IDs: [3, 41, 43, 44, 42, 45, 51]
+2025-01-16 17:42:55 - Forwarding request to DocumentListViewController
+2025-01-16 17:42:55 - Received POST request for document list view
+2025-01-16 17:42:55 - Raw search parameters - title: , keywords: ML, subject: 
+2025-01-16 17:42:55 - Processed search parameters - title: , keywords: ML, subject: 
+2025-01-16 17:42:55 - Using AI-enhanced search
+2025-01-16 17:42:55 - 开始执行AI增强搜索...
+2025-01-16 17:42:55 - 用户ID：1
+2025-01-16 17:42:55 - 页码：1
+2025-01-16 17:42:55 - 每页大小：5
+2025-01-16 17:42:55 - 原始搜索条件 - 标题：[], 关键词：[ML], 主题：[]
+2025-01-16 17:42:55 - 检测到有效的搜索条件，准备调用AI增强服务...
+2025-01-16 17:42:55 - 开始AI增强搜索 - 原始输入：
+2025-01-16 17:42:55 - 标题：
+2025-01-16 17:42:55 - 关键词：ML
+2025-01-16 17:42:55 - 主题：
+2025-01-16 17:42:55 - 获取到文档总数：24
+2025-01-16 17:42:55 - 现有标题数量：15
+2025-01-16 17:42:55 - 现有关键词数量：40
+2025-01-16 17:42:55 - 现有主题数量：12
+2025-01-16 17:42:55 - 现有标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023
+2025-01-16 17:42:55 - 现有关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技
+2025-01-16 17:42:55 - 现有主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告
+2025-01-16 17:42:55 - 发送给AI的提示：我有一个文档库，包含以下内容：
+标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023
+关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技
+主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告
+
+用户搜索条件：
+关键词：ML
+
+请根据用户的搜索条件，从已有的内容中选择最相关的：
+1. 如果用户输入了标题，从已有标题中选择2-3个最相关的
+2. 如果用户输入了关键词，从已有关键词中选择3-5个最相关的
+3. 如果用户输入了主题，从已有主题中选择1-2个最相关的
+请按以下格式返回（每个字段用竖线|分隔，如果某个字段没有相关结果则返回空）：
+标题结果|关键词结果|主题结果
+2025-01-16 17:42:55 - Request payload: {"max_tokens":100,"stream":false,"temperature":0.7,"messages":[{"role":"system","content":"You are a helpful assistant specialized in analyzing document content and enhancing search terms."},{"role":"user","content":"我有一个文档库，包含以下内容：\n标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023\n关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技\n主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告\n\n用户搜索条件：\n关键词：ML\n\n请根据用户的搜索条件，从已有的内容中选择最相关的：\n1. 如果用户输入了标题，从已有标题中选择2-3个最相关的\n2. 如果用户输入了关键词，从已有关键词中选择3-5个最相关的\n3. 如果用户输入了主题，从已有主题中选择1-2个最相关的\n请按以下格式返回（每个字段用竖线|分隔，如果某个字段没有相关结果则返回空）：\n标题结果|关键词结果|主题结果"}],"model":"deepseek-chat"}
+2025-01-16 17:42:57 - API Response: {"id":"fa25e4c2-12ad-46ab-a8af-72c9764b743d","object":"chat.completion","created":1737020577,"model":"deepseek-chat","choices":[{"index":0,"message":{"role":"assistant","content":"|机器学习|人工智能, 计算机科学|"},"logprobs":null,"finish_reason":"stop"}],"usage":{"prompt_tokens":360,"completion_tokens":9,"total_tokens":369,"prompt_cache_hit_tokens":0,"prompt_cache_miss_tokens":360},"system_fingerprint":"fp_3a5770e1b4"}
+2025-01-16 17:42:57 - AI返回的原始响应：|机器学习|人工智能, 计算机科学|
+2025-01-16 17:42:57 - AI响应解析后的部分数量：3
+2025-01-16 17:42:57 - AI增强后的结果：
+2025-01-16 17:42:57 - 增强后的标题：
+2025-01-16 17:42:57 - 增强后的关键词：机器学习
+2025-01-16 17:42:57 - 增强后的主题：人工智能, 计算机科学
+2025-01-16 17:42:57 - AI增强服务返回结果：{keywords=机器学习, subject=人工智能, 计算机科学, title=}
+2025-01-16 17:42:57 - 处理AI返回的增强结果：
+2025-01-16 17:42:57 - AI未返回有效的标题增强结果，保持原标题不变
+2025-01-16 17:42:57 - 使用增强后的关键词替换原关键词：机器学习
+2025-01-16 17:42:57 - 使用增强后的主题替换原主题：人工智能, 计算机科学
+2025-01-16 17:42:57 - 最终使用的搜索条件 - 标题：[], 关键词：[机器学习], 主题：[人工智能, 计算机科学]
+2025-01-16 17:42:57 - 开始执行数据库搜索...
+2025-01-16 17:42:57 - 用户1搜索了标题包含、关键词包含机器学习、主题包含人工智能, 计算机科学的文档，第1页
+2025-01-16 17:42:57 - 数据库搜索完成，返回结果数量：0
+2025-01-16 17:42:57 - Search conditions changed, recalculating recommendations
+2025-01-16 17:42:57 - 开始执行AI增强搜索...
+2025-01-16 17:42:57 - 用户ID：1
+2025-01-16 17:42:57 - 页码：1
+2025-01-16 17:42:57 - 每页大小：2147483647
+2025-01-16 17:42:57 - 原始搜索条件 - 标题：[], 关键词：[ML], 主题：[]
+2025-01-16 17:42:57 - 检测到有效的搜索条件，准备调用AI增强服务...
+2025-01-16 17:42:57 - 开始AI增强搜索 - 原始输入：
+2025-01-16 17:42:57 - 标题：
+2025-01-16 17:42:57 - 关键词：ML
+2025-01-16 17:42:57 - 主题：
+2025-01-16 17:42:57 - 获取到文档总数：24
+2025-01-16 17:42:57 - 现有标题数量：15
+2025-01-16 17:42:57 - 现有关键词数量：40
+2025-01-16 17:42:57 - 现有主题数量：12
+2025-01-16 17:42:57 - 现有标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023
+2025-01-16 17:42:57 - 现有关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技
+2025-01-16 17:42:57 - 现有主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告
+2025-01-16 17:42:57 - 发送给AI的提示：我有一个文档库，包含以下内容：
+标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023
+关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技
+主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告
+
+用户搜索条件：
+关键词：ML
+
+请根据用户的搜索条件，从已有的内容中选择最相关的：
+1. 如果用户输入了标题，从已有标题中选择2-3个最相关的
+2. 如果用户输入了关键词，从已有关键词中选择3-5个最相关的
+3. 如果用户输入了主题，从已有主题中选择1-2个最相关的
+请按以下格式返回（每个字段用竖线|分隔，如果某个字段没有相关结果则返回空）：
+标题结果|关键词结果|主题结果
+2025-01-16 17:42:57 - Request payload: {"max_tokens":100,"stream":false,"temperature":0.7,"messages":[{"role":"system","content":"You are a helpful assistant specialized in analyzing document content and enhancing search terms."},{"role":"user","content":"我有一个文档库，包含以下内容：\n标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023\n关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技\n主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告\n\n用户搜索条件：\n关键词：ML\n\n请根据用户的搜索条件，从已有的内容中选择最相关的：\n1. 如果用户输入了标题，从已有标题中选择2-3个最相关的\n2. 如果用户输入了关键词，从已有关键词中选择3-5个最相关的\n3. 如果用户输入了主题，从已有主题中选择1-2个最相关的\n请按以下格式返回（每个字段用竖线|分隔，如果某个字段没有相关结果则返回空）：\n标题结果|关键词结果|主题结果"}],"model":"deepseek-chat"}
+2025-01-16 17:42:58 - API Response: {"id":"6134cf73-2fc1-401b-91f6-512db50c2bbe","object":"chat.completion","created":1737020578,"model":"deepseek-chat","choices":[{"index":0,"message":{"role":"assistant","content":"|机器学习|人工智能"},"logprobs":null,"finish_reason":"stop"}],"usage":{"prompt_tokens":360,"completion_tokens":4,"total_tokens":364,"prompt_cache_hit_tokens":320,"prompt_cache_miss_tokens":40},"system_fingerprint":"fp_3a5770e1b4"}
+2025-01-16 17:42:58 - AI返回的原始响应：|机器学习|人工智能
+2025-01-16 17:42:58 - AI响应解析后的部分数量：3
+2025-01-16 17:42:58 - AI增强后的结果：
+2025-01-16 17:42:58 - 增强后的标题：
+2025-01-16 17:42:58 - 增强后的关键词：机器学习
+2025-01-16 17:42:58 - 增强后的主题：人工智能
+2025-01-16 17:42:58 - AI增强服务返回结果：{keywords=机器学习, subject=人工智能, title=}
+2025-01-16 17:42:58 - 处理AI返回的增强结果：
+2025-01-16 17:42:58 - AI未返回有效的标题增强结果，保持原标题不变
+2025-01-16 17:42:58 - 使用增强后的关键词替换原关键词：机器学习
+2025-01-16 17:42:58 - 使用增强后的主题替换原主题：人工智能
+2025-01-16 17:42:58 - 最终使用的搜索条件 - 标题：[], 关键词：[机器学习], 主题：[人工智能]
+2025-01-16 17:42:58 - 开始执行数据库搜索...
+2025-01-16 17:42:58 - 用户1搜索了标题包含、关键词包含机器学习、主题包含人工智能的文档，第1页
+2025-01-16 17:42:58 - 数据库搜索完成，返回结果数量：0
+2025-01-16 17:42:58 - Source document titles: []
+2025-01-16 17:42:58 - No documents available for recommendation
+2025-01-16 17:43:51 - Forwarding request to DocumentListViewController
+2025-01-16 17:43:51 - Received POST request for document list view
+2025-01-16 17:43:51 - Raw search parameters - title: , keywords: 机器学习, subject: 
+2025-01-16 17:43:51 - Processed search parameters - title: , keywords: 机器学习, subject: 
+2025-01-16 17:43:51 - Using regular search
+2025-01-16 17:43:51 - 用户1搜索了标题包含、关键词包含机器学习、主题包含的文档，第1页
+2025-01-16 17:43:51 - Search conditions changed, recalculating recommendations
+2025-01-16 17:43:51 - 用户1搜索了标题包含、关键词包含机器学习、主题包含的文档，第1页
+2025-01-16 17:43:51 - Source document titles: [人工智能在医疗诊断中的应用, 自然语言处理技术综述, 机器学习在图像识别中的应用, 人工智能发展报告2023]
+2025-01-16 17:43:51 - Source document IDs: [1, 36, 37, 39, 49]
+2025-01-16 17:43:51 - Candidate document IDs: [3, 4, 41, 42, 43, 44, 45, 51, 52]
+2025-01-16 17:43:51 - Finding similar articles for source docs: [1, 36, 37, 39, 49]
+2025-01-16 17:43:51 - Reading vector from file: D:\java_hm_work\tokens\1.txt
+2025-01-16 17:43:51 - Error reading vector for document 1: D:\java_hm_work\tokens\1.txt (系统找不到指定的文件。)
+2025-01-16 17:43:51 - Reading vector from file: D:\java_hm_work\tokens\36.txt
+2025-01-16 17:43:51 - Reading vector from file: D:\java_hm_work\tokens\37.txt
+2025-01-16 17:43:51 - Reading vector from file: D:\java_hm_work\tokens\39.txt
+2025-01-16 17:43:51 - Reading vector from file: D:\java_hm_work\tokens\49.txt
+2025-01-16 17:43:51 - Reading vector from file: D:\java_hm_work\tokens\3.txt
+2025-01-16 17:43:51 - Reading vector from file: D:\java_hm_work\tokens\4.txt
+2025-01-16 17:43:51 - Error reading vector for candidate 4: D:\java_hm_work\tokens\4.txt (系统找不到指定的文件。)
+2025-01-16 17:43:51 - Reading vector from file: D:\java_hm_work\tokens\41.txt
+2025-01-16 17:43:51 - Reading vector from file: D:\java_hm_work\tokens\42.txt
+2025-01-16 17:43:51 - Reading vector from file: D:\java_hm_work\tokens\43.txt
+2025-01-16 17:43:51 - Reading vector from file: D:\java_hm_work\tokens\44.txt
+2025-01-16 17:43:51 - Reading vector from file: D:\java_hm_work\tokens\45.txt
+2025-01-16 17:43:51 - Reading vector from file: D:\java_hm_work\tokens\51.txt
+2025-01-16 17:43:51 - Reading vector from file: D:\java_hm_work\tokens\52.txt
+2025-01-16 17:43:51 - Error reading vector for candidate 52: D:\java_hm_work\tokens\52.txt (系统找不到指定的文件。)
+2025-01-16 17:43:51 - Similar document IDs: [3, 41, 43, 44, 42, 45, 51]
+2025-01-16 17:43:52 - Forwarding request to DocumentListViewController
+2025-01-16 17:43:52 - Received POST request for document list view
+2025-01-16 17:43:52 - Raw search parameters - title: , keywords: 机器学习, subject: 
+2025-01-16 17:43:52 - Processed search parameters - title: , keywords: 机器学习, subject: 
+2025-01-16 17:43:52 - Using AI-enhanced search
+2025-01-16 17:43:52 - 开始执行AI增强搜索...
+2025-01-16 17:43:52 - 用户ID：1
+2025-01-16 17:43:52 - 页码：1
+2025-01-16 17:43:52 - 每页大小：5
+2025-01-16 17:43:52 - 原始搜索条件 - 标题：[], 关键词：[机器学习], 主题：[]
+2025-01-16 17:43:52 - 检测到有效的搜索条件，准备调用AI增强服务...
+2025-01-16 17:43:52 - 开始AI增强搜索 - 原始输入：
+2025-01-16 17:43:52 - 标题：
+2025-01-16 17:43:52 - 关键词：机器学习
+2025-01-16 17:43:52 - 主题：
+2025-01-16 17:43:52 - 获取到文档总数：24
+2025-01-16 17:43:52 - 现有标题数量：15
+2025-01-16 17:43:52 - 现有关键词数量：40
+2025-01-16 17:43:52 - 现有主题数量：12
+2025-01-16 17:43:52 - 现有标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023
+2025-01-16 17:43:52 - 现有关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技
+2025-01-16 17:43:52 - 现有主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告
+2025-01-16 17:43:52 - 发送给AI的提示：我有一个文档库，包含以下内容：
+标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023
+关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技
+主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告
+
+用户搜索条件：
+关键词：机器学习
+
+请根据用户的搜索条件，从已有的内容中选择最相关的：
+1. 如果用户输入了标题，从已有标题中选择2-3个最相关的
+2. 如果用户输入了关键词，从已有关键词中选择3-5个最相关的
+3. 如果用户输入了主题，从已有主题中选择1-2个最相关的
+请按以下格式返回（每个字段用竖线|分隔，如果某个字段没有相关结果则返回空）：
+标题结果|关键词结果|主题结果
+2025-01-16 17:43:52 - Request payload: {"max_tokens":100,"stream":false,"temperature":0.7,"messages":[{"role":"system","content":"You are a helpful assistant specialized in analyzing document content and enhancing search terms."},{"role":"user","content":"我有一个文档库，包含以下内容：\n标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023\n关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技\n主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告\n\n用户搜索条件：\n关键词：机器学习\n\n请根据用户的搜索条件，从已有的内容中选择最相关的：\n1. 如果用户输入了标题，从已有标题中选择2-3个最相关的\n2. 如果用户输入了关键词，从已有关键词中选择3-5个最相关的\n3. 如果用户输入了主题，从已有主题中选择1-2个最相关的\n请按以下格式返回（每个字段用竖线|分隔，如果某个字段没有相关结果则返回空）：\n标题结果|关键词结果|主题结果"}],"model":"deepseek-chat"}
+2025-01-16 17:43:53 - API Response: {"id":"0bae650b-6d58-4668-a242-e62e988154d9","object":"chat.completion","created":1737020633,"model":"deepseek-chat","choices":[{"index":0,"message":{"role":"assistant","content":"深度学习框架比较研究|机器学习, 深度学习, AI, 数据分析, 图像识别|人工智能"},"logprobs":null,"finish_reason":"stop"}],"usage":{"prompt_tokens":360,"completion_tokens":20,"total_tokens":380,"prompt_cache_hit_tokens":192,"prompt_cache_miss_tokens":168},"system_fingerprint":"fp_3a5770e1b4"}
+2025-01-16 17:43:53 - AI返回的原始响应：深度学习框架比较研究|机器学习, 深度学习, AI, 数据分析, 图像识别|人工智能
+2025-01-16 17:43:53 - AI响应解析后的部分数量：3
+2025-01-16 17:43:53 - AI增强后的结果：
+2025-01-16 17:43:53 - 增强后的标题：深度学习框架比较研究
+2025-01-16 17:43:53 - 增强后的关键词：机器学习, 深度学习, AI, 数据分析, 图像识别
+2025-01-16 17:43:53 - 增强后的主题：人工智能
+2025-01-16 17:43:53 - AI增强服务返回结果：{keywords=机器学习, 深度学习, AI, 数据分析, 图像识别, subject=人工智能, title=深度学习框架比较研究}
+2025-01-16 17:43:53 - 处理AI返回的增强结果：
+2025-01-16 17:43:53 - 使用增强后的标题替换原标题：深度学习框架比较研究
+2025-01-16 17:43:53 - 使用增强后的关键词替换原关键词：机器学习, 深度学习, AI, 数据分析, 图像识别
+2025-01-16 17:43:53 - 使用增强后的主题替换原主题：人工智能
+2025-01-16 17:43:53 - 最终使用的搜索条件 - 标题：[深度学习框架比较研究], 关键词：[机器学习, 深度学习, AI, 数据分析, 图像识别], 主题：[人工智能]
+2025-01-16 17:43:53 - 开始执行数据库搜索...
+2025-01-16 17:43:53 - 用户1搜索了标题包含深度学习框架比较研究、关键词包含机器学习, 深度学习, AI, 数据分析, 图像识别、主题包含人工智能的文档，第1页
+2025-01-16 17:43:53 - 数据库搜索完成，返回结果数量：0
+2025-01-16 17:43:53 - Using cached recommendations
+2025-01-16 17:49:12 - 用户1搜索了标题包含、关键词包含、主题包含的文档，第1页
+2025-01-16 17:49:16 - Forwarding request to DocumentListViewController
+2025-01-16 17:49:16 - Received GET request for document list view
+2025-01-16 17:49:16 - 用户1搜索了标题包含、关键词包含、主题包含的文档，第1页
+2025-01-16 17:49:16 - No cached recommendations found, calculating new ones
+2025-01-16 17:49:16 - Source document titles: [教育科技创新报告, 可持续发展白皮书, 自然语言处理技术综述, 机器学习在图像识别中的应用, 人工智能发展报告2023]
+2025-01-16 17:49:16 - Source document IDs: [1, 2, 5, 36, 37]
+2025-01-16 17:49:16 - Candidate document IDs: [3, 4, 41, 42, 43, 44, 45, 51, 52]
+2025-01-16 17:49:16 - Finding similar articles for source docs: [1, 2, 5, 36, 37]
+2025-01-16 17:49:16 - Reading vector from file: D:\java_hm_work\tokens\1.txt
+2025-01-16 17:49:16 - Error reading vector for document 1: D:\java_hm_work\tokens\1.txt (系统找不到指定的文件。)
+2025-01-16 17:49:16 - Reading vector from file: D:\java_hm_work\tokens\2.txt
+2025-01-16 17:49:16 - Error reading vector for document 2: D:\java_hm_work\tokens\2.txt (系统找不到指定的文件。)
+2025-01-16 17:49:16 - Reading vector from file: D:\java_hm_work\tokens\5.txt
+2025-01-16 17:49:16 - Error reading vector for document 5: D:\java_hm_work\tokens\5.txt (系统找不到指定的文件。)
+2025-01-16 17:49:16 - Reading vector from file: D:\java_hm_work\tokens\36.txt
+2025-01-16 17:49:16 - Reading vector from file: D:\java_hm_work\tokens\37.txt
+2025-01-16 17:49:16 - Reading vector from file: D:\java_hm_work\tokens\3.txt
+2025-01-16 17:49:16 - Reading vector from file: D:\java_hm_work\tokens\4.txt
+2025-01-16 17:49:16 - Error reading vector for candidate 4: D:\java_hm_work\tokens\4.txt (系统找不到指定的文件。)
+2025-01-16 17:49:16 - Reading vector from file: D:\java_hm_work\tokens\41.txt
+2025-01-16 17:49:16 - Reading vector from file: D:\java_hm_work\tokens\42.txt
+2025-01-16 17:49:16 - Reading vector from file: D:\java_hm_work\tokens\43.txt
+2025-01-16 17:49:16 - Reading vector from file: D:\java_hm_work\tokens\44.txt
+2025-01-16 17:49:16 - Reading vector from file: D:\java_hm_work\tokens\45.txt
+2025-01-16 17:49:16 - Reading vector from file: D:\java_hm_work\tokens\51.txt
+2025-01-16 17:49:16 - Reading vector from file: D:\java_hm_work\tokens\52.txt
+2025-01-16 17:49:16 - Error reading vector for candidate 52: D:\java_hm_work\tokens\52.txt (系统找不到指定的文件。)
+2025-01-16 17:49:16 - Similar document IDs: [3, 41, 43, 44, 42, 45, 51]
+2025-01-16 17:49:22 - Forwarding request to DocumentListViewController
+2025-01-16 17:49:22 - Received POST request for document list view
+2025-01-16 17:49:22 - Raw search parameters - title: , keywords: ML, subject: 
+2025-01-16 17:49:22 - Processed search parameters - title: , keywords: ML, subject: 
+2025-01-16 17:49:22 - Using regular search
+2025-01-16 17:49:22 - 用户1搜索了标题包含、关键词包含ML、主题包含的文档，第1页
+2025-01-16 17:49:22 - Search conditions changed, recalculating recommendations
+2025-01-16 17:49:22 - 用户1搜索了标题包含、关键词包含ML、主题包含的文档，第1页
+2025-01-16 17:49:22 - Source document titles: []
+2025-01-16 17:49:22 - No documents available for recommendation
+2025-01-16 17:49:23 - Forwarding request to DocumentListViewController
+2025-01-16 17:49:23 - Received POST request for document list view
+2025-01-16 17:49:23 - Raw search parameters - title: , keywords: ML, subject: 
+2025-01-16 17:49:23 - Processed search parameters - title: , keywords: ML, subject: 
+2025-01-16 17:49:23 - Using AI-enhanced search
+2025-01-16 17:49:23 - 开始执行AI增强搜索...
+2025-01-16 17:49:23 - 用户ID：1
+2025-01-16 17:49:23 - 页码：1
+2025-01-16 17:49:23 - 每页大小：5
+2025-01-16 17:49:23 - 原始搜索条件 - 标题：[], 关键词：[ML], 主题：[]
+2025-01-16 17:49:23 - 检测到有效的搜索条件，准备调用AI增强服务...
+2025-01-16 17:49:23 - 开始AI增强搜索 - 原始输入：
+2025-01-16 17:49:23 - 标题：
+2025-01-16 17:49:23 - 关键词：ML
+2025-01-16 17:49:23 - 主题：
+2025-01-16 17:49:23 - 获取到文档总数：24
+2025-01-16 17:49:23 - 现有标题数量：15
+2025-01-16 17:49:23 - 现有关键词数量：40
+2025-01-16 17:49:23 - 现有主题数量：12
+2025-01-16 17:49:23 - 现有标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023
+2025-01-16 17:49:23 - 现有关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技
+2025-01-16 17:49:23 - 现有主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告
+2025-01-16 17:49:23 - 发送给AI的提示：我有一个文档库，包含以下内容：
+标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023
+关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技
+主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告
+
+用户搜索条件：
+关键词：ML
+
+请根据用户的搜索条件，从已有的内容中选择最相关的一个：
+1. 如果用户输入了标题，从已有标题中选择1个最相关的
+2. 如果用户输入了关键词，从已有关键词中选择1个最相关的
+3. 如果用户输入了主题，从已有主题中选择1个最相关的
+请按以下格式返回（每个字段用竖线|分隔，如果某个字段没有相关结果则返回空）：
+标题结果|关键词结果|主题结果
+2025-01-16 17:49:23 - Request payload: {"max_tokens":100,"stream":false,"temperature":0.7,"messages":[{"role":"system","content":"You are a helpful assistant specialized in analyzing document content and enhancing search terms."},{"role":"user","content":"我有一个文档库，包含以下内容：\n标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023\n关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技\n主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告\n\n用户搜索条件：\n关键词：ML\n\n请根据用户的搜索条件，从已有的内容中选择最相关的一个：\n1. 如果用户输入了标题，从已有标题中选择1个最相关的\n2. 如果用户输入了关键词，从已有关键词中选择1个最相关的\n3. 如果用户输入了主题，从已有主题中选择1个最相关的\n请按以下格式返回（每个字段用竖线|分隔，如果某个字段没有相关结果则返回空）：\n标题结果|关键词结果|主题结果"}],"model":"deepseek-chat"}
+2025-01-16 17:49:24 - API Response: {"id":"99c61c96-9d84-41a7-8c61-b8e4d18080e2","object":"chat.completion","created":1737020964,"model":"deepseek-chat","choices":[{"index":0,"message":{"role":"assistant","content":"|机器学习|人工智能|"},"logprobs":null,"finish_reason":"stop"}],"usage":{"prompt_tokens":355,"completion_tokens":5,"total_tokens":360,"prompt_cache_hit_tokens":256,"prompt_cache_miss_tokens":99},"system_fingerprint":"fp_3a5770e1b4"}
+2025-01-16 17:49:24 - AI返回的原始响应：|机器学习|人工智能|
+2025-01-16 17:49:24 - AI响应解析后的部分数量：3
+2025-01-16 17:49:24 - AI增强后的结果：
+2025-01-16 17:49:24 - 增强后的标题：
+2025-01-16 17:49:24 - 增强后的关键词：机器学习
+2025-01-16 17:49:24 - 增强后的主题：人工智能
+2025-01-16 17:49:24 - AI增强服务返回结果：{keywords=机器学习, subject=人工智能, title=}
+2025-01-16 17:49:24 - 处理AI返回的增强结果：
+2025-01-16 17:49:24 - AI未返回有效的标题增强结果，保持原标题不变
+2025-01-16 17:49:24 - 使用增强后的关键词替换原关键词：机器学习
+2025-01-16 17:49:24 - 使用增强后的主题替换原主题：人工智能
+2025-01-16 17:49:24 - 最终使用的搜索条件 - 标题：[], 关键词：[机器学习], 主题：[人工智能]
+2025-01-16 17:49:24 - 开始执行数据库搜索...
+2025-01-16 17:49:24 - 用户1搜索了标题包含、关键词包含机器学习、主题包含人工智能的文档，第1页
+2025-01-16 17:49:24 - 数据库搜索完成，返回结果数量：5
+2025-01-16 17:49:24 - Using cached recommendations
+2025-01-16 17:49:29 - Forwarding request to DocumentListViewController
+2025-01-16 17:49:29 - Received POST request for document list view
+2025-01-16 17:49:29 - Raw search parameters - title: , keywords: DL, subject: 
+2025-01-16 17:49:29 - Processed search parameters - title: , keywords: DL, subject: 
+2025-01-16 17:49:29 - Using regular search
+2025-01-16 17:49:29 - 用户1搜索了标题包含、关键词包含DL、主题包含的文档，第1页
+2025-01-16 17:49:29 - Search conditions changed, recalculating recommendations
+2025-01-16 17:49:29 - 用户1搜索了标题包含、关键词包含DL、主题包含的文档，第1页
+2025-01-16 17:49:29 - Source document titles: []
+2025-01-16 17:49:29 - No documents available for recommendation
+2025-01-16 17:49:30 - Forwarding request to DocumentListViewController
+2025-01-16 17:49:30 - Received POST request for document list view
+2025-01-16 17:49:30 - Raw search parameters - title: , keywords: DL, subject: 
+2025-01-16 17:49:30 - Processed search parameters - title: , keywords: DL, subject: 
+2025-01-16 17:49:30 - Using AI-enhanced search
+2025-01-16 17:49:30 - 开始执行AI增强搜索...
+2025-01-16 17:49:30 - 用户ID：1
+2025-01-16 17:49:30 - 页码：1
+2025-01-16 17:49:30 - 每页大小：5
+2025-01-16 17:49:30 - 原始搜索条件 - 标题：[], 关键词：[DL], 主题：[]
+2025-01-16 17:49:30 - 检测到有效的搜索条件，准备调用AI增强服务...
+2025-01-16 17:49:30 - 开始AI增强搜索 - 原始输入：
+2025-01-16 17:49:30 - 标题：
+2025-01-16 17:49:30 - 关键词：DL
+2025-01-16 17:49:30 - 主题：
+2025-01-16 17:49:30 - 获取到文档总数：24
+2025-01-16 17:49:30 - 现有标题数量：15
+2025-01-16 17:49:30 - 现有关键词数量：40
+2025-01-16 17:49:30 - 现有主题数量：12
+2025-01-16 17:49:30 - 现有标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023
+2025-01-16 17:49:30 - 现有关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技
+2025-01-16 17:49:30 - 现有主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告
+2025-01-16 17:49:30 - 发送给AI的提示：我有一个文档库，包含以下内容：
+标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023
+关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技
+主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告
+
+用户搜索条件：
+关键词：DL
+
+请根据用户的搜索条件，从已有的内容中选择最相关的一个：
+1. 如果用户输入了标题，从已有标题中选择1个最相关的
+2. 如果用户输入了关键词，从已有关键词中选择1个最相关的
+3. 如果用户输入了主题，从已有主题中选择1个最相关的
+请按以下格式返回（每个字段用竖线|分隔，如果某个字段没有相关结果则返回空）：
+标题结果|关键词结果|主题结果
+2025-01-16 17:49:30 - Request payload: {"max_tokens":100,"stream":false,"temperature":0.7,"messages":[{"role":"system","content":"You are a helpful assistant specialized in analyzing document content and enhancing search terms."},{"role":"user","content":"我有一个文档库，包含以下内容：\n标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023\n关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技\n主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告\n\n用户搜索条件：\n关键词：DL\n\n请根据用户的搜索条件，从已有的内容中选择最相关的一个：\n1. 如果用户输入了标题，从已有标题中选择1个最相关的\n2. 如果用户输入了关键词，从已有关键词中选择1个最相关的\n3. 如果用户输入了主题，从已有主题中选择1个最相关的\n请按以下格式返回（每个字段用竖线|分隔，如果某个字段没有相关结果则返回空）：\n标题结果|关键词结果|主题结果"}],"model":"deepseek-chat"}
+2025-01-16 17:49:32 - API Response: {"id":"9f05f994-9bda-4fe3-bce3-ce0c369ee454","object":"chat.completion","created":1737020971,"model":"deepseek-chat","choices":[{"index":0,"message":{"role":"assistant","content":"|深度学习|人工智能|"},"logprobs":null,"finish_reason":"stop"}],"usage":{"prompt_tokens":355,"completion_tokens":5,"total_tokens":360,"prompt_cache_hit_tokens":192,"prompt_cache_miss_tokens":163},"system_fingerprint":"fp_3a5770e1b4"}
+2025-01-16 17:49:32 - AI返回的原始响应：|深度学习|人工智能|
+2025-01-16 17:49:32 - AI响应解析后的部分数量：3
+2025-01-16 17:49:32 - AI增强后的结果：
+2025-01-16 17:49:32 - 增强后的标题：
+2025-01-16 17:49:32 - 增强后的关键词：深度学习
+2025-01-16 17:49:32 - 增强后的主题：人工智能
+2025-01-16 17:49:32 - AI增强服务返回结果：{keywords=深度学习, subject=人工智能, title=}
+2025-01-16 17:49:32 - 处理AI返回的增强结果：
+2025-01-16 17:49:32 - AI未返回有效的标题增强结果，保持原标题不变
+2025-01-16 17:49:32 - 使用增强后的关键词替换原关键词：深度学习
+2025-01-16 17:49:32 - 使用增强后的主题替换原主题：人工智能
+2025-01-16 17:49:32 - 最终使用的搜索条件 - 标题：[], 关键词：[深度学习], 主题：[人工智能]
+2025-01-16 17:49:32 - 开始执行数据库搜索...
+2025-01-16 17:49:32 - 用户1搜索了标题包含、关键词包含深度学习、主题包含人工智能的文档，第1页
+2025-01-16 17:49:32 - 数据库搜索完成，返回结果数量：5
+2025-01-16 17:49:32 - Using cached recommendations
+2025-01-16 17:49:44 - Forwarding request to DocumentListViewController
+2025-01-16 17:49:44 - Received POST request for document list view
+2025-01-16 17:49:44 - Raw search parameters - title: , keywords: AIGC, subject: 
+2025-01-16 17:49:44 - Processed search parameters - title: , keywords: AIGC, subject: 
+2025-01-16 17:49:44 - Using AI-enhanced search
+2025-01-16 17:49:44 - 开始执行AI增强搜索...
+2025-01-16 17:49:44 - 用户ID：1
+2025-01-16 17:49:44 - 页码：1
+2025-01-16 17:49:44 - 每页大小：5
+2025-01-16 17:49:44 - 原始搜索条件 - 标题：[], 关键词：[AIGC], 主题：[]
+2025-01-16 17:49:44 - 检测到有效的搜索条件，准备调用AI增强服务...
+2025-01-16 17:49:44 - 开始AI增强搜索 - 原始输入：
+2025-01-16 17:49:44 - 标题：
+2025-01-16 17:49:44 - 关键词：AIGC
+2025-01-16 17:49:44 - 主题：
+2025-01-16 17:49:44 - 获取到文档总数：24
+2025-01-16 17:49:44 - 现有标题数量：15
+2025-01-16 17:49:44 - 现有关键词数量：40
+2025-01-16 17:49:44 - 现有主题数量：12
+2025-01-16 17:49:44 - 现有标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023
+2025-01-16 17:49:44 - 现有关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技
+2025-01-16 17:49:44 - 现有主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告
+2025-01-16 17:49:44 - 发送给AI的提示：我有一个文档库，包含以下内容：
+标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023
+关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技
+主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告
+
+用户搜索条件：
+关键词：AIGC
+
+请根据用户的搜索条件，从已有的内容中选择最相关的一个：
+1. 如果用户输入了标题，从已有标题中选择1个最相关的
+2. 如果用户输入了关键词，从已有关键词中选择1个最相关的
+3. 如果用户输入了主题，从已有主题中选择1个最相关的
+请按以下格式返回（每个字段用竖线|分隔，如果某个字段没有相关结果则返回空）：
+标题结果|关键词结果|主题结果
+2025-01-16 17:49:44 - Request payload: {"max_tokens":100,"stream":false,"temperature":0.7,"messages":[{"role":"system","content":"You are a helpful assistant specialized in analyzing document content and enhancing search terms."},{"role":"user","content":"我有一个文档库，包含以下内容：\n标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023\n关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技\n主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告\n\n用户搜索条件：\n关键词：AIGC\n\n请根据用户的搜索条件，从已有的内容中选择最相关的一个：\n1. 如果用户输入了标题，从已有标题中选择1个最相关的\n2. 如果用户输入了关键词，从已有关键词中选择1个最相关的\n3. 如果用户输入了主题，从已有主题中选择1个最相关的\n请按以下格式返回（每个字段用竖线|分隔，如果某个字段没有相关结果则返回空）：\n标题结果|关键词结果|主题结果"}],"model":"deepseek-chat"}
+2025-01-16 17:49:45 - API Response: {"id":"6228e48b-818b-43c8-85e9-40e7cca50d9f","object":"chat.completion","created":1737020985,"model":"deepseek-chat","choices":[{"index":0,"message":{"role":"assistant","content":"|人工智能|人工智能|"},"logprobs":null,"finish_reason":"stop"}],"usage":{"prompt_tokens":357,"completion_tokens":5,"total_tokens":362,"prompt_cache_hit_tokens":192,"prompt_cache_miss_tokens":165},"system_fingerprint":"fp_3a5770e1b4"}
+2025-01-16 17:49:45 - AI返回的原始响应：|人工智能|人工智能|
+2025-01-16 17:49:45 - AI响应解析后的部分数量：3
+2025-01-16 17:49:45 - AI增强后的结果：
+2025-01-16 17:49:45 - 增强后的标题：
+2025-01-16 17:49:45 - 增强后的关键词：人工智能
+2025-01-16 17:49:45 - 增强后的主题：人工智能
+2025-01-16 17:49:45 - AI增强服务返回结果：{keywords=人工智能, subject=人工智能, title=}
+2025-01-16 17:49:45 - 处理AI返回的增强结果：
+2025-01-16 17:49:45 - AI未返回有效的标题增强结果，保持原标题不变
+2025-01-16 17:49:45 - 使用增强后的关键词替换原关键词：人工智能
+2025-01-16 17:49:45 - 使用增强后的主题替换原主题：人工智能
+2025-01-16 17:49:45 - 最终使用的搜索条件 - 标题：[], 关键词：[人工智能], 主题：[人工智能]
+2025-01-16 17:49:45 - 开始执行数据库搜索...
+2025-01-16 17:49:45 - 用户1搜索了标题包含、关键词包含人工智能、主题包含人工智能的文档，第1页
+2025-01-16 17:49:45 - 数据库搜索完成，返回结果数量：2
+2025-01-16 17:49:45 - Search conditions changed, recalculating recommendations
+2025-01-16 17:49:45 - 开始执行AI增强搜索...
+2025-01-16 17:49:45 - 用户ID：1
+2025-01-16 17:49:45 - 页码：1
+2025-01-16 17:49:45 - 每页大小：2147483647
+2025-01-16 17:49:45 - 原始搜索条件 - 标题：[], 关键词：[AIGC], 主题：[]
+2025-01-16 17:49:45 - 检测到有效的搜索条件，准备调用AI增强服务...
+2025-01-16 17:49:45 - 开始AI增强搜索 - 原始输入：
+2025-01-16 17:49:45 - 标题：
+2025-01-16 17:49:45 - 关键词：AIGC
+2025-01-16 17:49:45 - 主题：
+2025-01-16 17:49:45 - 获取到文档总数：24
+2025-01-16 17:49:45 - 现有标题数量：15
+2025-01-16 17:49:45 - 现有关键词数量：40
+2025-01-16 17:49:45 - 现有主题数量：12
+2025-01-16 17:49:45 - 现有标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023
+2025-01-16 17:49:45 - 现有关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技
+2025-01-16 17:49:45 - 现有主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告
+2025-01-16 17:49:45 - 发送给AI的提示：我有一个文档库，包含以下内容：
+标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023
+关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技
+主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告
+
+用户搜索条件：
+关键词：AIGC
+
+请根据用户的搜索条件，从已有的内容中选择最相关的一个：
+1. 如果用户输入了标题，从已有标题中选择1个最相关的
+2. 如果用户输入了关键词，从已有关键词中选择1个最相关的
+3. 如果用户输入了主题，从已有主题中选择1个最相关的
+请按以下格式返回（每个字段用竖线|分隔，如果某个字段没有相关结果则返回空）：
+标题结果|关键词结果|主题结果
+2025-01-16 17:49:45 - Request payload: {"max_tokens":100,"stream":false,"temperature":0.7,"messages":[{"role":"system","content":"You are a helpful assistant specialized in analyzing document content and enhancing search terms."},{"role":"user","content":"我有一个文档库，包含以下内容：\n标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023\n关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技\n主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告\n\n用户搜索条件：\n关键词：AIGC\n\n请根据用户的搜索条件，从已有的内容中选择最相关的一个：\n1. 如果用户输入了标题，从已有标题中选择1个最相关的\n2. 如果用户输入了关键词，从已有关键词中选择1个最相关的\n3. 如果用户输入了主题，从已有主题中选择1个最相关的\n请按以下格式返回（每个字段用竖线|分隔，如果某个字段没有相关结果则返回空）：\n标题结果|关键词结果|主题结果"}],"model":"deepseek-chat"}
+2025-01-16 17:49:46 - API Response: {"id":"525f1ecf-9a3b-4d3a-b153-c8525af8d2ef","object":"chat.completion","created":1737020986,"model":"deepseek-chat","choices":[{"index":0,"message":{"role":"assistant","content":"|人工智能|人工智能|"},"logprobs":null,"finish_reason":"stop"}],"usage":{"prompt_tokens":357,"completion_tokens":5,"total_tokens":362,"prompt_cache_hit_tokens":320,"prompt_cache_miss_tokens":37},"system_fingerprint":"fp_3a5770e1b4"}
+2025-01-16 17:49:46 - AI返回的原始响应：|人工智能|人工智能|
+2025-01-16 17:49:46 - AI响应解析后的部分数量：3
+2025-01-16 17:49:46 - AI增强后的结果：
+2025-01-16 17:49:46 - 增强后的标题：
+2025-01-16 17:49:46 - 增强后的关键词：人工智能
+2025-01-16 17:49:46 - 增强后的主题：人工智能
+2025-01-16 17:49:46 - AI增强服务返回结果：{keywords=人工智能, subject=人工智能, title=}
+2025-01-16 17:49:46 - 处理AI返回的增强结果：
+2025-01-16 17:49:46 - AI未返回有效的标题增强结果，保持原标题不变
+2025-01-16 17:49:46 - 使用增强后的关键词替换原关键词：人工智能
+2025-01-16 17:49:46 - 使用增强后的主题替换原主题：人工智能
+2025-01-16 17:49:46 - 最终使用的搜索条件 - 标题：[], 关键词：[人工智能], 主题：[人工智能]
+2025-01-16 17:49:46 - 开始执行数据库搜索...
+2025-01-16 17:49:46 - 用户1搜索了标题包含、关键词包含人工智能、主题包含人工智能的文档，第1页
+2025-01-16 17:49:46 - 数据库搜索完成，返回结果数量：2
+2025-01-16 17:49:46 - Source document titles: [人工智能发展报告2023]
+2025-01-16 17:49:46 - Source document IDs: [1, 49]
+2025-01-16 17:49:46 - Candidate document IDs: [3, 4, 41, 42, 43, 44, 45, 51, 52]
+2025-01-16 17:49:46 - Finding similar articles for source docs: [1, 49]
+2025-01-16 17:49:46 - Reading vector from file: D:\java_hm_work\tokens\1.txt
+2025-01-16 17:49:46 - Error reading vector for document 1: D:\java_hm_work\tokens\1.txt (系统找不到指定的文件。)
+2025-01-16 17:49:46 - Reading vector from file: D:\java_hm_work\tokens\49.txt
+2025-01-16 17:49:46 - Reading vector from file: D:\java_hm_work\tokens\3.txt
+2025-01-16 17:49:46 - Reading vector from file: D:\java_hm_work\tokens\4.txt
+2025-01-16 17:49:46 - Error reading vector for candidate 4: D:\java_hm_work\tokens\4.txt (系统找不到指定的文件。)
+2025-01-16 17:49:46 - Reading vector from file: D:\java_hm_work\tokens\41.txt
+2025-01-16 17:49:46 - Reading vector from file: D:\java_hm_work\tokens\42.txt
+2025-01-16 17:49:46 - Reading vector from file: D:\java_hm_work\tokens\43.txt
+2025-01-16 17:49:46 - Reading vector from file: D:\java_hm_work\tokens\44.txt
+2025-01-16 17:49:46 - Reading vector from file: D:\java_hm_work\tokens\45.txt
+2025-01-16 17:49:46 - Reading vector from file: D:\java_hm_work\tokens\51.txt
+2025-01-16 17:49:46 - Reading vector from file: D:\java_hm_work\tokens\52.txt
+2025-01-16 17:49:46 - Error reading vector for candidate 52: D:\java_hm_work\tokens\52.txt (系统找不到指定的文件。)
+2025-01-16 17:49:46 - Similar document IDs: [51, 42, 45, 3, 41, 43, 44]
+2025-01-16 17:49:49 - Forwarding request to DocumentListViewController
+2025-01-16 17:49:49 - Received POST request for document list view
+2025-01-16 17:49:49 - Raw search parameters - title: , keywords: AI, subject: 
+2025-01-16 17:49:49 - Processed search parameters - title: , keywords: AI, subject: 
+2025-01-16 17:49:49 - Using AI-enhanced search
+2025-01-16 17:49:49 - 开始执行AI增强搜索...
+2025-01-16 17:49:49 - 用户ID：1
+2025-01-16 17:49:49 - 页码：1
+2025-01-16 17:49:49 - 每页大小：5
+2025-01-16 17:49:49 - 原始搜索条件 - 标题：[], 关键词：[AI], 主题：[]
+2025-01-16 17:49:49 - 检测到有效的搜索条件，准备调用AI增强服务...
+2025-01-16 17:49:49 - 开始AI增强搜索 - 原始输入：
+2025-01-16 17:49:49 - 标题：
+2025-01-16 17:49:49 - 关键词：AI
+2025-01-16 17:49:49 - 主题：
+2025-01-16 17:49:49 - 获取到文档总数：24
+2025-01-16 17:49:49 - 现有标题数量：15
+2025-01-16 17:49:49 - 现有关键词数量：40
+2025-01-16 17:49:49 - 现有主题数量：12
+2025-01-16 17:49:49 - 现有标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023
+2025-01-16 17:49:49 - 现有关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技
+2025-01-16 17:49:49 - 现有主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告
+2025-01-16 17:49:49 - 发送给AI的提示：我有一个文档库，包含以下内容：
+标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023
+关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技
+主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告
+
+用户搜索条件：
+关键词：AI
+
+请根据用户的搜索条件，从已有的内容中选择最相关的一个：
+1. 如果用户输入了标题，从已有标题中选择1个最相关的
+2. 如果用户输入了关键词，从已有关键词中选择1个最相关的
+3. 如果用户输入了主题，从已有主题中选择1个最相关的
+请按以下格式返回（每个字段用竖线|分隔，如果某个字段没有相关结果则返回空）：
+标题结果|关键词结果|主题结果
+2025-01-16 17:49:49 - Request payload: {"max_tokens":100,"stream":false,"temperature":0.7,"messages":[{"role":"system","content":"You are a helpful assistant specialized in analyzing document content and enhancing search terms."},{"role":"user","content":"我有一个文档库，包含以下内容：\n标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023\n关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技\n主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告\n\n用户搜索条件：\n关键词：AI\n\n请根据用户的搜索条件，从已有的内容中选择最相关的一个：\n1. 如果用户输入了标题，从已有标题中选择1个最相关的\n2. 如果用户输入了关键词，从已有关键词中选择1个最相关的\n3. 如果用户输入了主题，从已有主题中选择1个最相关的\n请按以下格式返回（每个字段用竖线|分隔，如果某个字段没有相关结果则返回空）：\n标题结果|关键词结果|主题结果"}],"model":"deepseek-chat"}
+2025-01-16 17:49:50 - API Response: {"id":"4f23d9db-8c1d-44db-aed0-b52fd3efb536","object":"chat.completion","created":1737020991,"model":"deepseek-chat","choices":[{"index":0,"message":{"role":"assistant","content":"|人工智能|人工智能|"},"logprobs":null,"finish_reason":"stop"}],"usage":{"prompt_tokens":355,"completion_tokens":5,"total_tokens":360,"prompt_cache_hit_tokens":192,"prompt_cache_miss_tokens":163},"system_fingerprint":"fp_3a5770e1b4"}
+2025-01-16 17:49:50 - AI返回的原始响应：|人工智能|人工智能|
+2025-01-16 17:49:50 - AI响应解析后的部分数量：3
+2025-01-16 17:49:50 - AI增强后的结果：
+2025-01-16 17:49:50 - 增强后的标题：
+2025-01-16 17:49:50 - 增强后的关键词：人工智能
+2025-01-16 17:49:50 - 增强后的主题：人工智能
+2025-01-16 17:49:50 - AI增强服务返回结果：{keywords=人工智能, subject=人工智能, title=}
+2025-01-16 17:49:50 - 处理AI返回的增强结果：
+2025-01-16 17:49:50 - AI未返回有效的标题增强结果，保持原标题不变
+2025-01-16 17:49:50 - 使用增强后的关键词替换原关键词：人工智能
+2025-01-16 17:49:50 - 使用增强后的主题替换原主题：人工智能
+2025-01-16 17:49:50 - 最终使用的搜索条件 - 标题：[], 关键词：[人工智能], 主题：[人工智能]
+2025-01-16 17:49:50 - 开始执行数据库搜索...
+2025-01-16 17:49:50 - 用户1搜索了标题包含、关键词包含人工智能、主题包含人工智能的文档，第1页
+2025-01-16 17:49:50 - 数据库搜索完成，返回结果数量：2
+2025-01-16 17:49:50 - Search conditions changed, recalculating recommendations
+2025-01-16 17:49:50 - 开始执行AI增强搜索...
+2025-01-16 17:49:50 - 用户ID：1
+2025-01-16 17:49:50 - 页码：1
+2025-01-16 17:49:50 - 每页大小：2147483647
+2025-01-16 17:49:50 - 原始搜索条件 - 标题：[], 关键词：[AI], 主题：[]
+2025-01-16 17:49:50 - 检测到有效的搜索条件，准备调用AI增强服务...
+2025-01-16 17:49:50 - 开始AI增强搜索 - 原始输入：
+2025-01-16 17:49:50 - 标题：
+2025-01-16 17:49:50 - 关键词：AI
+2025-01-16 17:49:50 - 主题：
+2025-01-16 17:49:50 - 获取到文档总数：24
+2025-01-16 17:49:50 - 现有标题数量：15
+2025-01-16 17:49:51 - 现有关键词数量：40
+2025-01-16 17:49:51 - 现有主题数量：12
+2025-01-16 17:49:51 - 现有标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023
+2025-01-16 17:49:51 - 现有关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技
+2025-01-16 17:49:51 - 现有主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告
+2025-01-16 17:49:51 - 发送给AI的提示：我有一个文档库，包含以下内容：
+标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023
+关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技
+主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告
+
+用户搜索条件：
+关键词：AI
+
+请根据用户的搜索条件，从已有的内容中选择最相关的一个：
+1. 如果用户输入了标题，从已有标题中选择1个最相关的
+2. 如果用户输入了关键词，从已有关键词中选择1个最相关的
+3. 如果用户输入了主题，从已有主题中选择1个最相关的
+请按以下格式返回（每个字段用竖线|分隔，如果某个字段没有相关结果则返回空）：
+标题结果|关键词结果|主题结果
+2025-01-16 17:49:51 - Request payload: {"max_tokens":100,"stream":false,"temperature":0.7,"messages":[{"role":"system","content":"You are a helpful assistant specialized in analyzing document content and enhancing search terms."},{"role":"user","content":"我有一个文档库，包含以下内容：\n标题列表：数字经济趋势分析，教育科技创新报告，医疗健康产业研究，自然语言处理技术综述，深度学习框架比较研究，物联网安全技术研究，5G技术发展与应用前景，人工智能伦理问题研究，云计算技术发展趋势，区块链技术在金融领域的应用，可持续发展白皮书，大数据分析在商业决策中的应用，人工智能在医疗诊断中的应用，机器学习在图像识别中的应用，人工智能发展报告2023\n关键词列表：环保，CNN，区块链，数字经济，产业发展，社会影响，教育科技，通信技术，IoT，微服务，NLP，PyTorch，数据分析，机器学习，在线教育，人工智能，加密货币，BERT，物联网，TensorFlow，云计算，商业智能，深度学习，AI，伦理，加密，网络安全，可持续发展，绿色能源，诊断，5G，医疗，健康，互联网，分布式系统，图像识别，电子商务，大数据，创新，金融科技\n主题列表：医疗技术，技术报告，行业报告，通信工程，环境报告，人工智能，计算机科学，金融技术，商业分析，网络安全，经济报告，教育报告\n\n用户搜索条件：\n关键词：AI\n\n请根据用户的搜索条件，从已有的内容中选择最相关的一个：\n1. 如果用户输入了标题，从已有标题中选择1个最相关的\n2. 如果用户输入了关键词，从已有关键词中选择1个最相关的\n3. 如果用户输入了主题，从已有主题中选择1个最相关的\n请按以下格式返回（每个字段用竖线|分隔，如果某个字段没有相关结果则返回空）：\n标题结果|关键词结果|主题结果"}],"model":"deepseek-chat"}
+2025-01-16 17:49:52 - API Response: {"id":"92612cd8-69a6-44f1-bd20-eb3f1e657212","object":"chat.completion","created":1737020992,"model":"deepseek-chat","choices":[{"index":0,"message":{"role":"assistant","content":"|人工智能|人工智能|"},"logprobs":null,"finish_reason":"stop"}],"usage":{"prompt_tokens":355,"completion_tokens":5,"total_tokens":360,"prompt_cache_hit_tokens":0,"prompt_cache_miss_tokens":355},"system_fingerprint":"fp_3a5770e1b4"}
+2025-01-16 17:49:52 - AI返回的原始响应：|人工智能|人工智能|
+2025-01-16 17:49:52 - AI响应解析后的部分数量：3
+2025-01-16 17:49:52 - AI增强后的结果：
+2025-01-16 17:49:52 - 增强后的标题：
+2025-01-16 17:49:52 - 增强后的关键词：人工智能
+2025-01-16 17:49:52 - 增强后的主题：人工智能
+2025-01-16 17:49:52 - AI增强服务返回结果：{keywords=人工智能, subject=人工智能, title=}
+2025-01-16 17:49:52 - 处理AI返回的增强结果：
+2025-01-16 17:49:52 - AI未返回有效的标题增强结果，保持原标题不变
+2025-01-16 17:49:52 - 使用增强后的关键词替换原关键词：人工智能
+2025-01-16 17:49:52 - 使用增强后的主题替换原主题：人工智能
+2025-01-16 17:49:52 - 最终使用的搜索条件 - 标题：[], 关键词：[人工智能], 主题：[人工智能]
+2025-01-16 17:49:52 - 开始执行数据库搜索...
+2025-01-16 17:49:52 - 用户1搜索了标题包含、关键词包含人工智能、主题包含人工智能的文档，第1页
+2025-01-16 17:49:52 - 数据库搜索完成，返回结果数量：2
+2025-01-16 17:49:52 - Source document titles: [人工智能发展报告2023]
+2025-01-16 17:49:52 - Source document IDs: [1, 49]
+2025-01-16 17:49:52 - Candidate document IDs: [3, 4, 41, 42, 43, 44, 45, 51, 52]
+2025-01-16 17:49:52 - Finding similar articles for source docs: [1, 49]
+2025-01-16 17:49:52 - Reading vector from file: D:\java_hm_work\tokens\1.txt
+2025-01-16 17:49:52 - Error reading vector for document 1: D:\java_hm_work\tokens\1.txt (系统找不到指定的文件。)
+2025-01-16 17:49:52 - Reading vector from file: D:\java_hm_work\tokens\49.txt
+2025-01-16 17:49:52 - Reading vector from file: D:\java_hm_work\tokens\3.txt
+2025-01-16 17:49:52 - Reading vector from file: D:\java_hm_work\tokens\4.txt
+2025-01-16 17:49:52 - Error reading vector for candidate 4: D:\java_hm_work\tokens\4.txt (系统找不到指定的文件。)
+2025-01-16 17:49:52 - Reading vector from file: D:\java_hm_work\tokens\41.txt
+2025-01-16 17:49:52 - Reading vector from file: D:\java_hm_work\tokens\42.txt
+2025-01-16 17:49:52 - Reading vector from file: D:\java_hm_work\tokens\43.txt
+2025-01-16 17:49:52 - Reading vector from file: D:\java_hm_work\tokens\44.txt
+2025-01-16 17:49:52 - Reading vector from file: D:\java_hm_work\tokens\45.txt
+2025-01-16 17:49:52 - Reading vector from file: D:\java_hm_work\tokens\51.txt
+2025-01-16 17:49:52 - Reading vector from file: D:\java_hm_work\tokens\52.txt
+2025-01-16 17:49:52 - Error reading vector for candidate 52: D:\java_hm_work\tokens\52.txt (系统找不到指定的文件。)
+2025-01-16 17:49:52 - Similar document IDs: [51, 42, 45, 3, 41, 43, 44]

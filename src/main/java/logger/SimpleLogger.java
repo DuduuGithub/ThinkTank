@@ -17,7 +17,7 @@ public class SimpleLogger {
         try {
             // 获取当前时间
             String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-            String logMessage = timestamp + " - " + message;
+            String logMessage = timestamp + " - " + message + "\n";  // 添加换行符，使日志更易读
 
             // 创建文件对象
             File logFile = new File(LOG_FILE_PATH);
@@ -31,10 +31,9 @@ public class SimpleLogger {
             // 使用 BufferedWriter 进行写入操作
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(logFile, true))) {
                 writer.write(logMessage);
-                writer.newLine();  // 换行
             }
         } catch (IOException e) {
-            e.printStackTrace();  // 打印异常信息
+            System.err.println("写入日志失败: " + e.getMessage());  // 改为直接输出到控制台
         }
     }
 

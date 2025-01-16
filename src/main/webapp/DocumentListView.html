@@ -215,6 +215,109 @@
             pointer-events: none;
         }
 
+        .documents-section {
+            margin: 30px 15px;  /* 增加与搜索栏的间距，保持左右间距 */
+            min-height: 400px;
+        }
+
+        .recommended-documents {
+            margin: 30px 15px;  /* 增加间距并保持左右对齐 */
+            padding-top: 20px;
+            min-height: 300px;
+            border-top: 2px solid #eee;
+        }
+
+        .table-container {
+            min-height: 300px;
+            margin: 0;  /* 移除表格容器的边距 */
+        }
+
+        .pagination-container {
+            margin: 20px 0;  /* 保持适当的上下间距 */
+            text-align: left;  /* 改为左对齐 */
+        }
+
+        .action-buttons {
+            margin: 30px 15px;  /* 增加上下间距，保持左右间距 */
+            display: flex;
+            gap: 20px;
+        }
+
+        .search-bar {
+            margin: 30px 15px;  /* 增加与按钮和表格的间距，保持左右间距 */
+            padding: 0;  /* 移除内边距，使用外边距控制间距 */
+        }
+
+        /* 确保表格内容对齐 */
+        .table {
+            width: 100%;
+            margin-bottom: 0;  /* 移除表格底部边距 */
+        }
+
+        .pagination {
+            display: inline-flex;
+            gap: 5px;
+            margin: 20px 0;
+            align-items: center;  /* 确保所有按钮垂直居中对齐 */
+        }
+
+        .pagination .page-item {
+            display: flex;  /* 使用 flex 布局 */
+            align-items: center;  /* 垂直居中对齐 */
+            height: 38px;  /* 固定高度 */
+        }
+
+        .pagination .page-item .page-link,
+        .pagination .page-item button.page-link,
+        .pagination .page-item span.page-link {
+            height: 100%;  /* 填充整个高度 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 12px;
+            min-width: 38px;  /* 设置最小宽度 */
+            border: 1px solid #ddd;
+            color: #333;
+            background-color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            margin: 0;  /* 移除外边距 */
+        }
+
+        .pagination .page-item.active .page-link {
+            background-color: #333;  /* 改为黑色 */
+            border-color: #333;      /* 改为黑色 */
+            color: #fff;
+        }
+
+        .pagination .page-item .page-link:hover {
+            background-color: #f5f5f5;
+            border-color: #ddd;
+        }
+
+        .pagination .page-item.disabled .page-link {
+            color: #999;
+            pointer-events: none;
+            background-color: #fff;
+            border-color: #ddd;
+        }
+
+        .pagination form {
+            margin: 0;
+            padding: 0;
+            height: 100%;  /* 确保表单填充整个高度 */
+        }
+
+        .pagination button.page-link {
+            border: none;
+            background: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            color: inherit;
+            font-size: inherit;
+        }
+
     </style>
 </head>
 
@@ -228,86 +331,139 @@
                 <div class="text-base">
                     <div class="row">
                         <div class="col-md-12">
-                            <button class="btn btn-primary" id="add-report">添加报告</button>
-                            <button class="btn btn-primary" id="openModalBtn">一键上传文件</button>
-
-                            <div id="myModal" class="custom-favorite-modal">
-                                <div class="custom-favorite-modal-content">
-                                    <span class="custom-close">&times;</span>
-                                    <h4>上传报告文件</h4>
-                                    <div class="upload-container">
-                                        <form id="uploadForm" action="app/loadPdf" method="post" enctype="multipart/form-data" style="text-align: center;">
-                                            <div class="favorite-bag-item" style="margin: 30px 0;">
-                                                <input type="file" name="file" accept=".pdf" style="margin-bottom: 20px; display: block; margin-left: auto; margin-right: auto;" />
-                                                <br/>
-                                                <input type="submit" value="上传报告" class="btn btn-primary" />
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
+                            <!-- 操作按钮区域 -->
+                            <div class="action-buttons">
+                                <button class="btn btn-primary" id="add-report">添加报告</button>
+                                <button class="btn btn-primary" id="openModalBtn">一键上传文件</button>
                             </div>
 
+                            <!-- 搜索区域 -->
                             <div class="search-bar">
-                                <form id="searchForm" method="post" action="/aireport/app/documentListView">
-                                    <div class="form-group">
-                                        <input type="text" id="title-search" name="title" class="form-control" placeholder="标题" th:value="${titleFilter}">
-                                        <input type="text" id="keywords-search" name="keywords" class="form-control" placeholder="关键词" th:value="${keywordsFilter}">
-                                        <input type="text" id="subject-search" name="subject" class="form-control" placeholder="主题" th:value="${subjectFilter}">
-                                        <button type="submit" class="btn btn-primary">搜索</button>
+                                <form id="searchForm" method="post" action="/aireport/app/documentListView" accept-charset="UTF-8">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <input type="text" class="form-control" id="title" name="title" th:value="${titleFilter}" placeholder="标题">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <input type="text" class="form-control" id="keywords" name="keywords" th:value="${keywordsFilter}" placeholder="关键词">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <input type="text" class="form-control" id="subject" name="subject" th:value="${subjectFilter}" placeholder="主题">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <input type="hidden" id="useAI" name="useAI" value="false">
+                                            <button type="submit" class="btn btn-primary" onclick="document.getElementById('useAI').value='false'">普通搜索</button>
+                                            <button type="submit" class="btn btn-success" onclick="document.getElementById('useAI').value='true'">AI增强搜索</button>
+                                            <button type="button" class="btn btn-secondary" onclick="clearSearch()">清空</button>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
 
-                            <table class="table table-bordered responsive" id="reportTable">
-                                <thead>
-                                    <tr>
-                                        <th>报告ID</th>
-                                        <th>报告标题</th>
-                                        <th>报告关键词</th>
-                                        <th>报告主题词</th>
-                                        <th>报告详情</th>
-                                        <th>操作</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- Thymeleaf模板语法，遍历documentList -->
-                                    <tr th:each="document : ${documentList}">
-                                        <td th:text="${document.documentId}"></td>
-                                        <td th:text="${document.title}"></td>
-                                        <td th:text="${document.keywords}"></td>
-                                        <td th:text="${document.subject}"></td>
-                                        <td><a th:href="@{app/pdf(id=${document.documentId})}" class="view-full-text">点击查看全文</a></td>
-                                        <td>
-                                            <!-- 删除按钮 -->
-                                            <button th:onclick="'deleteDocument(' + ${document.documentId} + ')'" class="btn btn-danger">删除</button>
+                            <!-- 文档列表区域 -->
+                            <div class="documents-section">
+                                <div class="table-container">
+                                    <table class="table table-bordered responsive" id="reportTable">
+                                        <thead>
+                                            <tr>
+                                                <th>报告ID</th>
+                                                <th>报告标题</th>
+                                                <th>报告关键词</th>
+                                                <th>报告关键句</th>
+                                                <th>报告详情</th>
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- Thymeleaf模板语法，遍历documentList -->
+                                            <tr th:each="document : ${documentList}">
+                                                <td th:text="${document.documentId}"></td>
+                                                <td th:text="${document.title}"></td>
+                                                <td th:text="${document.keywords}"></td>
+                                                <td th:text="${document.subject}"></td>
+                                                <td><a th:href="@{app/pdf(id=${document.documentId})}" class="view-full-text">点击查看全文</a></td>
+                                                <td>
+                                                    <!-- 删除按钮 -->
+                                                    <button th:onclick="'deleteDocument(' + ${document.documentId} + ')'" class="btn btn-danger">删除</button>
 
-                                            <!-- 收藏按钮和文件夹列表容器 -->
-                                            <div class="favorite-container" style="position: relative; display: inline-block;">
-                                                <!-- 收藏按钮 -->
-                                                <button class="btn btn-favorite" th:onclick="'showFavoriteModal(' + ${document.documentId} + ')'">
-                                                    <i class="entypo-star"></i> 收藏
-                                                </button>
-                                                
-                                                <!-- 文件夹列表框 -->
-                                                <div class="folder-dropdown">
-                                                    <ul>
-                                                        <!-- 遍历用户的收藏文件夹列表 -->
-                                                        <li th:each="folder : ${folderList}">
-                                                            <a href="#" class="add-to-folder" th:data-folder-id="${folder.id}" th:text="${folder.name}"></a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
+                                                    <!-- 收藏按钮和文件夹列表容器 -->
+                                                    <div class="favorite-container" style="position: relative; display: inline-block;">
+                                                        <!-- 收藏按钮 -->
+                                                        <button class="btn btn-favorite" th:onclick="'showFavoriteModal(' + ${document.documentId} + ')'">
+                                                            <i class="entypo-star"></i> 收藏
+                                                        </button>
+                                                        
+                                                        <!-- 文件夹列表框 -->
+                                                        <div class="folder-dropdown">
+                                                            <ul>
+                                                                <!-- 遍历用户的收藏文件夹列表 -->
+                                                                <li th:each="folder : ${folderList}">
+                                                                    <a href="#" class="add-to-folder" th:data-folder-id="${folder.id}" th:text="${folder.name}"></a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
 
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div class="pagination" id="paginationControls"></div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                                <div class="pagination-container">
+                                    <div class="row" th:if="${documentList != null and !documentList.empty}">
+                                        <div class="col-md-12 text-center">
+                                            <nav aria-label="Document list navigation">
+                                                <ul class="pagination">
+                                                    <!-- 上一页 -->
+                                                    <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled' : ''">
+                                                        <form th:action="@{/app/documentListView}" method="post" style="display: inline;">
+                                                            <input type="hidden" name="page" th:value="${currentPage - 1}">
+                                                            <input type="hidden" name="recommendedPage" th:value="${recommendedCurrentPage}">
+                                                            <input type="hidden" name="title" th:value="${titleFilter}">
+                                                            <input type="hidden" name="keywords" th:value="${keywordsFilter}">
+                                                            <input type="hidden" name="subject" th:value="${subjectFilter}">
+                                                            <input type="hidden" name="useAI" th:value="${param.useAI}">
+                                                            <button type="submit" class="page-link">上一页</button>
+                                                        </form>
+                                                    </li>
+                                                    
+                                                    <!-- 页码 -->
+                                                    <li class="page-item" th:each="pageNum : ${#numbers.sequence(1, totalPages)}"
+                                                        th:classappend="${pageNum == currentPage} ? 'active' : ''">
+                                                        <form th:action="@{/app/documentListView}" method="post" style="display: inline;">
+                                                            <input type="hidden" name="page" th:value="${pageNum}">
+                                                            <input type="hidden" name="recommendedPage" th:value="${recommendedCurrentPage}">
+                                                            <input type="hidden" name="title" th:value="${titleFilter}">
+                                                            <input type="hidden" name="keywords" th:value="${keywordsFilter}">
+                                                            <input type="hidden" name="subject" th:value="${subjectFilter}">
+                                                            <input type="hidden" name="useAI" th:value="${param.useAI}">
+                                                            <button type="submit" class="page-link" th:text="${pageNum}">1</button>
+                                                        </form>
+                                                    </li>
+                                                    
+                                                    <!-- 下一页 -->
+                                                    <li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled' : ''">
+                                                        <form th:action="@{/app/documentListView}" method="post" style="display: inline;">
+                                                            <input type="hidden" name="page" th:value="${currentPage + 1}">
+                                                            <input type="hidden" name="recommendedPage" th:value="${recommendedCurrentPage}">
+                                                            <input type="hidden" name="title" th:value="${titleFilter}">
+                                                            <input type="hidden" name="keywords" th:value="${keywordsFilter}">
+                                                            <input type="hidden" name="subject" th:value="${subjectFilter}">
+                                                            <input type="hidden" name="useAI" th:value="${param.useAI}">
+                                                            <button type="submit" class="page-link">下一页</button>
+                                                        </form>
+                                                    </li>
+                                                </ul>
+                                            </nav>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="recommended-documents">
                                 <h3>推荐报告</h3>
-                                <div class="table-responsive">
+                                <div class="table-container">
                                     <table class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
@@ -331,6 +487,58 @@
                                             </tr>
                                         </tbody>
                                     </table>
+                                </div>
+                                
+                                <div class="pagination-container">
+                                    <div class="row" th:if="${recommendedDocuments != null and !recommendedDocuments.empty}">
+                                        <div class="col-md-12 text-center">
+                                            <nav aria-label="Recommended documents navigation">
+                                                <ul class="pagination">
+                                                    <!-- 上一页 -->
+                                                    <li class="page-item" th:classappend="${recommendedCurrentPage == 1} ? 'disabled' : ''">
+                                                        <form th:action="@{/app/documentListView}" method="post" style="display: inline;">
+                                                            <input type="hidden" name="page" th:value="${currentPage}">
+                                                            <input type="hidden" name="recommendedPage" th:value="${recommendedCurrentPage - 1}">
+                                                            <input type="hidden" name="title" th:value="${titleFilter}">
+                                                            <input type="hidden" name="keywords" th:value="${keywordsFilter}">
+                                                            <input type="hidden" name="subject" th:value="${subjectFilter}">
+                                                            <input type="hidden" name="useAI" th:value="${param.useAI}">
+                                                            <button type="submit" class="page-link" th:if="${recommendedCurrentPage > 1}">上一页</button>
+                                                            <span class="page-link" th:if="${recommendedCurrentPage == 1}">上一页</span>
+                                                        </form>
+                                                    </li>
+                                                    
+                                                    <!-- 页码 -->
+                                                    <li class="page-item" th:each="pageNum : ${#numbers.sequence(1, recommendedTotalPages)}"
+                                                        th:classappend="${pageNum == recommendedCurrentPage} ? 'active' : ''">
+                                                        <form th:action="@{/app/documentListView}" method="post" style="display: inline;">
+                                                            <input type="hidden" name="page" th:value="${currentPage}">
+                                                            <input type="hidden" name="recommendedPage" th:value="${pageNum}">
+                                                            <input type="hidden" name="title" th:value="${titleFilter}">
+                                                            <input type="hidden" name="keywords" th:value="${keywordsFilter}">
+                                                            <input type="hidden" name="subject" th:value="${subjectFilter}">
+                                                            <input type="hidden" name="useAI" th:value="${param.useAI}">
+                                                            <button type="submit" class="page-link" th:text="${pageNum}">1</button>
+                                                        </form>
+                                                    </li>
+                                                    
+                                                    <!-- 下一页 -->
+                                                    <li class="page-item" th:classappend="${recommendedCurrentPage == recommendedTotalPages} ? 'disabled' : ''">
+                                                        <form th:action="@{/app/documentListView}" method="post" style="display: inline;">
+                                                            <input type="hidden" name="page" th:value="${currentPage}">
+                                                            <input type="hidden" name="recommendedPage" th:value="${recommendedCurrentPage + 1}">
+                                                            <input type="hidden" name="title" th:value="${titleFilter}">
+                                                            <input type="hidden" name="keywords" th:value="${keywordsFilter}">
+                                                            <input type="hidden" name="subject" th:value="${subjectFilter}">
+                                                            <input type="hidden" name="useAI" th:value="${param.useAI}">
+                                                            <button type="submit" class="page-link" th:if="${recommendedCurrentPage < recommendedTotalPages}">下一页</button>
+                                                            <span class="page-link" th:if="${recommendedCurrentPage == recommendedTotalPages}">下一页</span>
+                                                        </form>
+                                                    </li>
+                                                </ul>
+                                            </nav>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -600,6 +808,108 @@
                 showToast('操作失败，请重试', false);
             });
         }
+
+        function submitSearch(useAI) {
+            var title = encodeURIComponent(document.getElementById('title').value.trim());
+            var keywords = encodeURIComponent(document.getElementById('keywords').value.trim());
+            var subject = encodeURIComponent(document.getElementById('subject').value.trim());
+            
+            // 构建基础 URL
+            var baseUrl = '/aireport/app/documentListView';
+            
+            // 构建查询字符串
+            var queryString = [];
+            if (title) queryString.push('title=' + title);
+            if (keywords) queryString.push('keywords=' + keywords);
+            if (subject) queryString.push('subject=' + subject);
+            queryString.push('useAI=' + useAI);
+            
+            // 组合完整的 URL
+            var url = baseUrl + '?' + queryString.join('&');
+            
+            // 输出日志用于调试
+            console.log('Search URL:', url);
+            
+            window.location.href = url;
+        }
+
+        function clearSearch() {
+            document.getElementById('title').value = '';
+            document.getElementById('keywords').value = '';
+            document.getElementById('subject').value = '';
+            document.getElementById('searchForm').submit();
+        }
+
+        // 在 script 部分添加分页处理函数
+        function submitPaginationForm(form, event) {
+            event.preventDefault();
+            
+            // 获取表单数据
+            const formData = new FormData(form);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+            
+            // 保存当前滚动位置
+            const scrollPosition = window.scrollY;
+            
+            // 发送 AJAX 请求
+            fetch(form.action, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams(data)
+            })
+            .then(response => response.text())
+            .then(html => {
+                // 解析返回的HTML
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                
+                // 更新文档列表和分页
+                const documentList = doc.querySelector('.documents-section');
+                if (documentList) {
+                    document.querySelector('.documents-section').innerHTML = documentList.innerHTML;
+                }
+                
+                // 更新推荐列表和分页
+                const recommendedList = doc.querySelector('.recommended-documents');
+                if (recommendedList) {
+                    document.querySelector('.recommended-documents').innerHTML = recommendedList.innerHTML;
+                }
+                
+                // 重新绑定分页事件
+                bindPaginationEvents();
+                
+                // 立即恢复滚动位置，不使用动画
+                window.scrollTo(0, scrollPosition);
+                
+                // 为确保在所有内容都渲染完成后保持位置，再次检查
+                setTimeout(() => {
+                    if (window.scrollY !== scrollPosition) {
+                        window.scrollTo(0, scrollPosition);
+                    }
+                }, 50);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showToast('加载失败，请重试', false);
+            });
+        }
+
+        // 绑定所有分页表单的提交事件
+        function bindPaginationEvents() {
+            document.querySelectorAll('.pagination form').forEach(form => {
+                form.onsubmit = (e) => submitPaginationForm(form, e);
+            });
+        }
+
+        // 页面加载完成后绑定事件
+        document.addEventListener('DOMContentLoaded', function() {
+            bindPaginationEvents();
+        });
     </script>
 
     <!-- 确保引入了Bootstrap的JS文件 -->

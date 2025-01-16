@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,19 +19,23 @@
     <link rel="stylesheet" href="static/css/neon-forms.css">
     <link rel="stylesheet" href="static/css/black.css">
     <link rel="stylesheet" href="static/css/new.css">
-    
+
     <!-- 引入导航栏相关的 CSS -->
     <link rel="stylesheet" href="static/css/navbar.css">
 
     <!-- 引入两个列表相关的 CSS -->
     <link rel="stylesheet" href="static/css/style.css">
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="https://unpkg.com/html-docx-js/dist/html-docx.js"></script>
+
     <style>
         /* 其他页面特有的样式 */
-        
+
         /* ... 其他样式 ... */
     </style>
 </head>
+
 <body class="page-body" data-url="http://neon.dev">
     <div class="page-container horizontal-menu">
 
@@ -48,7 +53,7 @@
                             <!-- 报告包列表将通过 JavaScript 动态加载 -->
                         </div>
                     </div>
-                    
+
                     <!-- 右侧报告列表 -->
                     <div class="list-box">
                         <h3>我的报告</h3>
@@ -62,7 +67,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="dialog-box">
-                            <input class="input" type="text" placeholder="请输入一个主题，例如"芯片出口管制"">
+                            <input class="input" type="text" placeholder="请输入一个主题，例如" 芯片出口管制"">
                             <div class="toggle-search">
                                 <label class="switch">
                                     <input type="checkbox" checked>
@@ -74,7 +79,7 @@
                                 <button class="search-button">开始</button>
                             </div>
                         </div>
-                        
+
                         <!-- 把结果容器移到这里 -->
                         <div class="result-container">
                             <div class="begin">
@@ -108,7 +113,7 @@
 
     <script>
         // 为输入框添加回车键监听
-        document.getElementsByClassName('input')[0].addEventListener('keypress', function(e) {
+        document.getElementsByClassName('input')[0].addEventListener('keypress', function (e) {
             if (e.key === 'Enter') {
                 // 阻止默认的回车换行行为
                 e.preventDefault();
@@ -118,10 +123,10 @@
         });
 
         // 原有的点击事件监听保持不变
-        document.getElementsByClassName('search-button')[0].addEventListener('click', function() {
+        document.getElementsByClassName('search-button')[0].addEventListener('click', function () {
             // 获取输入的主题
             const description = document.getElementsByClassName('input')[0].value;
-            
+
             // 获取选中的报告包ID列表
             const bagIds = [];
             document.querySelectorAll('.bags-list input[type="checkbox"]:checked').forEach(checkbox => {
@@ -145,19 +150,19 @@
                 },
                 body: `description=${encodeURIComponent(description)}&bagIds=${encodeURIComponent(bagIds.join(','))}&documentIds=${encodeURIComponent(documentIds.join(','))}&useNetwork=${useNetwork}`
             })
-            .then(response => response.text())
-            .then(content => {
-                // 将文本按换行符分割成段落，每个段落都用 p 标签包裹
-                const formattedContent = content.split('\n')
-                    .map(paragraph => `<p>${paragraph}</p>`)
-                    .join('');
-                document.querySelector('.result-content').innerHTML = formattedContent;
-            });
+                .then(response => response.text())
+                .then(content => {
+                    // 将文本按换行符分割成段落，每个段落都用 p 标签包裹
+                    const formattedContent = content.split('\n')
+                        .map(paragraph => `<p>${paragraph}</p>`)
+                        .join('');
+                    document.querySelector('.result-content').innerHTML = formattedContent;
+                });
         });
     </script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // 获取报告包列表
             fetch('/aireport/app/bagOperation', {
                 method: 'POST',
@@ -166,25 +171,25 @@
                 },
                 body: 'action=queryBags'
             })
-            .then(response => response.json())
-            .then(bags => {
-                const bagsList = document.querySelector('.bags-list');
-                bags.forEach(bag => {
-                    const listItem = document.createElement('div');
-                    listItem.className = 'list-item';
-                    listItem.innerHTML = `
+                .then(response => response.json())
+                .then(bags => {
+                    const bagsList = document.querySelector('.bags-list');
+                    bags.forEach(bag => {
+                        const listItem = document.createElement('div');
+                        listItem.className = 'list-item';
+                        listItem.innerHTML = `
                         <input type="checkbox" id="bag${bag.bagId}">
                         <span>${bag.bagName}</span>
                     `;
-                    listItem.addEventListener('click', function(e) {
-                        if (e.target !== this.querySelector('input[type="checkbox"]')) {
-                            const checkbox = this.querySelector('input[type="checkbox"]');
-                            checkbox.checked = !checkbox.checked;
-                        }
+                        listItem.addEventListener('click', function (e) {
+                            if (e.target !== this.querySelector('input[type="checkbox"]')) {
+                                const checkbox = this.querySelector('input[type="checkbox"]');
+                                checkbox.checked = !checkbox.checked;
+                            }
+                        });
+                        bagsList.appendChild(listItem);
                     });
-                    bagsList.appendChild(listItem);
                 });
-            });
 
             // 获取报告列表
             fetch('/aireport/app/getDocuments', {
@@ -193,26 +198,67 @@
                     'Content-Type': 'application/x-www-form-urlencoded',
                 }
             })
-            .then(response => response.json())
-            .then(documents => {
-                const reportsList = document.querySelector('.reports-list');
-                documents.forEach(doc => {
-                    const listItem = document.createElement('div');
-                    listItem.className = 'list-item';
-                    listItem.innerHTML = `
+                .then(response => response.json())
+                .then(documents => {
+                    const reportsList = document.querySelector('.reports-list');
+                    documents.forEach(doc => {
+                        const listItem = document.createElement('div');
+                        listItem.className = 'list-item';
+                        listItem.innerHTML = `
                         <input type="checkbox" id="doc${doc.documentId}">
                         <span>${doc.title}</span>
                     `;
-                    listItem.addEventListener('click', function(e) {
-                        if (e.target !== this.querySelector('input[type="checkbox"]')) {
-                            const checkbox = this.querySelector('input[type="checkbox"]');
-                            checkbox.checked = !checkbox.checked;
-                        }
+                        listItem.addEventListener('click', function (e) {
+                            if (e.target !== this.querySelector('input[type="checkbox"]')) {
+                                const checkbox = this.querySelector('input[type="checkbox"]');
+                                checkbox.checked = !checkbox.checked;
+                            }
+                        });
+                        reportsList.appendChild(listItem);
                     });
-                    reportsList.appendChild(listItem);
                 });
-            });
+        });
+    </script>
+    <script src="https://gcore.jsdelivr.net/npm/html-docx-js@latest/dist/html-docx.min.js"></script>
+    <script>
+        document.getElementsByClassName('save-button')[0].addEventListener('click', function() {
+            try {
+                // 获取报告内容的HTML
+                const content = document.querySelector('.result-content').innerHTML;
+                
+                // 构建完整的HTML文档
+                const htmlContent = `
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <meta charset="UTF-8">
+                        <title>Report</title>
+                    </head>
+                    <body>
+                        ${content}
+                    </body>
+                    </html>
+                `;
+
+                // 检查是否加载了必要的库
+                if (typeof htmlDocx === 'undefined') {
+                    throw new Error('html-docx-js library not loaded');
+                }
+
+                // 转换为docx
+                const converted = htmlDocx.asBlob(htmlContent, {
+                    orientation: 'portrait',
+                    margins: { top: 720 }
+                });
+
+                // 使用 FileSaver 保存文件
+                saveAs(converted, 'report.docx');
+            } catch (error) {
+                console.error('Error during document conversion:', error);
+                alert('保存文档时出错：' + error.message);
+            }
         });
     </script>
 </body>
+
 </html>

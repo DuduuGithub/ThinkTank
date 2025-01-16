@@ -33,16 +33,26 @@ public class DocumentDaoProxy implements DocumentDao {
     }
 
     // 代理搜索文档的逻辑
-    public List<Document> searchDocuments(int userId, String title, String keywords, String subject) {
+    public List<Document> searchDocuments(int userId, String title, String keywords, String subject, int page, int pageSize) {
         // 过滤查询条件为空的情况
         if (title == null) title = "";
         if (keywords == null) keywords = "";
         if (subject == null) subject = "";
 
         // 记录搜索日志
-        SimpleLogger.log("用户" + userId + "搜索了标题包含" + title + "、关键词包含" + keywords + "、主题包含" + subject + "的文档");
+        SimpleLogger.log("用户" + userId + "搜索了标题包含" + title + "、关键词包含" + keywords + "、主题包含" + subject + "的文档，第" + page + "页");
         // 调用DocumentDaoImpl的查询方法
-        return dao.searchDocuments(userId, title, keywords, subject);
+        return dao.searchDocuments(userId, title, keywords, subject, page, pageSize);
+    }
+
+    // 获取总文档数
+    public int getTotalDocuments(int userId, String title, String keywords, String subject) {
+        // 过滤查询条件为空的情况
+        if (title == null) title = "";
+        if (keywords == null) keywords = "";
+        if (subject == null) subject = "";
+
+        return dao.getTotalDocuments(userId, title, keywords, subject);
     }
 
     /*
@@ -196,5 +206,13 @@ public class DocumentDaoProxy implements DocumentDao {
                 e.printStackTrace();
             }
         }
+    }
+
+    /**
+     * 获取所有文档
+     * @return 所有文档列表
+     */
+    public List<Document> getAllDocuments() {
+        return dao.findAll();
     }
 }
