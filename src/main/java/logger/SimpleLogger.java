@@ -10,7 +10,7 @@ import java.util.Date;
 public class SimpleLogger {
 
     // 日志文件路径
-    private static final String LOG_FILE_PATH = "logs/app.log";
+    private static final String LOG_FILE_PATH = "D:\\logs\\app.log";
 
     // 写入日志的方法
     public static void log(String message) {
