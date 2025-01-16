@@ -46,12 +46,12 @@ public class DocumentOutput {
             }
             Document document = documentService.getDocumentById(Integer.valueOf(paperID));
             if (document != null) {
-                papers.add(document.getContent());
+                papers.add(document.getTitle() + "：" + document.getSubject());
             }
         }
 
         if (bagIds.size() > 0) {
-                // 通过包名获取论文内容
+                // 通过包id获取论文内容
                 for (String bagId : bagIds) {
                     try{
                         Integer.parseInt(bagId);
@@ -60,7 +60,7 @@ public class DocumentOutput {
                     }
                     List<Document> documents = documentService.getDocumentsInBag(Integer.valueOf(bagId));
                     for (Document document : documents) {
-                        papers.add(document.getContent());
+                        papers.add(document.getTitle() + "：" + document.getSubject());
                     }
                 }
 
