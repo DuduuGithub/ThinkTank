@@ -27,18 +27,8 @@ public class DocumentService {
         return documentDaoProxy.findById(id);
     }
 
-    // 高级搜索：根据用户ID和搜索条件返回匹配的文档列表
+    // 普通搜索：直接根据条件匹配
     public List<Document> searchDocuments(int userId, String title, String keywords, String subject, int page, int pageSize) {
-        // 如果提供了关键词，使用 AI 增强关键词
-        if (keywords != null && !keywords.trim().isEmpty()) {
-            String enhancedKeywords = keywordEnhanceService.enhanceKeywords(keywords);
-            // 如果 AI 返回了增强的关键词，就使用增强的关键词
-            if (!enhancedKeywords.isEmpty()) {
-                SimpleLogger.log("Original keywords: " + keywords);
-                SimpleLogger.log("Enhanced keywords: " + enhancedKeywords);
-                keywords = enhancedKeywords;
-            }
-        }
         return documentDaoProxy.searchDocuments(userId, title, keywords, subject, page, pageSize);
     }
 
@@ -122,5 +112,20 @@ public class DocumentService {
      */
     public List<Document> getAllDocuments() {
         return documentDaoProxy.getAllDocuments();
+    }
+
+    // AI 增强搜索：使用 AI 增强关键词后再搜索
+    public List<Document> searchDocumentsWithAI(int userId, String title, String keywords, String subject, int page, int pageSize) {
+        // 如果提供了关键词，使用 AI 增强关键词
+        if (keywords != null && !keywords.trim().isEmpty()) {
+            String enhancedKeywords = keywordEnhanceService.enhanceKeywords(keywords);
+            // 如果 AI 返回了增强的关键词，就使用增强的关键词
+            if (!enhancedKeywords.isEmpty()) {
+                SimpleLogger.log("Original keywords: " + keywords);
+                SimpleLogger.log("Enhanced keywords: " + enhancedKeywords);
+                keywords = enhancedKeywords;
+            }
+        }
+        return documentDaoProxy.searchDocuments(userId, title, keywords, subject, page, pageSize);
     }
 }
