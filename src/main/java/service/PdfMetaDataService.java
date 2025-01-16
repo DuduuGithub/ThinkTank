@@ -59,8 +59,10 @@ public class PdfMetaDataService {
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public static Map getPdfMetaData(InputStream pdfInputStream) throws Exception {
         String pdfContent = PdfTools.getPdfContent(pdfInputStream);
-        
-        // 修改提示词，使其更加明确和简洁
+        if(pdfContent.length() >6000){
+            pdfContent = pdfContent.substring(0, 6000);
+        }
+
         String prompt = "请仅提取以下内容，并按指定格式返回JSON：\n" +
                        "1. 文章标题(title)\n" +
                        "2. 文章关键词(keywords)\n" +
@@ -70,53 +72,57 @@ public class PdfMetaDataService {
                        "注意：所有字段必须是字符串，不能是数组\n" +
                        "提供给你的文章内容如下：" + pdfContent;
 
-        String result = BigModelNew.askQuestion(prompt);
+        String result;
+        JsonObject jsonObject;
+        int retryCount = 0;
         
-        // 检查大模型返回结果
-        SimpleLogger.log("大模型返回结果: " + result);
-
-        // 检查结果是否为空
-        if (result == null || result.trim().isEmpty()) {
-            throw new Exception("AI模型返回结果为空");
-        }
-
-        // 检查是否包含JSON
-        if (!result.contains("{") || !result.contains("}")) {
-            throw new Exception("AI模型返回的结果不包含有效的JSON格式");
-        }
-
-        // 截取result中的json字符串
-        String jsonString = result.substring(result.indexOf('{'), result.lastIndexOf('}') + 1);
-        SimpleLogger.log("pdfMetaDta json字符串: " + jsonString);
-
-        try {
-            // 使用 JsonParser 先解析 JSON
-            JsonObject jsonObject = JsonParser.parseString(jsonString).getAsJsonObject();
+        do {
+            retryCount++;
+            result = BigModelNew.askQuestion(prompt);
+            SimpleLogger.log("第" + retryCount + "次尝试，大模型返回结果: " + result);
             
-            // 创建结果 Map
-            Map<String, Object> map = new HashMap<>();
-            
-            // 处理每个字段，确保是字符串格式
-            String title = getStringValue(jsonObject, "title");
-            String keywords = getStringValue(jsonObject, "keywords");
-            String subject = getStringValue(jsonObject, "subject");
-            
-            // 检查关键字段是否为空
-            if (title.trim().isEmpty() || keywords.trim().isEmpty() || subject.trim().isEmpty()) {
-                throw new Exception("AI模型返回的数据不完整，缺少必要字段");
+            try {
+                // 检查结果是否为空
+                if (result == null || result.trim().isEmpty()) {
+                    SimpleLogger.log("返回结果为空，重试");
+                    continue;
+                }
+
+                // 检查是否包含JSON
+                if (!result.contains("{") || !result.contains("}")) {
+                    SimpleLogger.log("返回结果不包含有效JSON，重试");
+                    continue;
+                }
+
+                // 截取JSON字符串
+                String jsonString = result.substring(result.indexOf('{'), result.lastIndexOf('}') + 1);
+                
+                // 解析JSON
+                jsonObject = JsonParser.parseString(jsonString).getAsJsonObject();
+                
+                // 检查必要字段
+                String title = getStringValue(jsonObject, "title");
+                String keywords = getStringValue(jsonObject, "keywords");
+                String subject = getStringValue(jsonObject, "subject");
+                
+                // 如果所有必要字段都不为空，创建并返回结果
+                if (!title.trim().isEmpty() && !keywords.trim().isEmpty() && !subject.trim().isEmpty()) {
+                    SimpleLogger.log("成功获取有效结果，共尝试" + retryCount + "次");
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("title", title);
+                    map.put("keywords", keywords);
+                    map.put("subject", subject);
+                    map.put("content", pdfContent);
+                    return map;
+                } else {
+                    SimpleLogger.log("必要字段存在空值，重试");
+                }
+                
+            } catch (Exception e) {
+                SimpleLogger.log("第" + retryCount + "次尝试解析失败: " + e.getMessage());
             }
             
-            // 添加到 map 中
-            map.put("title", title);
-            map.put("keywords", keywords);
-            map.put("subject", subject);
-            map.put("content", pdfContent);
-            
-            return map;
-        } catch (Exception e) {
-            SimpleLogger.log("Error parsing JSON response: " + e.getMessage());
-            throw new Exception("解析AI返回的数据时出错: " + e.getMessage());
-        }
+        } while (true);  // 无限循环直到获取有效结果
     }
 
     // 辅助方法：从 JsonObject 中安全地获取字符串值
