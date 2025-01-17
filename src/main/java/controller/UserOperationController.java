@@ -12,7 +12,8 @@ public class UserOperationController {
         if(action.equals("register")){
             // 获取用户输入的密码
             String password = request.getParameter("password");
-
+            
+            // 获取插入结果
             String result = UserOperationService.register(password);
             response.setCharacterEncoding("utf-8");
             response.setContentType("application/json");

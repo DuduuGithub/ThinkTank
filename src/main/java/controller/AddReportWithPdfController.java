@@ -1,13 +1,15 @@
 package controller;
 
 import java.io.InputStream;
-import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import db.dao.proxy.DocumentDaoProxy;
 import db.factory.DaoFactory;
 import db.vo.Document;
+import db.vo.User;
 import service.PdfMetaDataService;
 import service.ClsTokenGenerater;
 import logger.SimpleLogger;
@@ -50,6 +52,21 @@ public class AddReportWithPdfController {
                 // 创建ClsTokenGenerater实例并生成向量
                 ClsTokenGenerater tokenGenerater = new ClsTokenGenerater(inputText, vectorFileName);
                 tokenGenerater.generateClsToken();
+
+                // 如果 userId 为 1 ，则是系统默认库，则需要再把该报告插入到所有其他用户名下
+                if(userId==1){
+                    DocumentListViewController documentListViewController = new DocumentListViewController();
+                    List<User> allUsers = DaoFactory.getInstance().getUserDao().findAll();
+                    for(User currentUser:allUsers){
+                        if(currentUser.getUserId()!=1){
+                            // 查找刚才插入的新报告
+                            Document defaultDocument = DaoFactory.getInstance().getDocumentDao().findById(document_id);
+                            defaultDocument.setUserId(currentUser.getUserId());
+                            int newDocId = DaoFactory.getInstance().getDocumentDao().insert(defaultDocument);
+                            documentListViewController.copyVectorFile(document_id, newDocId);
+                        }
+                    }
+                }
 
                 // 返回成功响应
                 response.getWriter().write(String.format(

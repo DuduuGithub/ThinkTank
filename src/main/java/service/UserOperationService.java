@@ -1,9 +1,13 @@
 package service;
 
+import java.util.List;
+
 import db.dao.impl.UserDaoImpl;
 import db.dao.proxy.UserDaoProxy;
 import db.factory.DaoFactory;
 import db.vo.User;
+import db.vo.Document;
+import controller.DocumentListViewController;
 
 public class UserOperationService {
 
@@ -33,12 +37,27 @@ public class UserOperationService {
             }
         }
     }
+    
+    /*
+     * 用途：用于注册新用户，会把系统默认的报告加到新用户的名下
+     * 参数：新用户的密码
+     * 返回：表明注册结果的json格式字符串
+     */
     public static String register(String password){
         UserDaoProxy userDapProxy = DaoFactory.getInstance().getUserDao();
         int userId = userDapProxy.insert(new User(password));
         if(userId == -1){
             return "{\"success\":false,\"message\":\"注册失败\"}";
         }else{
+            // 查找到系统初始库的所有报告，并将其插入到新用户的名下
+            List<Document> defaultDocuments = DaoFactory.getInstance().getDocumentDao().findByUserId("1");
+            for(Document document:defaultDocuments){
+                // 把报告插入数据库并获取新的记录的 documentId
+                document.setUserId(userId);
+                int newDocId = DaoFactory.getInstance().getDocumentDao().insert(document);
+                // 把向量文件复制一份
+                new DocumentListViewController().copyVectorFile(document.getDocumentId(), newDocId);
+            }
             return "{\"success\":true,\"message\":\"注册成功\",\"userId\":\"" + userId + "\"}";
         }
     }

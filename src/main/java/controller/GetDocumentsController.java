@@ -13,6 +13,9 @@ import com.google.gson.Gson;
 import db.vo.Document;
 import service.DocumentService;
 
+/*
+ * 用途：用于首页的查找一个用户的所有的报告
+ */
 public class GetDocumentsController {
     public static void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException{
         HttpSession session = request.getSession();

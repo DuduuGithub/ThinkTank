@@ -35,6 +35,10 @@ public class DocumentListViewController {
         this.vectorService = new VectorService();
     }
 
+    public DocumentListViewController(){
+        
+    }
+
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
         // 设置请求和响应的字符编码
         request.setCharacterEncoding("UTF-8");
@@ -265,7 +269,7 @@ public class DocumentListViewController {
         }
     }
 
-    private void copyVectorFile(int sourceDocId, int newDocId) {
+    public void copyVectorFile(int sourceDocId, int newDocId) {
         try {
             File sourceFile = new File(VECTOR_DIR + sourceDocId + ".txt");
             File targetFile = new File(VECTOR_DIR + newDocId + ".txt");

@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.google.gson.Gson;
 
-import db.dao.impl.BagDaoImpl;
 import db.dao.proxy.Bag2documentDaoProxy;
 import db.dao.proxy.BagDaoProxy;
 import db.factory.DaoFactory;
@@ -15,7 +14,7 @@ public class BagOperationService {
 
     public static String queryBags(Integer userId) {
         // 查询用户的报告包
-        BagDaoProxy bagDao = new BagDaoProxy();
+        BagDaoProxy bagDao = DaoFactory.getInstance().getBagDao();
         List<Bag> bags = bagDao.queryByUserId(userId);
         
         // 转换为JSON
@@ -24,7 +23,7 @@ public class BagOperationService {
     }
     
     public static String addToBag(int bagId, int documentId) {
-        Bag2documentDaoProxy bag2documentDaoProxy = new Bag2documentDaoProxy();
+        Bag2documentDaoProxy bag2documentDaoProxy = DaoFactory.getInstance().getBag2documentDao();
 
         //检查报告是否已经存在
         if(bag2documentDaoProxy.exists(new Bag2document(bagId, documentId))){
@@ -41,7 +40,7 @@ public class BagOperationService {
     }
 
     public static String removeFromBag(int bagId, int documentId) {
-        Bag2documentDaoProxy bag2documentDaoProxy = new Bag2documentDaoProxy();
+        Bag2documentDaoProxy bag2documentDaoProxy = DaoFactory.getInstance().getBag2documentDao();
         boolean success = bag2documentDaoProxy.delete(new Bag2document(bagId, documentId));
 
         if (success) {
