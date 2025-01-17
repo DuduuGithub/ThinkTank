@@ -76,7 +76,8 @@ public class PdfMetaDataService {
         String result;
         JsonObject jsonObject;
         int retryCount = 0;
-        
+        Map<String, Object> map = new HashMap<>();
+
         do {
             retryCount++;
             result = BigModelNew.askQuestion(prompt);
@@ -109,7 +110,7 @@ public class PdfMetaDataService {
                 // 如果所有必要字段都不为空，创建并返回结果
                 if (!title.trim().isEmpty() && !keywords.trim().isEmpty() && !subject.trim().isEmpty()) {
                     SimpleLogger.log("成功获取有效结果，共尝试" + retryCount + "次");
-                    Map<String, Object> map = new HashMap<>();
+                    
                     map.put("title", title);
                     map.put("keywords", keywords);
                     map.put("subject", subject);
@@ -123,7 +124,14 @@ public class PdfMetaDataService {
                 SimpleLogger.log("第" + retryCount + "次尝试解析失败: " + e.getMessage());
             }
             
-        } while (true);  // 无限循环直到获取有效结果
+        } while (retryCount<=5);  // 无限循环直到获取有效结果
+        if (map.isEmpty()) {
+            map.put("title", "未获得有效结果");
+            map.put("keywords", "未获得有效结果");
+            map.put("subject", "未获得有效结果");
+            map.put("content", pdfContent);
+        }
+        return map;
     }
 
     // 辅助方法：从 JsonObject 中安全地获取字符串值
