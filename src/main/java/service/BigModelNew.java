@@ -21,9 +21,9 @@ public class BigModelNew extends WebSocketListener {
     // 各版本的hostUrl及其对应的domain参数，具体可以参考接口文档 https://www.xfyun.cn/doc/spark/Web.html
     public static final String hostUrl = "https://spark-api.xf-yun.com/v4.0/chat";
     public static final String domain = "4.0Ultra";
-    public static final String appid = "5a8b44c1";
-    public static final String apiSecret = "NGIzMDYzODZmYTAwNzNlNWQzZWE4ZWE1";
-    public static final String apiKey = "e8db086796929a333f194a7860334938";
+    public static final String appid = "7daa8991";
+    public static final String apiSecret = "ZTRiMTk4YTVmMTg2Yjc0ZThjNzkxODdk";
+    public static final String apiKey = "512b072bef5d029a98e07497df4898e9";
 
     public static final Gson gson = new Gson();
 

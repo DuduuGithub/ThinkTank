@@ -9,8 +9,8 @@ CREATE TABLE user (
 -- 文档表
 CREATE TABLE document (
     document_id INT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(200) NOT NULL,
-    keywords VARCHAR(200),
+    title TEXT NOT NULL,
+    keywords TEXT,
     subject LONGTEXT,
     content LONGTEXT,
     user_id INT,                      

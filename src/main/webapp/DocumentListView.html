@@ -18,6 +18,9 @@
     
     <!-- 引入导航栏相关的 CSS -->
     <link rel="stylesheet" href="../static/css/navbar.css">
+
+    <!-- 引入 Font Awesome 图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
@@ -61,26 +64,30 @@
 
         /* 收藏按钮样式 */
         .btn-favorite {
-            background-color: #ffc107; /* 金色背景 */
+            background-color: #efef17; /* 保持金色背景 */
             border: none;
-            color: white;
-            padding: 6px 12px; /* 调整padding使其与删除按钮一致 */
+            color: rgb(204, 207, 12); /* 内部星星颜色设置为白色 */
+            padding: 6px; /* 调整为一致的内边距，使按钮为正方形 */
+            width: 38px; /* 与删除按钮高度一致 */
+            height: 38px; /* 与删除按钮高度一致 */
             text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 14px; /* 调整字体大小 */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px; /* 保持字体大小 */
             margin-left: 5px;
-            border-radius: 4px; /* 改为方形边角 */
+            border-radius: 4px; /* 保持方形边角 */
             cursor: pointer;
             transition: background-color 0.3s;
         }
 
         .btn-favorite:hover {
-            background-color: #e0a800; /* 悬停时稍暗的金色 */
+            background-color: #c79708; /* 悬停时稍暗的金色 */
         }
 
         .btn-favorite i {
-            font-size: 14px; /* 调整图标大小 */
+            font-size: 14px; /* 保持图标大小 */
+            color: white; /* 确保星星图标为白色 */
         }
 
         /* 文件夹列表框样式 */
@@ -318,6 +325,109 @@
             font-size: inherit;
         }
 
+        /* 按钮容器使用 Flexbox 并排排列按钮 */
+        .action-buttons-container {
+            display: flex;
+            gap: 10px; /* 按钮之间的间距，可根据需要调整 */
+            align-items: center; /* 垂直居中对齐 */
+        }
+
+        /* 收藏按钮容器调整 */
+        .favorite-container {
+            position: relative;
+            width: 42.08px;
+            height: 30.42px;
+        }
+
+        .favorite-container .btn-primary {
+            width: 42.08px;
+            height: 30.42px;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #ffd700;
+            border-color: #ffd700;
+        }
+
+        /* 调整收藏按钮的颜色 */
+        .btn-favorite {
+            background-color: transparent;
+            color: #f0ad4e; /* 金色，可根据需要调整 */
+            border: none;
+            padding: 0; /* 移除内边距 */
+        }
+
+        /* 收藏按钮悬停效果 */
+        .btn-favorite:hover {
+            color: #ec971f;
+        }
+
+        /* 删除按钮悬停效果 */
+        .btn-danger:hover {
+            background-color: #c9302c;
+            border-color: #ac2925;
+        }
+
+        /* 文件夹下拉菜单样式 */
+        .favorite-container .folder-dropdown {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .favorite-container:hover .folder-dropdown {
+            display: block;
+        }
+
+        /* 调整文件夹列表项的样式 */
+        .folder-dropdown ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .folder-dropdown li a {
+            color: #333;
+            padding: 8px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .folder-dropdown li a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .table-fixed th {
+            white-space: nowrap;
+        }
+
+        .th-id {
+            width: 100px;
+        }
+
+        .th-title {
+            width: 200px;
+        }
+
+        .th-keywords {
+            width: 150px;
+        }
+
+        .th-key-sentence {
+            width: 200px;
+        }
+
+        .th-details {
+            width: 150px;
+        }
+
+        .th-actions {
+            width: 100px;
+        }
     </style>
 </head>
 
@@ -333,7 +443,7 @@
                         <div class="col-md-12">
                             <!-- 操作按钮区域 -->
                             <div class="action-buttons">
-                                <button class="btn btn-primary" id="add-report">添加报告</button>
+                                <!-- <button class="btn btn-primary" id="add-report">添加报告</button> -->
                                 <button class="btn btn-primary" id="openModalBtn">一键上传文件</button>
                                 
                                 <div id="myModal" class="custom-favorite-modal">
@@ -381,13 +491,13 @@
                                 <div class="table-container">
                                     <table class="table table-bordered responsive" id="reportTable">
                                         <thead>
-                                            <tr>
-                                                <th>报告ID</th>
-                                                <th>报告标题</th>
-                                                <th>报告关键词</th>
-                                                <th>报告关键句</th>
-                                                <th>报告详情</th>
-                                                <th>操作</th>
+                                            <tr class="table-fixed">
+                                                <th class="th-id">报告ID</th>
+                                                <th class="th-title">报告标题</th>
+                                                <th class="th-keywords">报告关键词</th>
+                                                <th class="th-key-sentence">报告关键句</th>
+                                                <th class="th-details">报告详情</th>
+                                                <th class="th-actions">操作</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -399,24 +509,30 @@
                                                 <td th:text="${document.subject}"></td>
                                                 <td><a th:href="@{app/pdf(id=${document.documentId})}" class="view-full-text">点击查看全文</a></td>
                                                 <td>
-                                                    <!-- 删除按钮 -->
-                                                    <button th:onclick="'deleteDocument(' + ${document.documentId} + ')'" class="btn btn-danger">删除</button>
-
-                                                    <!-- 收藏按钮和文件夹列表容器 -->
-                                                    <div class="favorite-container" style="position: relative; display: inline-block;">
-                                                        <!-- 收藏按钮 -->
-                                                        <button class="btn btn-favorite" th:onclick="'showFavoriteModal(' + ${document.documentId} + ')'">
-                                                            <i class="entypo-star"></i> 收藏
+                                                    <!-- 按钮容器 -->
+                                                    <div class="action-buttons-container">
+                                                        <!-- 删除按钮（Font Awesome垃圾桶图标） -->
+                                                        <button th:onclick="'deleteDocument(' + ${document.documentId} + ')'" class="btn btn-danger" title="删除" aria-label="删除">
+                                                            <i class="entypo-trash" style="font-size:12px; color:white;"></i>
                                                         </button>
                                                         
-                                                        <!-- 文件夹列表框 -->
-                                                        <div class="folder-dropdown">
-                                                            <ul>
-                                                                <!-- 遍历用户的收藏文件夹列表 -->
-                                                                <li th:each="folder : ${folderList}">
-                                                                    <a href="#" class="add-to-folder" th:data-folder-id="${folder.id}" th:text="${folder.name}"></a>
-                                                                </li>
-                                                            </ul>
+                                                        <!-- 收藏按钮（星星图标） -->
+                                                        <div class="favorite-container">
+                                                            <button class="btn btn-primary" 
+                                                                    th:onclick="'showFavoriteModal(' + ${document.documentId} + ')'"
+                                                                    style="background-color: #ffd700; border-color: #ffd700;">
+                                                                <i class="entypo-star" style="font-size:12px; color:white;"></i>
+                                                            </button>
+                                                            
+                                                            <!-- 文件夹列表框 -->
+                                                            <div class="folder-dropdown">
+                                                                <ul>
+                                                                    <!-- 遍历用户的收藏文件夹列表 -->
+                                                                    <li th:each="folder : ${folderList}">
+                                                                        <a href="#" class="add-to-folder" th:data-folder-id="${folder.id}" th:text="${folder.name}"></a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
                                                         </div>
                                                     </div>
 

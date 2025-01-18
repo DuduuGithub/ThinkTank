@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,7 +7,6 @@
     <meta name="description" content="Neon Admin Panel">
     <meta name="author" content="">
     <title>模型首页</title>
-
     <!-- 引入公共 CSS -->
     <link rel="stylesheet" href="static/css/jquery-ui-1.10.3.custom.min.css">
     <link rel="stylesheet" href="static/css/entypo.css">
@@ -19,29 +17,71 @@
     <link rel="stylesheet" href="static/css/neon-forms.css">
     <link rel="stylesheet" href="static/css/black.css">
     <link rel="stylesheet" href="static/css/new.css">
-
     <!-- 引入导航栏相关的 CSS -->
     <link rel="stylesheet" href="static/css/navbar.css">
-
     <!-- 引入两个列表相关的 CSS -->
     <link rel="stylesheet" href="static/css/style.css">
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
     <script src="https://unpkg.com/html-docx-js/dist/html-docx.js"></script>
-
     <style>
         /* 其他页面特有的样式 */
-
-        /* ... 其他样式 ... */
+        /* 加载转圈的样式 */
+        .spinner {
+            width: 40px;
+            height: 40px;
+            /* 放置在结果容器内的居中位置 */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            display: none;
+            /* 动画 */
+            animation: fadeIn 0.3s;
+        }
+        .double-bounce1,
+        .double-bounce2 {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-color: #3498db;
+            opacity: 0.6;
+            position: absolute;
+            top: 0;
+            left: 0;
+            animation: bounce 2.0s infinite ease-in-out;
+        }
+        .double-bounce2 {
+            animation-delay: -1.0s;
+        }
+        @keyframes bounce {
+            0%,
+            100% {
+                transform: scale(0.0);
+            }
+            50% {
+                transform: scale(1.0);
+            }
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        /* 为结果容器设置相对定位，以便绝对定位的转圈居中 */
+        .result-container {
+            position: relative;
+        }
+        
     </style>
 </head>
-
 <body class="page-body" data-url="http://neon.dev">
     <div class="page-container horizontal-menu">
-
         <!-- 导航栏占位符 -->
         <div id="navbar"></div>
-
         <div class="main-content">
             <div class="container">
                 <!-- 移动到这里：列表框 -->
@@ -53,7 +93,6 @@
                             <!-- 报告包列表将通过 JavaScript 动态加载 -->
                         </div>
                     </div>
-
                     <!-- 右侧报告列表 -->
                     <div class="list-box">
                         <h3>我的报告</h3>
@@ -62,12 +101,11 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- 搜索框部分 -->
                 <div class="row">
                     <div class="col-md-12">
                         <div class="dialog-box">
-                            <input class="input" type="text" placeholder="请输入一个主题，例如" 芯片出口管制"">
+                            <input class="input" type="text" placeholder="请输入一个主题，例如 '芯片出口管制'">
                             <div class="toggle-search">
                                 <label class="switch">
                                     <input type="checkbox" checked>
@@ -79,9 +117,13 @@
                                 <button class="search-button">开始</button>
                             </div>
                         </div>
-
                         <!-- 把结果容器移到这里 -->
                         <div class="result-container">
+                            <!-- 加载转圈 -->
+                            <div id="spinner" class="spinner">
+                                <div class="double-bounce1"></div>
+                                <div class="double-bounce2"></div>
+                            </div>
                             <div class="begin">
                                 <button class="save-button">保存</button>
                             </div>
@@ -98,7 +140,6 @@
             </div>
         </div>
     </div>
-
     <!-- 引入公共 JavaScript -->
     <script src="static/js/jquery-1.11.0.min.js"></script>
     <!--[if lt IE 9]><script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -107,10 +148,8 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
     <!-- 引入导航栏相关的 JavaScript -->
     <script src="static/js/navbar.js"></script>
-
     <script>
         // 为输入框添加回车键监听
         document.getElementsByClassName('input')[0].addEventListener('keypress', function (e) {
@@ -121,27 +160,25 @@
                 document.getElementsByClassName('search-button')[0].click();
             }
         });
-
         // 原有的点击事件监听保持不变
         document.getElementsByClassName('search-button')[0].addEventListener('click', function () {
+            // 显示加载转圈
+            const spinner = document.getElementById('spinner');
+            spinner.style.display = 'block';
             // 获取输入的主题
             const description = document.getElementsByClassName('input')[0].value;
-
             // 获取选中的报告包ID列表
             const bagIds = [];
             document.querySelectorAll('.bags-list input[type="checkbox"]:checked').forEach(checkbox => {
                 bagIds.push(checkbox.id.replace('bag', ''));
             });
-
             // 获取选中的报告ID列表
             const documentIds = [];
             document.querySelectorAll('.reports-list input[type="checkbox"]:checked').forEach(checkbox => {
                 documentIds.push(checkbox.id.replace('doc', ''));
             });
-
             // 获取是否联网搜索
             const useNetwork = document.querySelector('.toggle-search input[type="checkbox"]').checked;
-
             // 发送请求
             fetch('/aireport/app/generateReport', {
                 method: 'POST',
@@ -152,15 +189,22 @@
             })
                 .then(response => response.text())
                 .then(content => {
+                    // 隐藏加载转圈
+                    spinner.style.display = 'none';
                     // 将文本按换行符分割成段落，每个段落都用 p 标签包裹
                     const formattedContent = content.split('\n')
                         .map(paragraph => `<p>${paragraph}</p>`)
                         .join('');
                     document.querySelector('.result-content').innerHTML = formattedContent;
+                })
+                .catch(error => {
+                    // 隐藏加载转圈
+                    spinner.style.display = 'none';
+                    // 显示错误信息
+                    alert('生成报告时出错：' + error.message);
                 });
         });
     </script>
-
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // 获取报告包列表
@@ -190,7 +234,6 @@
                         bagsList.appendChild(listItem);
                     });
                 });
-
             // 获取报告列表
             fetch('/aireport/app/getDocuments', {
                 method: 'POST',
@@ -221,11 +264,10 @@
     </script>
     <script src="https://gcore.jsdelivr.net/npm/html-docx-js@latest/dist/html-docx.min.js"></script>
     <script>
-        document.getElementsByClassName('save-button')[0].addEventListener('click', function() {
+        document.getElementsByClassName('save-button')[0].addEventListener('click', function () {
             try {
                 // 获取报告内容的HTML
                 const content = document.querySelector('.result-content').innerHTML;
-                
                 // 构建完整的HTML文档
                 const htmlContent = `
                     <!DOCTYPE html>
@@ -239,18 +281,15 @@
                     </body>
                     </html>
                 `;
-
                 // 检查是否加载了必要的库
                 if (typeof htmlDocx === 'undefined') {
                     throw new Error('html-docx-js library not loaded');
                 }
-
                 // 转换为docx
                 const converted = htmlDocx.asBlob(htmlContent, {
                     orientation: 'portrait',
                     margins: { top: 720 }
                 });
-
                 // 使用 FileSaver 保存文件
                 saveAs(converted, 'report.docx');
             } catch (error) {
@@ -260,5 +299,4 @@
         });
     </script>
 </body>
-
 </html>

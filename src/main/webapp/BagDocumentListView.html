@@ -84,6 +84,34 @@
     .form-group {
         margin-bottom: 15px;
     }
+
+    .table-fixed th {
+        white-space: nowrap;
+    }
+    
+    .th-id {
+        width: 100px;
+    }
+    
+    .th-title {
+        width: 200px;
+    }
+    
+    .th-keywords {
+        width: 150px;
+    }
+    
+    .th-key-sentence {
+        width: 200px;
+    }
+    
+    .th-details {
+        width: 150px;
+    }
+    
+    .th-actions {
+        width: 100px;
+    }
     </style>
 </head>
 
@@ -101,13 +129,13 @@
 
                             <table class="table table-bordered responsive" id="reportTable">
                                 <thead>
-                                    <tr>
-                                        <th>报告ID</th>
-                                        <th>报告标题</th>
-                                        <th>报告关键词</th>
-                                        <th>报告关键句</th>
-                                        <th>报告详情</th>
-                                        <th>操作</th>
+                                    <tr class="table-fixed">
+                                        <th class="th-id">报告ID</th>
+                                        <th class="th-title">报告标题</th>
+                                        <th class="th-keywords">报告关键词</th>
+                                        <th class="th-key-sentence">报告关键句</th>
+                                        <th class="th-details">报告详情</th>
+                                        <th class="th-actions">操作</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -124,12 +152,15 @@
                                                 <input type="hidden" name="bagId" th:value="${bagId}" />
                                                 <input type="hidden" name="documentId" th:value="${document.documentId}" />
                                                 <input type="hidden" name="action" value="delete" />
-                                                <input type="submit" class="btn btn-danger" value="移除" />
+                                                <!-- 替换移除按钮为垃圾桶图标 -->
+                                                <button type="submit" class="btn btn-danger" title="移除">
+                                                    <i class="entypo-trash"></i>
+                                                </button>
                                             </form>
-                                            <!-- 添加修改按钮 -->
+                                            <!-- 替换修改按钮为编辑图标按钮 -->
                                             <button class="btn btn-primary" 
                                                     th:onclick="'openEditModal(' + ${document.documentId} + ')'">
-                                                修改
+                                                <i class="entypo-pencil" style="font-size:12px; color:white;"></i>
                                             </button>
                                         </td>
                                     </tr>

@@ -124,7 +124,7 @@ public class PdfMetaDataService {
                 SimpleLogger.log("第" + retryCount + "次尝试解析失败: " + e.getMessage());
             }
             
-        } while (retryCount<=5);  // 无限循环直到获取有效结果
+        } while (retryCount<=2);  // 无限循环直到获取有效结果
         if (map.isEmpty()) {
             map.put("title", "未获得有效结果");
             map.put("keywords", "未获得有效结果");

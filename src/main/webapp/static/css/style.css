@@ -163,3 +163,68 @@
     width: 120px;
     top: 0;
 }
+
+/* 按钮容器使用 Flexbox 并排排列按钮 */
+.action-buttons-container {
+    display: flex;
+    gap: 10px; /* 按钮之间的间距，可根据需要调整 */
+    align-items: center; /* 垂直居中对齐 */
+}
+
+/* 收藏按钮容器调整 */
+.favorite-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* 调整收藏按钮的颜色 */
+.btn-favorite {
+    background-color: transparent;
+    color: #f0ad4e; /* 金色，可根据需要调整 */
+    border: none;
+    padding: 0; /* 移除内边距 */
+}
+
+/* 收藏按钮悬停效果 */
+.btn-favorite:hover {
+    color: #ec971f;
+}
+
+/* 删除按钮悬停效果 */
+.btn-danger:hover {
+    background-color: #c9302c;
+    border-color: #ac2925;
+}
+
+/* 文件夹下拉菜单样式 */
+.favorite-container .folder-dropdown {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.favorite-container:hover .folder-dropdown {
+    display: block;
+}
+
+/* 调整文件夹列表项的样式 */
+.folder-dropdown ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.folder-dropdown li a {
+    color: #333;
+    padding: 8px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.folder-dropdown li a:hover {
+    background-color: #f1f1f1;
+}
